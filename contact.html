@@ -1,45 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Contact</title>
+    <meta charset="UTF-8">
+    <title>Contact | AR-Tech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <h1>Website Saya</h1>
-    <nav>
-        <a href="index.html">Home</a> |
-        <a href="about.html">About</a> |
-        <a href="contact.html">Contact</a>
-    </nav>
+<header class="site-header">
+    <div class="header-container">
+        <div class="logo">
+            <h1>AR-Tech</h1>
+            <span>Phone Repair Specialist</span>
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
 </header>
+
 <div class="container">
 
-<section>
-    <h2>Contact</h2>
+    <!-- CONTACT INFO -->
+    <section class="contact-info reveal">
+        <h2>Hubungi Kami</h2>
 
-    <form id="contactForm">
-        <label></label><br>
-        <input type="text" id="name" placeholder="Name">
+        <div class="contact-grid">
+            <div class="contact-item">
+                <h3>📞 Telefon / WhatsApp</h3>
+                <p>013-474 7876</p>
+            </div>
 
-        <label></label><br>
-        <input type="email" id="email" placeholder="Email">
+            <div class="contact-item">
+                <h3>📍 Lokasi</h3>
+                <p>Sungai Petani, Kedah</p>
+            </div>
 
-        <label></label><br>
-        <textarea id="message" placeholder="Your message"></textarea>
+            <div class="contact-item">
+                <h3>🕒 Waktu Operasi</h3>
+                <p>Setiap hari<br>10.00 pagi – 9.00 malam</p>
+            </div>
+        </div>
+    </section>
 
-        <button type="submit">Hantar</button>
-    </form>
-</section>
+    <!-- GOOGLE MAP -->
+    <section class="map-section reveal">
+        <h2>Lokasi Kedai</h2>
+
+        <iframe 
+            src="https://www.google.com/maps?q=Sungai%20Petani%20Kedah&output=embed"
+            width="100%" 
+            height="350" 
+            style="border:0; border-radius:12px;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section class="contact-form-section reveal">
+        <h2>Hantar Mesej</h2>
+
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Nama">
+            <input type="email" id="email" placeholder="Email">
+            <textarea id="message" placeholder="Mesej"></textarea>
+
+            <button type="submit">Hantar Mesej</button>
+        </form>
+    </section>
 
 </div>
 
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/60134747876" class="floating-whatsapp" target="_blank">💬</a>
 
 <footer>
-    <p>© 2026 Website Saya</p>
+    <p>© 2026 AR-Tech</p>
 </footer>
-<script src="script.js"></script>
 
+<script src="script.js"></script>
 </body>
 </html>
