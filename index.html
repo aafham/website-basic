@@ -83,6 +83,19 @@
             Tempah Sekarang
           </a>
 
+          <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+            <span class="theme-icon" data-light="&#9790;" data-dark="&#9728;">&#9790;</span>
+            <span
+              class="theme-label"
+              data-bm-light="Gelap"
+              data-en-light="Dark"
+              data-bm-dark="Terang"
+              data-en-dark="Light"
+            >
+              Gelap
+            </span>
+          </button>
+
           <div class="lang-toggle" role="group" aria-label="Language toggle">
             <button class="lang-btn active" type="button" data-lang="ms">BM</button>
             <button class="lang-btn" type="button" data-lang="en">EN</button>
@@ -954,6 +967,79 @@
       }
 
       const root = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const themeLabel = themeToggle ? themeToggle.querySelector(".theme-label") : null;
+      const themeIcon = themeToggle ? themeToggle.querySelector(".theme-icon") : null;
+
+      function updateThemeToggleUI() {
+        if (!themeToggle) {
+          return;
+        }
+        const theme = root.dataset.theme || "light";
+        const lang = root.dataset.lang || "ms";
+        const isDark = theme === "dark";
+
+        if (themeIcon) {
+          const icon = isDark ? themeIcon.dataset.dark : themeIcon.dataset.light;
+          if (icon) {
+            themeIcon.innerHTML = icon;
+          }
+        }
+
+        if (themeLabel) {
+          const label = isDark
+            ? (lang === "en" ? themeLabel.dataset.enDark : themeLabel.dataset.bmDark)
+            : (lang === "en" ? themeLabel.dataset.enLight : themeLabel.dataset.bmLight);
+          if (label) {
+            themeLabel.textContent = label;
+          }
+        }
+
+        const ariaLabel = isDark
+          ? (lang === "en" ? "Switch to light mode" : "Tukar ke mod terang")
+          : (lang === "en" ? "Switch to dark mode" : "Tukar ke mod gelap");
+        themeToggle.setAttribute("aria-label", ariaLabel);
+        themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+      }
+
+      function setTheme(theme, persist = true) {
+        root.dataset.theme = theme;
+        updateThemeToggleUI();
+        if (!persist) {
+          return;
+        }
+        try {
+          localStorage.setItem("preferredTheme", theme);
+        } catch (error) {
+          // Ignore storage errors (private mode, etc.)
+        }
+      }
+
+      function getPreferredTheme() {
+        try {
+          const savedTheme = localStorage.getItem("preferredTheme");
+          if (savedTheme === "light" || savedTheme === "dark") {
+            return savedTheme;
+          }
+        } catch (error) {
+          // Ignore storage errors (private mode, etc.)
+        }
+        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      }
+
+      const initialTheme = getPreferredTheme();
+      setTheme(initialTheme, false);
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const nextTheme = (root.dataset.theme || "light") === "dark" ? "light" : "dark";
+          setTheme(nextTheme);
+        });
+      }
+
       const langButtons = document.querySelectorAll(".lang-btn");
       const translatable = document.querySelectorAll("[data-bm][data-en]");
       const ariaTranslatable = document.querySelectorAll("[data-bm-aria-label][data-en-aria-label]");
@@ -1008,6 +1094,8 @@
         langButtons.forEach((btn) => {
           btn.classList.toggle("active", btn.dataset.lang === lang);
         });
+
+        updateThemeToggleUI();
       }
 
       let initialLang = root.dataset.lang || "ms";
