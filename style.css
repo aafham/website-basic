@@ -9,12 +9,20 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --header-offset: 120px;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, sans-serif;
   background-color: #f5f1eb;
   color: #333;
   line-height: 1.6;
-  scroll-padding-top: 110px;
+  scroll-padding-top: var(--header-offset);
+}
+
+section[id] {
+  scroll-margin-top: var(--header-offset);
 }
 
 /* ================= HEADER ================= */
@@ -42,6 +50,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
   transition: padding 0.35s ease;
 }
 
@@ -59,6 +70,11 @@ body {
   color: #d1fae5;
 }
 
+.main-nav {
+  display: flex;
+  align-items: center;
+}
+
 .main-nav a {
   color: white;
   text-decoration: none;
@@ -71,10 +87,80 @@ body {
   text-decoration: underline;
 }
 
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.header-call:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: #3fa37b;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+}
+
+.header-cta:hover {
+  background: #2f6f62;
+  transform: translateY(-1px);
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lang-btn.active {
+  background: #ffffff;
+  color: #1f4f46;
+}
+
 /* ================= HERO ================= */
 .hero {
   background: linear-gradient(rgba(47, 111, 98, 0.75), rgba(47, 111, 98, 0.75)),
-    url("https://images.unsplash.com/photo-1560448204-e02f11c3d0e2");
+    url("images/ruang-tamu.jpg");
   background-size: cover;
   background-position: center;
   padding: 120px 20px;
@@ -102,6 +188,63 @@ body {
   margin-top: 12px;
   font-size: 14px;
   opacity: 0.9;
+}
+
+.hero-rate {
+  margin: 16px auto 22px;
+  display: inline-block;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+}
+
+.hero-rate a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* ================= VIDEO ================= */
+.video-tour {
+  padding: 70px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.video-tour h3 {
+  font-size: 30px;
+  color: #1f4f46;
+  margin-bottom: 10px;
+}
+
+.video-desc {
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.video-card {
+  max-width: 520px;
+  margin: 0 auto;
+  background: #f0fdf4;
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.video-card video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  display: block;
+  background: #0e2a24;
+}
+
+.video-note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #4b5563;
 }
 
 /* ================= BUTTONS ================= */
@@ -397,6 +540,98 @@ body {
 .gallery {
   padding: 90px 20px;
   text-align: center;
+}
+
+.how-to-book {
+  padding: 80px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.book-steps {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.book-step {
+  background: #f0fdf4;
+  padding: 26px 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.book-step h4 {
+  margin-top: 12px;
+  font-size: 18px;
+  color: #1f4f46;
+}
+
+.book-step p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #555;
+}
+
+.step-num {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: #1f4f46;
+  color: white;
+  font-weight: 700;
+}
+
+.date-check {
+  padding: 80px 20px;
+  background: #f5f1eb;
+  text-align: center;
+}
+
+.date-form {
+  max-width: 850px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  font-weight: 600;
+  color: #1f4f46;
+  font-size: 14px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.form-full {
+  grid-column: span 2;
+}
+
+.date-form button {
+  grid-column: span 2;
+  justify-self: center;
 }
 
 .gallery h3 {
@@ -749,19 +984,83 @@ footer {
 
 /* ================= FLOATING WHATSAPP ================= */
 .floating-whatsapp {
+  display: none;
+}
+
+/* ================= FLOATING CTA (DESKTOP) ================= */
+.floating-cta {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 55px;
-  height: 55px;
-  background-color: #25d366;
-  border-radius: 50%;
+  right: 24px;
+  bottom: 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 230px;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 999;
+}
+
+.floating-cta.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.floating-cta-text {
+  font-size: 13px;
+  color: #1f4f46;
+  font-weight: 600;
+}
+
+.floating-cta-btn {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #3fa37b;
   color: white;
-  font-size: 24px;
   text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.floating-cta-btn:hover {
+  background: #2f6f62;
+}
+
+/* ================= BACK TO TOP ================= */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 170px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #1f4f46;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 999;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* ================= MOBILE STICKY WHATSAPP ================= */
@@ -808,12 +1107,22 @@ footer {
 
   .main-nav {
     width: 100%;
-    display: none;
+    display: flex;
     flex-direction: column;
-    margin-top: 15px;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    margin-top: 0;
     background: #1f4f46;
     border-radius: 12px;
     padding: 10px 0;
+    order: 3;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-6px);
+    transition: max-height 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
   }
 
   .main-nav a {
@@ -824,7 +1133,18 @@ footer {
   }
 
   .main-nav.show {
-    display: flex;
+    max-height: 320px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .header-tools {
+    margin-left: auto;
+  }
+
+  .header-cta,
+  .header-call {
+    display: none;
   }
 
   .mobile-whatsapp {
@@ -851,5 +1171,19 @@ footer {
 
   .floating-whatsapp {
     display: none;
+  }
+
+  .floating-cta,
+  .back-to-top {
+    display: none;
+  }
+
+  .date-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-full,
+  .date-form button {
+    grid-column: span 1;
   }
 }

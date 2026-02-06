@@ -1,9 +1,33 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="ms" data-lang="ms" data-title-bm="Jitra2Stay | Homestay di Jitra" data-title-en="Jitra2Stay | Homestay in Jitra">
   <head>
     <meta charset="UTF-8">
     <title>Jitra2Stay | Homestay di Jitra</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Jitra2Stay ialah homestay Semi-D 2 tingkat di Jitra. Ruang luas, bersih & selesa untuk keluarga dan rombongan."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Jitra2Stay | Homestay di Jitra">
+    <meta
+      property="og:description"
+      content="Homestay Semi-D 2 tingkat di Jitra. Luas, bersih dan selesa untuk keluarga & rombongan."
+    >
+    <meta property="og:image" content="images/halaman.jpg">
+    <meta property="og:locale" content="ms_MY">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jitra2Stay | Homestay di Jitra">
+    <meta
+      name="twitter:description"
+      content="Homestay Semi-D 2 tingkat di Jitra. Luas, bersih dan selesa untuk keluarga & rombongan."
+    >
+    <meta name="twitter:image" content="images/halaman.jpg">
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f4f46'/%3E%3Cpath d='M16 30L32 18l16 12v16H16V30z' fill='%23ffffff'/%3E%3Cpath d='M26 46V34h12v12z' fill='%233fa37b'/%3E%3C/svg%3E"
+    >
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -12,53 +36,137 @@
       <div class="header-container">
         <div class="logo">
           <h1>Jitra2Stay</h1>
-          <span>Homestay Selesa di Jitra</span>
+          <span data-bm="Homestay Selesa di Jitra" data-en="Comfortable Homestay in Jitra">Homestay Selesa di Jitra</span>
         </div>
 
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          type="button"
-          aria-label="Buka menu"
-          aria-controls="mainNav"
-          aria-expanded="false"
-        >
-          &#9776;
-        </button>
-
         <nav class="main-nav" id="mainNav">
-          <a href="#home">Home</a>
-          <a href="#kemudahan">Kemudahan</a>
-          <a href="#kadar">Kadar</a>
-          <a href="#lokasi">Lokasi</a>
-          <a href="#hubungi">Hubungi</a>
+          <a href="#home" data-bm="Laman Utama" data-en="Home">Laman Utama</a>
+          <a href="#tentang" data-bm="Tentang" data-en="About">Tentang</a>
+          <a href="#kemudahan" data-bm="Kemudahan" data-en="Facilities">Kemudahan</a>
+          <a href="#kadar" data-bm="Kadar" data-en="Rates">Kadar</a>
+          <a href="#lokasi" data-bm="Lokasi" data-en="Location">Lokasi</a>
+          <a href="#hubungi" data-bm="Hubungi" data-en="Contact">Hubungi</a>
         </nav>
+
+        <div class="header-tools">
+          <button
+            class="menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Buka menu"
+            data-bm-aria-label="Buka menu"
+            data-en-aria-label="Open menu"
+            aria-controls="mainNav"
+            aria-expanded="false"
+          >
+            &#9776;
+          </button>
+
+          <a
+            href="tel:+60194410666"
+            class="header-call"
+            data-bm="Call"
+            data-en="Call"
+            aria-label="Call"
+          >
+            &#128222; Call
+          </a>
+
+          <a
+            href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+            data-bm-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+            data-en-href="https://wa.me/60194410666?text=Hi%20Jitra2Stay,%20I%20would%20like%20to%20book%20a%20homestay."
+            class="header-cta"
+            data-bm="Tempah Sekarang"
+            data-en="Book Now"
+          >
+            Tempah Sekarang
+          </a>
+
+          <div class="lang-toggle" role="group" aria-label="Language toggle">
+            <button class="lang-btn active" type="button" data-lang="ms">BM</button>
+            <button class="lang-btn" type="button" data-lang="en">EN</button>
+          </div>
+        </div>
       </div>
     </header>
 
     <!-- ================= HERO ================= -->
     <section id="home" class="hero">
       <div class="hero-content">
-        <span class="hero-badge">&#11088; Pilihan Popular Keluarga di Jitra</span>
+        <span
+          class="hero-badge"
+          data-bm="&#11088; Pilihan Popular Keluarga di Jitra"
+          data-en="&#11088; Popular Choice for Families in Jitra"
+        >
+          &#11088; Pilihan Popular Keluarga di Jitra
+        </span>
 
-        <h2>Homestay Semi-D 2 Tingkat di Jitra</h2>
-        <p class="hero-trust">
+        <h2 data-bm="Homestay Semi-D 2 Tingkat di Jitra" data-en="2-Storey Semi-D Homestay in Jitra">
+          Homestay Semi-D 2 Tingkat di Jitra
+        </h2>
+        <p class="hero-trust" data-bm="Dipercayai tetamu dari seluruh Kedah &amp; Perlis." data-en="Trusted by guests across Kedah &amp; Perlis.">
           Dipercayai tetamu dari seluruh Kedah &amp; Perlis.
         </p>
 
-        <p>
+        <p
+          data-bm="Ruang luas, bersih dan selesa untuk keluarga &amp; rombongan.<br>Sesuai untuk kenduri, majlis, acara sukan dan konvokesyen."
+          data-en="Spacious, clean and comfortable for families &amp; groups.<br>Perfect for feasts, family events, sports events and convocations."
+        >
           Ruang luas, bersih dan selesa untuk keluarga &amp; rombongan.<br>
           Sesuai untuk kenduri, majlis, acara sukan dan konvokesyen.
         </p>
 
+        <div
+          class="hero-rate"
+          data-bm="Harga ringkas: <strong>RM170 – RM330/malam</strong> · <a href=&quot;#kadar&quot;>Lihat kadar</a>"
+          data-en="Quick rates: <strong>RM170 – RM330/night</strong> · <a href=&quot;#kadar&quot;>View rates</a>"
+        >
+          Harga ringkas: <strong>RM170 – RM330/malam</strong> · <a href="#kadar">Lihat kadar</a>
+        </div>
+
         <a
           href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay.%20Boleh%20saya%20tahu%20kadar%20dan%20tarikh%20yang%20ada?"
+          data-bm-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay.%20Boleh%20saya%20tahu%20kadar%20dan%20tarikh%20yang%20ada?"
+          data-en-href="https://wa.me/60194410666?text=Hi%20Jitra2Stay,%20I%20would%20like%20to%20book%20a%20homestay.%20Could%20you%20share%20the%20rates%20and%20available%20dates?"
           class="btn-primary"
           target="_blank"
           rel="noopener"
+          data-bm="WhatsApp Sekarang"
+          data-en="WhatsApp Now"
         >
           WhatsApp Sekarang
         </a>
+      </div>
+    </section>
+
+    <!-- ================= VIDEO TOUR ================= -->
+    <section class="video-tour reveal">
+      <h3 data-bm="Video Walkthrough" data-en="Walkthrough Video">Video Walkthrough</h3>
+      <p
+        class="video-desc"
+        data-bm="Tonton susun atur ruang tamu, bilik dan dapur (video akan ditambah)."
+        data-en="See the living room, bedrooms and kitchen layout (video coming soon)."
+      >
+        Tonton susun atur ruang tamu, bilik dan dapur (video akan ditambah).
+      </p>
+
+      <div class="video-card">
+        <video
+          controls
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="images/ruang-tamu.jpg"
+          aria-label="Video walkthrough Jitra2Stay"
+        >
+          <source src="videos/jitra2stay-walkthrough.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <p class="video-note" data-bm="Template video disediakan. Gantikan fail video bila siap." data-en="Video template is ready. Replace the video file when available.">
+          Template video disediakan. Gantikan fail video bila siap.
+        </p>
       </div>
     </section>
 
@@ -67,210 +175,347 @@
       <div class="highlight-container">
         <div class="highlight-item">
           &#127968;
-          <span>Semi-D 2 Tingkat</span>
+          <span data-bm="Semi-D 2 Tingkat" data-en="2-Storey Semi-D">Semi-D 2 Tingkat</span>
         </div>
 
         <div class="highlight-item">
           &#128106;
-          <span>Muat 6 &ndash; 10 Orang</span>
+          <span data-bm="Muat 6 &ndash; 10 Orang" data-en="Fits 6 &ndash; 10 Guests">Muat 6 &ndash; 10 Orang</span>
         </div>
 
         <div class="highlight-item">
           &#128205;
-          <span>Sebelah Hospital Jitra</span>
+          <span data-bm="Sebelah Hospital Jitra" data-en="Next to Jitra Hospital">Sebelah Hospital Jitra</span>
         </div>
 
         <div class="highlight-item">
           &#128246;
-          <span>WiFi &amp; Fully Aircond</span>
+          <span data-bm="WiFi &amp; Fully Aircond" data-en="WiFi &amp; Fully Air-Conditioned">WiFi &amp; Fully Aircond</span>
         </div>
       </div>
     </section>
 
     <!-- ================= TENTANG ================= -->
-    <section class="about-split reveal">
+    <section id="tentang" class="about-split reveal">
       <div class="about-split-container">
         <div class="about-left">
-          <h3>Tentang Homestay</h3>
+          <h3 data-bm="Tentang Homestay" data-en="About the Homestay">Tentang Homestay</h3>
 
-          <p>
+          <p
+            data-bm="Jitra2Stay adalah sebuah homestay Semi-D 2 tingkat yang luas, bersih dan selesa, sesuai untuk penginapan keluarga dan rombongan."
+            data-en="Jitra2Stay is a spacious, clean and comfortable 2-storey Semi-D homestay, perfect for families and groups."
+          >
             Jitra2Stay adalah sebuah homestay Semi-D 2 tingkat yang luas, bersih dan
             selesa, sesuai untuk penginapan keluarga dan rombongan.
           </p>
 
-          <p>
+          <p
+            data-bm="Kebanyakan tetamu kami menginap untuk kenduri, majlis keluarga, acara sukan serta konvokesyen."
+            data-en="Most of our guests stay for feasts, family events, sports events and convocations."
+          >
             Kebanyakan tetamu kami menginap untuk kenduri, majlis keluarga, acara
             sukan serta konvokesyen.
           </p>
 
-          <p>
+          <p
+            data-bm="Kami menawarkan kadar sewaan yang fleksibel mengikut bilangan bilik dan keperluan tetamu."
+            data-en="We offer flexible rental rates based on the number of rooms and guest needs."
+          >
             Kami menawarkan kadar sewaan yang fleksibel mengikut bilangan bilik
             dan keperluan tetamu.
           </p>
 
           <ul class="about-list">
-            <li>&#127968; Semi-D 2 Tingkat</li>
-            <li>&#128719; 5 Bilik Tidur</li>
-            <li>&#128703; 3 Bilik Air</li>
-            <li>&#10052; Fully Aircond &amp; Kipas</li>
+            <li data-bm="&#127968; Semi-D 2 Tingkat" data-en="&#127968; 2-Storey Semi-D">&#127968; Semi-D 2 Tingkat</li>
+            <li data-bm="&#128719; 5 Bilik Tidur" data-en="&#128719; 5 Bedrooms">&#128719; 5 Bilik Tidur</li>
+            <li data-bm="&#128703; 3 Bilik Air" data-en="&#128703; 3 Bathrooms">&#128703; 3 Bilik Air</li>
+            <li data-bm="&#10052; Fully Aircond &amp; Kipas" data-en="&#10052; Fully Air-Conditioned &amp; Fans">&#10052; Fully Aircond &amp; Kipas</li>
           </ul>
         </div>
 
         <div class="about-right">
-          <img src="images/halaman.jpg" alt="Ruang Tamu Jitra2Stay">
+          <img
+            src="images/halaman.jpg"
+            srcset="images/halaman.jpg 1x, images/halaman.jpg 2x"
+            alt="Ruang Tamu Jitra2Stay"
+            data-bm-alt="Ruang Tamu Jitra2Stay"
+            data-en-alt="Jitra2Stay Living Room"
+            loading="lazy"
+            decoding="async"
+          >
         </div>
       </div>
     </section>
 
     <!-- ================= SIAPA SESUAI ================= -->
     <section class="who-for reveal">
-      <h3>Siapa Sesuai Menginap di Jitra2Stay?</h3>
-      <p class="who-desc">
+      <h3 data-bm="Siapa Sesuai Menginap di Jitra2Stay?" data-en="Who Is Jitra2Stay For?">Siapa Sesuai Menginap di Jitra2Stay?</h3>
+      <p class="who-desc" data-bm="Homestay kami sesuai untuk pelbagai jenis tetamu &amp; acara." data-en="Our homestay suits a variety of guests &amp; occasions.">
         Homestay kami sesuai untuk pelbagai jenis tetamu &amp; acara.
       </p>
 
       <div class="who-grid">
         <div class="who-card">
           &#128106;
-          <h4>Keluarga Besar</h4>
-          <p>Sesuai untuk percutian keluarga &amp; cuti sekolah.</p>
+          <h4 data-bm="Keluarga Besar" data-en="Big Families">Keluarga Besar</h4>
+          <p data-bm="Sesuai untuk percutian keluarga &amp; cuti sekolah." data-en="Great for family vacations &amp; school holidays.">Sesuai untuk percutian keluarga &amp; cuti sekolah.</p>
         </div>
 
         <div class="who-card">
           &#128141;
-          <h4>Kenduri &amp; Majlis</h4>
-          <p>Penginapan selesa untuk tetamu kenduri &amp; majlis keluarga.</p>
+          <h4 data-bm="Kenduri &amp; Majlis" data-en="Feasts &amp; Events">Kenduri &amp; Majlis</h4>
+          <p data-bm="Penginapan selesa untuk tetamu kenduri &amp; majlis keluarga." data-en="Comfortable stay for feast guests &amp; family events.">Penginapan selesa untuk tetamu kenduri &amp; majlis keluarga.</p>
         </div>
 
         <div class="who-card">
           &#127891;
-          <h4>Konvokesyen</h4>
-          <p>Dekat dengan lokasi institusi &amp; dewan sekitar Jitra.</p>
+          <h4 data-bm="Konvokesyen" data-en="Convocations">Konvokesyen</h4>
+          <p data-bm="Dekat dengan lokasi institusi &amp; dewan sekitar Jitra." data-en="Close to institutions and halls around Jitra.">Dekat dengan lokasi institusi &amp; dewan sekitar Jitra.</p>
         </div>
 
         <div class="who-card">
           &#9917;
-          <h4>Acara Sukan</h4>
-          <p>Ruang luas &amp; parking mudah untuk rombongan besar.</p>
+          <h4 data-bm="Acara Sukan" data-en="Sports Events">Acara Sukan</h4>
+          <p data-bm="Ruang luas &amp; parking mudah untuk rombongan besar." data-en="Spacious with easy parking for large groups.">Ruang luas &amp; parking mudah untuk rombongan besar.</p>
         </div>
       </div>
     </section>
 
     <!-- ================= KENAPA PILIH KAMI ================= -->
     <section class="why-us reveal">
-      <h3>Kenapa Pilih Jitra2Stay?</h3>
-      <p class="why-desc">
+      <h3 data-bm="Kenapa Pilih Jitra2Stay?" data-en="Why Choose Jitra2Stay?">Kenapa Pilih Jitra2Stay?</h3>
+      <p class="why-desc" data-bm="Kami utamakan keselesaan, kebersihan dan pengalaman menginap yang terbaik." data-en="We prioritize comfort, cleanliness and a great stay experience.">
         Kami utamakan keselesaan, kebersihan dan pengalaman menginap yang terbaik.
       </p>
 
       <div class="why-grid">
         <div class="why-item">
           &#129532;
-          <h4>Bersih &amp; Terjaga</h4>
-          <p>Rumah sentiasa dibersihkan dan diselenggara sebelum setiap tetamu.</p>
+          <h4 data-bm="Bersih &amp; Terjaga" data-en="Clean &amp; Well Kept">Bersih &amp; Terjaga</h4>
+          <p data-bm="Rumah sentiasa dibersihkan dan diselenggara sebelum setiap tetamu." data-en="The house is cleaned and maintained before every guest.">Rumah sentiasa dibersihkan dan diselenggara sebelum setiap tetamu.</p>
         </div>
 
         <div class="why-item">
           &#128205;
-          <h4>Lokasi Strategik</h4>
-          <p>Dekat Hospital Jitra, Lotus&#8217;s, MRSM &amp; pusat bandar.</p>
+          <h4 data-bm="Lokasi Strategik" data-en="Strategic Location">Lokasi Strategik</h4>
+          <p data-bm="Dekat Hospital Jitra, Lotus&#8217;s, MRSM &amp; pusat bandar." data-en="Near Jitra Hospital, Lotus&#8217;s, MRSM &amp; the town center.">Dekat Hospital Jitra, Lotus&#8217;s, MRSM &amp; pusat bandar.</p>
         </div>
 
         <div class="why-item">
           &#127969;
-          <h4>1 Rumah Sahaja</h4>
-          <p>Privasi penuh untuk keluarga &amp; rombongan anda.</p>
+          <h4 data-bm="1 Rumah Sahaja" data-en="Entire House">1 Rumah Sahaja</h4>
+          <p data-bm="Privasi penuh untuk keluarga &amp; rombongan anda." data-en="Full privacy for your family &amp; group.">Privasi penuh untuk keluarga &amp; rombongan anda.</p>
         </div>
 
         <div class="why-item">
           &#128242;
-          <h4>Host Respons Pantas</h4>
-          <p>Mudah dihubungi &amp; respon pantas melalui WhatsApp.</p>
+          <h4 data-bm="Host Respons Pantas" data-en="Fast Host Response">Host Respons Pantas</h4>
+          <p data-bm="Mudah dihubungi &amp; respon pantas melalui WhatsApp." data-en="Easy to reach &amp; quick responses on WhatsApp.">Mudah dihubungi &amp; respon pantas melalui WhatsApp.</p>
         </div>
       </div>
     </section>
 
     <!-- ================= KEMUDAHAN ================= -->
     <section id="kemudahan" class="facilities reveal">
-      <h3>Kemudahan Disediakan</h3>
+      <h3 data-bm="Kemudahan Disediakan" data-en="Facilities Provided">Kemudahan Disediakan</h3>
 
       <div class="facility-list">
-        <div class="facility-item">&#10052; Fully Air-Conditioned</div>
-        <div class="facility-item">&#127744; Kipas di Setiap Bilik</div>
-        <div class="facility-item">&#128246; WiFi Percuma</div>
-        <div class="facility-item">&#128250; TV</div>
-        <div class="facility-item">&#127859; Dapur Lengkap</div>
-        <div class="facility-item">&#128663; Parking Luas</div>
-        <div class="facility-item">&#129532; Rumah Bersih &amp; Kemas</div>
+        <div class="facility-item" data-bm="&#10052; Fully Air-Conditioned" data-en="&#10052; Fully Air-Conditioned">&#10052; Fully Air-Conditioned</div>
+        <div class="facility-item" data-bm="&#127744; Kipas di Setiap Bilik" data-en="&#127744; Fans in Every Room">&#127744; Kipas di Setiap Bilik</div>
+        <div class="facility-item" data-bm="&#128246; WiFi Percuma" data-en="&#128246; Free WiFi">&#128246; WiFi Percuma</div>
+        <div class="facility-item" data-bm="&#128250; TV" data-en="&#128250; TV">&#128250; TV</div>
+        <div class="facility-item" data-bm="&#127859; Dapur Lengkap" data-en="&#127859; Fully Equipped Kitchen">&#127859; Dapur Lengkap</div>
+        <div class="facility-item" data-bm="&#128663; Parking Luas" data-en="&#128663; Spacious Parking">&#128663; Parking Luas</div>
+        <div class="facility-item" data-bm="&#129532; Rumah Bersih &amp; Kemas" data-en="&#129532; Clean &amp; Tidy Home">&#129532; Rumah Bersih &amp; Kemas</div>
       </div>
     </section>
 
     <!-- ================= KADAR ================= -->
     <section id="kadar" class="pricing reveal">
-      <h3>Kadar Sewaan</h3>
-      <p class="pricing-desc">
+      <h3 data-bm="Kadar Sewaan" data-en="Rates">Kadar Sewaan</h3>
+      <p class="pricing-desc" data-bm="Kadar sewaan fleksibel mengikut bilangan bilik yang ditempah." data-en="Flexible rates based on the number of rooms booked.">
         Kadar sewaan fleksibel mengikut bilangan bilik yang ditempah.
       </p>
 
       <div class="pricing-grid">
         <div class="price-card">
-          <h4>2 Bilik</h4>
-          <p>Fully Aircond</p>
+          <h4 data-bm="2 Bilik" data-en="2 Rooms">2 Bilik</h4>
+          <p data-bm="Fully Aircond" data-en="Fully Air-Conditioned">Fully Aircond</p>
           <span>RM170 / malam</span>
         </div>
 
         <div class="price-card">
-          <h4>3 Bilik</h4>
-          <p>Fully Aircond</p>
+          <h4 data-bm="3 Bilik" data-en="3 Rooms">3 Bilik</h4>
+          <p data-bm="Fully Aircond" data-en="Fully Air-Conditioned">Fully Aircond</p>
           <span>RM220 / malam</span>
         </div>
 
         <div class="price-card">
-          <h4>4 Bilik</h4>
-          <p>Fully Aircond</p>
+          <h4 data-bm="4 Bilik" data-en="4 Rooms">4 Bilik</h4>
+          <p data-bm="Fully Aircond" data-en="Fully Air-Conditioned">Fully Aircond</p>
           <span>RM280 / malam</span>
         </div>
 
         <div class="price-card best">
-          <span class="badge">Paling Popular</span>
-          <h4>5 Bilik</h4>
-          <p>Fully Aircond</p>
+          <span class="badge" data-bm="Paling Popular" data-en="Most Popular">Paling Popular</span>
+          <h4 data-bm="5 Bilik" data-en="5 Rooms">5 Bilik</h4>
+          <p data-bm="Fully Aircond" data-en="Fully Air-Conditioned">Fully Aircond</p>
           <span>RM330 / malam</span>
         </div>
       </div>
 
-      <div class="deposit-box">
+      <div
+        class="deposit-box"
+        data-bm="&#128272; <strong>Security Deposit:</strong> RM100 <span>(Dipulangkan selepas check-out jika tiada kerosakan)</span>"
+        data-en="&#128272; <strong>Security Deposit:</strong> RM100 <span>(Refunded after check-out if no damage)</span>"
+      >
         &#128272; <strong>Security Deposit:</strong> RM100
         <span>(Dipulangkan selepas check-out jika tiada kerosakan)</span>
       </div>
     </section>
 
+    <!-- ================= HOW TO BOOK ================= -->
+    <section class="how-to-book reveal">
+      <h3 data-bm="Cara Tempah (1-2-3)" data-en="How to Book (1-2-3)">Cara Tempah (1-2-3)</h3>
+      <p
+        class="section-desc"
+        data-bm="Tiga langkah ringkas untuk tempahan pantas."
+        data-en="Three simple steps for a quick booking."
+      >
+        Tiga langkah ringkas untuk tempahan pantas.
+      </p>
+
+      <div class="book-steps">
+        <div class="book-step">
+          <span class="step-num">1</span>
+          <h4 data-bm="Semak Tarikh" data-en="Check Dates">Semak Tarikh</h4>
+          <p data-bm="Maklumkan tarikh & bilangan tetamu." data-en="Share your dates & number of guests.">
+            Maklumkan tarikh & bilangan tetamu.
+          </p>
+        </div>
+        <div class="book-step">
+          <span class="step-num">2</span>
+          <h4 data-bm="Pilih Pakej" data-en="Pick a Package">Pilih Pakej</h4>
+          <p data-bm="Pilih bilangan bilik ikut bajet." data-en="Choose the number of rooms to match your budget.">
+            Pilih bilangan bilik ikut bajet.
+          </p>
+        </div>
+        <div class="book-step">
+          <span class="step-num">3</span>
+          <h4 data-bm="Sahkan Tempahan" data-en="Confirm Booking">Sahkan Tempahan</h4>
+          <p data-bm="Bayar deposit & dapatkan pengesahan." data-en="Pay the deposit & receive confirmation.">
+            Bayar deposit & dapatkan pengesahan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SEMAK TARIKH ================= -->
+    <section class="date-check reveal">
+      <h3 data-bm="Semak Tarikh" data-en="Check Availability">Semak Tarikh</h3>
+      <p
+        class="section-desc"
+        data-bm="Hantar maklumat ringkas, kami akan semak ketersediaan."
+        data-en="Send a quick request and we will check availability."
+      >
+        Hantar maklumat ringkas, kami akan semak ketersediaan.
+      </p>
+
+      <form class="date-form" id="dateForm">
+        <label class="form-field">
+          <span data-bm="Tarikh Check-in" data-en="Check-in Date">Tarikh Check-in</span>
+          <input type="date" name="checkin" required>
+        </label>
+
+        <label class="form-field">
+          <span data-bm="Tarikh Check-out" data-en="Check-out Date">Tarikh Check-out</span>
+          <input type="date" name="checkout" required>
+        </label>
+
+        <label class="form-field">
+          <span data-bm="Bilangan Tetamu" data-en="Number of Guests">Bilangan Tetamu</span>
+          <input type="number" name="guests" min="1" max="12" placeholder="6" required>
+        </label>
+
+        <label class="form-field">
+          <span data-bm="Bilangan Bilik" data-en="Number of Rooms">Bilangan Bilik</span>
+          <select name="rooms" required>
+            <option value="2">2 Bilik</option>
+            <option value="3">3 Bilik</option>
+            <option value="4">4 Bilik</option>
+            <option value="5">5 Bilik</option>
+          </select>
+        </label>
+
+        <label class="form-field form-full">
+          <span data-bm="Nota (optional)" data-en="Notes (optional)">Nota (optional)</span>
+          <textarea name="notes" rows="3" placeholder="Contoh: datang konvokesyen..."></textarea>
+        </label>
+
+        <button type="submit" class="btn-primary" data-bm="Hantar ke WhatsApp" data-en="Send to WhatsApp">
+          Hantar ke WhatsApp
+        </button>
+      </form>
+    </section>
+
     <!-- ================= GALLERY PREVIEW ================= -->
     <section class="gallery reveal">
-      <h3>Gambar Sekitar Homestay</h3>
-      <p class="section-desc">
+      <h3 data-bm="Gambar Sekitar Homestay" data-en="Homestay Gallery">Gambar Sekitar Homestay</h3>
+      <p class="section-desc" data-bm="Ruang luas, bersih dan selesa untuk keluarga &amp; rombongan." data-en="Spacious, clean and comfortable for families &amp; groups.">
         Ruang luas, bersih dan selesa untuk keluarga &amp; rombongan.
       </p>
 
       <div class="gallery-grid">
         <div class="gallery-item">
-          <img src="images/ruang-tamu.jpg" alt="Ruang Tamu">
-          <div class="gallery-label">Ruang Tamu</div>
+          <img
+            src="images/ruang-tamu.jpg"
+            srcset="images/ruang-tamu.jpg 1x, images/ruang-tamu.jpg 2x"
+            alt="Ruang Tamu"
+            data-bm-alt="Ruang Tamu"
+            data-en-alt="Living Room"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="gallery-label" data-bm="Ruang Tamu" data-en="Living Room">Ruang Tamu</div>
         </div>
 
         <div class="gallery-item">
-          <img src="images/bilik-tidur.jpg" alt="Bilik Tidur">
-          <div class="gallery-label">Bilik Tidur</div>
+          <img
+            src="images/bilik-tidur.jpg"
+            srcset="images/bilik-tidur.jpg 1x, images/bilik-tidur.jpg 2x"
+            alt="Bilik Tidur"
+            data-bm-alt="Bilik Tidur"
+            data-en-alt="Bedroom"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="gallery-label" data-bm="Bilik Tidur" data-en="Bedroom">Bilik Tidur</div>
         </div>
 
         <div class="gallery-item">
-          <img src="images/dapur.jpg" alt="Dapur">
-          <div class="gallery-label">Dapur</div>
+          <img
+            src="images/dapur.jpg"
+            srcset="images/dapur.jpg 1x, images/dapur.jpg 2x"
+            alt="Dapur"
+            data-bm-alt="Dapur"
+            data-en-alt="Kitchen"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="gallery-label" data-bm="Dapur" data-en="Kitchen">Dapur</div>
         </div>
 
         <div class="gallery-item">
-          <img src="images/luar-rumah.jpg" alt="Luar Rumah">
-          <div class="gallery-label">Luar Rumah</div>
+          <img
+            src="images/luar-rumah.jpg"
+            srcset="images/luar-rumah.jpg 1x, images/luar-rumah.jpg 2x"
+            alt="Luar Rumah"
+            data-bm-alt="Luar Rumah"
+            data-en-alt="Exterior"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="gallery-label" data-bm="Luar Rumah" data-en="Exterior">Luar Rumah</div>
         </div>
       </div>
 
@@ -279,6 +524,8 @@
         class="btn-primary gallery-btn"
         target="_blank"
         rel="noopener"
+        data-bm="Lihat Semua Gambar"
+        data-en="View All Photos"
       >
         Lihat Semua Gambar
       </a>
@@ -288,21 +535,27 @@
     <section id="lokasi" class="location-section reveal">
       <div class="location-container">
         <div class="location-info">
-          <h3>Lokasi Homestay</h3>
+          <h3 data-bm="Lokasi Homestay" data-en="Homestay Location">Lokasi Homestay</h3>
 
-          <p class="address">
+          <p
+            class="address"
+            data-bm="49, Taman Jitra Indah,<br>Jalan Hospital Daerah,<br>06000 Jitra, Kedah"
+            data-en="49, Taman Jitra Indah,<br>Jalan Hospital Daerah,<br>06000 Jitra, Kedah"
+          >
             49, Taman Jitra Indah,<br>
             Jalan Hospital Daerah,<br>
             06000 Jitra, Kedah
           </p>
 
-          <p class="note">(Sebelah pagar sisi Hospital Jitra)</p>
+          <p class="note" data-bm="(Sebelah pagar sisi Hospital Jitra)" data-en="(Next to Jitra Hospital side gate)">(Sebelah pagar sisi Hospital Jitra)</p>
 
           <a
             href="https://goo.gl/maps/pjnMbwm5Pk2QqPeP8"
             target="_blank"
             rel="noopener"
             class="map-btn"
+            data-bm="&#128205; Buka di Google Maps"
+            data-en="&#128205; Open in Google Maps"
           >
             &#128205; Buka di Google Maps
           </a>
@@ -318,6 +571,7 @@
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="Lokasi Jitra2Stay"
+            data-bm-title="Lokasi Jitra2Stay" data-en-title="Jitra2Stay Location"
           ></iframe>
         </div>
       </div>
@@ -325,116 +579,125 @@
 
     <!-- ================= TEMPAT BERDEKATAN ================= -->
     <section class="nearby reveal">
-      <h3>Tempat Berdekatan</h3>
-      <p class="nearby-desc">
+      <h3 data-bm="Tempat Berdekatan" data-en="Nearby Places">Tempat Berdekatan</h3>
+      <p class="nearby-desc" data-bm="Lokasi strategik dan mudah diakses ke pelbagai tempat penting sekitar Jitra." data-en="Strategic location with easy access to key places around Jitra.">
         Lokasi strategik dan mudah diakses ke pelbagai tempat penting sekitar Jitra.
       </p>
 
       <div class="nearby-grid">
         <div class="nearby-item">
           &#128722;
-          <span>Lotus&#8217;s Jitra</span>
-          <small>&plusmn; 5 min</small>
+          <span data-bm="Lotus&#8217;s Jitra" data-en="Lotus&#8217;s Jitra">Lotus&#8217;s Jitra</span>
+          <small data-bm="&plusmn; 5 min" data-en="&plusmn; 5 min">&plusmn; 5 min</small>
         </div>
 
         <div class="nearby-item">
           &#127979;
-          <span>MRSM Kubang Pasu</span>
-          <small>&plusmn; 10 min</small>
+          <span data-bm="MRSM Kubang Pasu" data-en="MRSM Kubang Pasu">MRSM Kubang Pasu</span>
+          <small data-bm="&plusmn; 10 min" data-en="&plusmn; 10 min">&plusmn; 10 min</small>
         </div>
 
         <div class="nearby-item">
           &#127891;
-          <span>POLIMAS</span>
-          <small>&plusmn; 15 min</small>
+          <span data-bm="POLIMAS" data-en="POLIMAS">POLIMAS</span>
+          <small data-bm="&plusmn; 15 min" data-en="&plusmn; 15 min">&plusmn; 15 min</small>
         </div>
 
         <div class="nearby-item">
           &#128348;
-          <span>Masjid Sharifah Fatimah</span>
-          <small>&plusmn; 10 min</small>
+          <span data-bm="Masjid Sharifah Fatimah" data-en="Masjid Sharifah Fatimah">Masjid Sharifah Fatimah</span>
+          <small data-bm="&plusmn; 10 min" data-en="&plusmn; 10 min">&plusmn; 10 min</small>
         </div>
 
         <div class="nearby-item">
           &#127914;
-          <span>Darulaman Aquapark</span>
-          <small>&plusmn; 20 min</small>
+          <span data-bm="Darulaman Aquapark" data-en="Darulaman Aquapark">Darulaman Aquapark</span>
+          <small data-bm="&plusmn; 20 min" data-en="&plusmn; 20 min">&plusmn; 20 min</small>
         </div>
 
         <div class="nearby-item">
           &#127973;
-          <span>Hospital Jitra</span>
-          <small>Berhampiran</small>
+          <span data-bm="Hospital Jitra" data-en="Jitra Hospital">Hospital Jitra</span>
+          <small data-bm="Berhampiran" data-en="Nearby">Berhampiran</small>
         </div>
       </div>
     </section>
 
     <section class="trust reveal">
-      <h3>Kenapa Tetamu Pilih Jitra2Stay?</h3>
-      <p class="section-desc">
+      <h3 data-bm="Kenapa Tetamu Pilih Jitra2Stay?" data-en="Why Guests Choose Jitra2Stay?">Kenapa Tetamu Pilih Jitra2Stay?</h3>
+      <p class="section-desc" data-bm="Kami utamakan keselesaan, kebersihan dan pengalaman menginap yang terbaik." data-en="We prioritize comfort, cleanliness and a great stay experience.">
         Kami utamakan keselesaan, kebersihan dan pengalaman menginap yang terbaik.
       </p>
 
       <div class="trust-grid">
         <div class="trust-card">
           &#11088;&#11088;&#11088;&#11088;&#11088;
-          <p>
+          <p
+            data-bm="&ldquo;Rumah sangat bersih &amp; luas. Sesuai untuk keluarga besar. Host sangat responsif.&rdquo;"
+            data-en="&ldquo;The house is very clean &amp; spacious. Great for big families. The host is very responsive.&rdquo;"
+          >
             &ldquo;Rumah sangat bersih &amp; luas. Sesuai untuk keluarga besar. Host
             sangat responsif.&rdquo;
           </p>
-          <span>- Tetamu Kenduri</span>
+          <span data-bm="- Tetamu Kenduri" data-en="- Event Guest">- Tetamu Kenduri</span>
         </div>
 
         <div class="trust-card">
           &#11088;&#11088;&#11088;&#11088;&#11088;
-          <p>
+          <p
+            data-bm="&ldquo;Lokasi dekat hospital &amp; bandar Jitra. Mudah urusan. Akan repeat.&rdquo;"
+            data-en="&ldquo;Location is near the hospital &amp; Jitra town. Easy and convenient. Will return.&rdquo;"
+          >
             &ldquo;Lokasi dekat hospital &amp; bandar Jitra. Mudah urusan. Akan
             repeat.&rdquo;
           </p>
-          <span>- Tetamu Keluarga</span>
+          <span data-bm="- Tetamu Keluarga" data-en="- Family Guest">- Tetamu Keluarga</span>
         </div>
 
         <div class="trust-card">
           &#11088;&#11088;&#11088;&#11088;&#11088;
-          <p>
+          <p
+            data-bm="&ldquo;Check-in senang, rumah lengkap dengan WiFi &amp; aircond. Sangat selesa.&rdquo;"
+            data-en="&ldquo;Easy check-in, the house is complete with WiFi &amp; air conditioning. Very comfortable.&rdquo;"
+          >
             &ldquo;Check-in senang, rumah lengkap dengan WiFi &amp; aircond. Sangat
             selesa.&rdquo;
           </p>
-          <span>- Tetamu Konvokesyen</span>
+          <span data-bm="- Tetamu Konvokesyen" data-en="- Convocation Guest">- Tetamu Konvokesyen</span>
         </div>
       </div>
 
       <div class="trust-icons">
-        <div>&#129532; Rumah Bersih</div>
-        <div>&#128205; Lokasi Strategik</div>
-        <div>&#128246; WiFi Percuma</div>
-        <div>&#128172; Respon Pantas</div>
+        <div data-bm="&#129532; Rumah Bersih" data-en="&#129532; Clean Home">&#129532; Rumah Bersih</div>
+        <div data-bm="&#128205; Lokasi Strategik" data-en="&#128205; Strategic Location">&#128205; Lokasi Strategik</div>
+        <div data-bm="&#128246; WiFi Percuma" data-en="&#128246; Free WiFi">&#128246; WiFi Percuma</div>
+        <div data-bm="&#128172; Respon Pantas" data-en="&#128172; Fast Response">&#128172; Respon Pantas</div>
       </div>
     </section>
 
     <!-- ================= FAQ ================= -->
     <section class="faq reveal">
-      <h3>Soalan Lazim (FAQ)</h3>
+      <h3 data-bm="Soalan Lazim (FAQ)" data-en="Frequently Asked Questions (FAQ)">Soalan Lazim (FAQ)</h3>
 
       <div class="faq-list">
         <div class="faq-item">
-          <h4>&#9200; Pukul berapa check-in &amp; check-out?</h4>
-          <p>Check-in: 3.00 petang | Check-out: 12.00 tengah hari</p>
+          <h4 data-bm="&#9200; Pukul berapa check-in &amp; check-out?" data-en="&#9200; What time is check-in &amp; check-out?">&#9200; Pukul berapa check-in &amp; check-out?</h4>
+          <p data-bm="Check-in: 3.00 petang | Check-out: 12.00 tengah hari" data-en="Check-in: 3:00 PM | Check-out: 12:00 PM">Check-in: 3.00 petang | Check-out: 12.00 tengah hari</p>
         </div>
 
         <div class="faq-item">
-          <h4>&#127859; Boleh masak?</h4>
-          <p>Ya, dapur lengkap disediakan untuk kegunaan tetamu.</p>
+          <h4 data-bm="&#127859; Boleh masak?" data-en="&#127859; Can we cook?">&#127859; Boleh masak?</h4>
+          <p data-bm="Ya, dapur lengkap disediakan untuk kegunaan tetamu." data-en="Yes, a fully equipped kitchen is available for guests.">Ya, dapur lengkap disediakan untuk kegunaan tetamu.</p>
         </div>
 
         <div class="faq-item">
-          <h4>&#128118; Sesuai untuk kanak-kanak?</h4>
-          <p>Sangat sesuai untuk keluarga &amp; kanak-kanak.</p>
+          <h4 data-bm="&#128118; Sesuai untuk kanak-kanak?" data-en="&#128118; Suitable for children?">&#128118; Sesuai untuk kanak-kanak?</h4>
+          <p data-bm="Sangat sesuai untuk keluarga &amp; kanak-kanak." data-en="Very suitable for families &amp; children.">Sangat sesuai untuk keluarga &amp; kanak-kanak.</p>
         </div>
 
         <div class="faq-item">
-          <h4>&#128685; Boleh merokok?</h4>
-          <p>Tidak dibenarkan merokok di dalam rumah.</p>
+          <h4 data-bm="&#128685; Boleh merokok?" data-en="&#128685; Smoking allowed?">&#128685; Boleh merokok?</h4>
+          <p data-bm="Tidak dibenarkan merokok di dalam rumah." data-en="Smoking is not allowed inside the house.">Tidak dibenarkan merokok di dalam rumah.</p>
         </div>
       </div>
     </section>
@@ -442,31 +705,38 @@
     <!-- ================= FINAL CTA ================= -->
     <section class="final-cta reveal" id="hubungi">
       <div class="final-cta-container">
-        <h2>Sedia Untuk Menginap di Jitra2Stay?</h2>
-        <p>
+        <h2 data-bm="Sedia Untuk Menginap di Jitra2Stay?" data-en="Ready to Stay at Jitra2Stay?">Sedia Untuk Menginap di Jitra2Stay?</h2>
+        <p
+          data-bm="Semak tarikh, harga &amp; ketersediaan bilik sekarang.<br>Tempahan pantas melalui WhatsApp."
+          data-en="Check dates, prices &amp; availability now.<br>Fast booking via WhatsApp."
+        >
           Semak tarikh, harga &amp; ketersediaan bilik sekarang.<br>
           Tempahan pantas melalui WhatsApp.
         </p>
 
         <a
           href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+          data-bm-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+          data-en-href="https://wa.me/60194410666?text=Hi%20Jitra2Stay,%20I%20would%20like%20to%20book%20a%20homestay."
           class="btn-cta"
           target="_blank"
           rel="noopener"
+          data-bm="&#128242; WhatsApp Untuk Tempahan"
+          data-en="&#128242; WhatsApp to Book"
         >
           &#128242; WhatsApp Untuk Tempahan
         </a>
 
         <div class="cta-trust">
-          <span>&#9889; Respon pantas</span>
-          <span>&#128522; Mesra pelanggan</span>
-          <span>&#9989; Mudah urusan</span>
+          <span data-bm="&#9889; Respon pantas" data-en="&#9889; Fast response">&#9889; Respon pantas</span>
+          <span data-bm="&#128522; Mesra pelanggan" data-en="&#128522; Friendly host">&#128522; Mesra pelanggan</span>
+          <span data-bm="&#9989; Mudah urusan" data-en="&#9989; Easy process">&#9989; Mudah urusan</span>
         </div>
       </div>
     </section>
 
     <!-- ================= FOOTER ================= -->
-    <footer>
+    <footer data-bm="&copy; 2026 Jitra2Stay &middot; Homestay di Jitra" data-en="&copy; 2026 Jitra2Stay &middot; Homestay in Jitra">
       &copy; 2026 Jitra2Stay &middot; Homestay di Jitra
     </footer>
 
@@ -480,6 +750,37 @@
     >
       &#128172;
     </a>
+
+    <!-- ================= FLOATING CTA (DESKTOP) ================= -->
+    <div class="floating-cta" id="floatingCta">
+      <div
+        class="floating-cta-text"
+        data-bm="Tempah cepat & mudah melalui WhatsApp"
+        data-en="Quick & easy booking via WhatsApp"
+      >
+        Tempah cepat & mudah melalui WhatsApp
+      </div>
+      <a
+        href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+        data-bm-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+        data-en-href="https://wa.me/60194410666?text=Hi%20Jitra2Stay,%20I%20would%20like%20to%20book%20a%20homestay."
+        class="floating-cta-btn"
+        data-bm="Tempah Sekarang"
+        data-en="Book Now"
+      >
+        Tempah Sekarang
+      </a>
+    </div>
+
+    <!-- ================= BACK TO TOP ================= -->
+    <button
+      class="back-to-top"
+      id="backToTop"
+      type="button"
+      aria-label="Back to top"
+    >
+      ↑
+    </button>
 
     <script>
       const reveals = document.querySelectorAll(".reveal");
@@ -501,6 +802,14 @@
       revealOnScroll();
 
       const header = document.getElementById("siteHeader");
+      const rootStyles = document.documentElement.style;
+      const updateHeaderOffset = () => {
+        if (!header) {
+          return;
+        }
+        const height = header.getBoundingClientRect().height;
+        rootStyles.setProperty("--header-offset", `${Math.ceil(height + 16)}px`);
+      };
       if (header) {
         window.addEventListener("scroll", () => {
           if (window.scrollY > 80) {
@@ -508,8 +817,11 @@
           } else {
             header.classList.remove("shrink");
           }
+          updateHeaderOffset();
         });
       }
+      window.addEventListener("resize", updateHeaderOffset);
+      updateHeaderOffset();
 
       const toggle = document.getElementById("menuToggle");
       const nav = document.getElementById("mainNav");
@@ -518,6 +830,13 @@
         toggle.addEventListener("click", () => {
           const isOpen = nav.classList.toggle("show");
           toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+
+        nav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            nav.classList.remove("show");
+            toggle.setAttribute("aria-expanded", "false");
+          });
         });
       }
 
@@ -532,16 +851,162 @@
           }
         });
       }
+
+      const floatingCta = document.getElementById("floatingCta");
+      const backToTop = document.getElementById("backToTop");
+
+      const updateFloatingUI = () => {
+        const show = window.scrollY > 500;
+        if (floatingCta) {
+          floatingCta.classList.toggle("show", show);
+        }
+        if (backToTop) {
+          backToTop.classList.toggle("show", show);
+        }
+      };
+
+      window.addEventListener("scroll", updateFloatingUI);
+      updateFloatingUI();
+
+      if (backToTop) {
+        backToTop.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
+
+      const dateForm = document.getElementById("dateForm");
+      if (dateForm) {
+        dateForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const data = new FormData(dateForm);
+          const checkin = data.get("checkin");
+          const checkout = data.get("checkout");
+          const guests = data.get("guests");
+          const rooms = data.get("rooms");
+          const notes = data.get("notes");
+          const lang = document.documentElement.dataset.lang || "ms";
+
+          const lines = [];
+          if (lang === "en") {
+            lines.push("Hi Jitra2Stay, I would like to check availability:");
+            lines.push(`Check-in: ${checkin}`);
+            lines.push(`Check-out: ${checkout}`);
+            lines.push(`Guests: ${guests}`);
+            lines.push(`Rooms: ${rooms}`);
+            if (notes) {
+              lines.push(`Notes: ${notes}`);
+            }
+          } else {
+            lines.push("Hai Jitra2Stay, saya ingin semak ketersediaan:");
+            lines.push(`Check-in: ${checkin}`);
+            lines.push(`Check-out: ${checkout}`);
+            lines.push(`Tetamu: ${guests}`);
+            lines.push(`Bilik: ${rooms}`);
+            if (notes) {
+              lines.push(`Nota: ${notes}`);
+            }
+          }
+
+          const message = encodeURIComponent(lines.join("\n"));
+          window.open(`https://wa.me/60194410666?text=${message}`, "_blank", "noopener");
+        });
+      }
+
+      const root = document.documentElement;
+      const langButtons = document.querySelectorAll(".lang-btn");
+      const translatable = document.querySelectorAll("[data-bm][data-en]");
+      const ariaTranslatable = document.querySelectorAll("[data-bm-aria-label][data-en-aria-label]");
+      const altTranslatable = document.querySelectorAll("[data-bm-alt][data-en-alt]");
+      const titleTranslatable = document.querySelectorAll("[data-bm-title][data-en-title]");
+      const hrefTranslatable = document.querySelectorAll("[data-bm-href][data-en-href]");
+
+      function applyLanguage(lang) {
+        root.lang = lang;
+        root.dataset.lang = lang;
+
+        const title = lang === "en" ? root.dataset.titleEn : root.dataset.titleBm;
+        if (title) {
+          document.title = title;
+        }
+
+        translatable.forEach((el) => {
+          const text = lang === "en" ? el.dataset.en : el.dataset.bm;
+          if (text !== undefined) {
+            el.innerHTML = text;
+          }
+        });
+
+        ariaTranslatable.forEach((el) => {
+          const label = lang === "en" ? el.dataset.enAriaLabel : el.dataset.bmAriaLabel;
+          if (label) {
+            el.setAttribute("aria-label", label);
+          }
+        });
+
+        altTranslatable.forEach((el) => {
+          const alt = lang === "en" ? el.dataset.enAlt : el.dataset.bmAlt;
+          if (alt) {
+            el.setAttribute("alt", alt);
+          }
+        });
+
+        titleTranslatable.forEach((el) => {
+          const titleText = lang === "en" ? el.dataset.enTitle : el.dataset.bmTitle;
+          if (titleText) {
+            el.setAttribute("title", titleText);
+          }
+        });
+
+        hrefTranslatable.forEach((el) => {
+          const href = lang === "en" ? el.dataset.enHref : el.dataset.bmHref;
+          if (href) {
+            el.setAttribute("href", href);
+          }
+        });
+
+        langButtons.forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === lang);
+        });
+      }
+
+      let initialLang = root.dataset.lang || "ms";
+      try {
+        const savedLang = localStorage.getItem("preferredLang");
+        if (savedLang === "ms" || savedLang === "en") {
+          initialLang = savedLang;
+        }
+      } catch (error) {
+        initialLang = root.dataset.lang || "ms";
+      }
+      applyLanguage(initialLang);
+
+      langButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          applyLanguage(btn.dataset.lang);
+          try {
+            localStorage.setItem("preferredLang", btn.dataset.lang);
+          } catch (error) {
+            // Ignore storage errors (private mode, etc.)
+          }
+        });
+      });
     </script>
 
     <!-- ================= MOBILE STICKY WHATSAPP ================= -->
     <a
       href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+      data-bm-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+      data-en-href="https://wa.me/60194410666?text=Hi%20Jitra2Stay,%20I%20would%20like%20to%20book%20a%20homestay."
       class="mobile-whatsapp"
       target="_blank"
       rel="noopener"
+      data-bm="&#128242; WhatsApp Untuk Tempahan"
+      data-en="&#128242; WhatsApp to Book"
     >
       &#128242; WhatsApp Untuk Tempahan
     </a>
   </body>
 </html>
+
+
+
