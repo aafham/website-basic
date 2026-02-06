@@ -1,553 +1,547 @@
 <!DOCTYPE html>
 <html lang="ms">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Jitra2Stay | Homestay di Jitra</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header class="site-header" id="siteHeader">
+      <div class="header-container">
+        <div class="logo">
+          <h1>Jitra2Stay</h1>
+          <span>Homestay Selesa di Jitra</span>
+        </div>
 
-<!-- ================= HEADER ================= -->
-<header class="site-header">
-  <div class="header-container">
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Buka menu"
+          aria-controls="mainNav"
+          aria-expanded="false"
+        >
+          &#9776;
+        </button>
 
-    <div class="logo">
-      <h1>Jitra2Stay</h1>
-      <span>Homestay Selesa di Jitra</span>
-    </div>
+        <nav class="main-nav" id="mainNav">
+          <a href="#home">Home</a>
+          <a href="#kemudahan">Kemudahan</a>
+          <a href="#kadar">Kadar</a>
+          <a href="#lokasi">Lokasi</a>
+          <a href="#hubungi">Hubungi</a>
+        </nav>
+      </div>
+    </header>
 
-    <!-- Hamburger button (mobile) -->
-    <button class="menu-toggle" id="menuToggle">☰</button>
-
-    <nav class="main-nav" id="mainNav">
-      <a href="#">Home</a>
-      <a href="#kemudahan">Kemudahan</a>
-      <a href="#kadar">Kadar</a>
-      <a href="#lokasi">Lokasi</a>
-      <a href="#hubungi">Hubungi</a>
-    </nav>
-
-  </div>
-</header>
-
-
-<!-- ================= HERO ================= -->
-<section id="home" class="hero">
-    <div class="hero-content">
-        <span class="hero-badge">⭐ Pilihan Popular Keluarga di Jitra</span>
+    <!-- ================= HERO ================= -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <span class="hero-badge">&#11088; Pilihan Popular Keluarga di Jitra</span>
 
         <h2>Homestay Semi-D 2 Tingkat di Jitra</h2>
         <p class="hero-trust">
-    Dipercayai tetamu dari seluruh Kedah & Perlis.
-</p>
-
-        <p>
-            Ruang luas, bersih dan selesa untuk keluarga & rombongan.<br>
-            Sesuai untuk kenduri, majlis, acara sukan dan konvokesyen.
+          Dipercayai tetamu dari seluruh Kedah &amp; Perlis.
         </p>
 
-        <a href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay.%20Boleh%20saya%20tahu%20kadar%20dan%20tarikh%20yang%20ada?"
-   class="btn-primary"
-   target="_blank">
-   WhatsApp Sekarang
-</a>
-
-    </div>
-</section>
-
-<!-- ================= QUICK HIGHLIGHTS ================= -->
-<section class="highlights reveal">
-    <div class="highlight-container">
-
-        <div class="highlight-item">
-            🏠
-            <span>Semi-D 2 Tingkat</span>
-        </div>
-
-        <div class="highlight-item">
-            👨‍👩‍👧‍👦
-            <span>Muat 6 – 10 Orang</span>
-        </div>
-
-        <div class="highlight-item">
-            📍
-            <span>Sebelah Hospital Jitra</span>
-        </div>
-
-        <div class="highlight-item">
-            📶
-            <span>WiFi & Fully Aircond</span>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- ================= TENTANG ================= -->
-<section class="about-split reveal">
-    <div class="about-split-container">
-
-        <!-- LEFT: TEXT -->
-        <div class="about-left">
-            <h3>Tentang Homestay</h3>
-
-            <p>
-                Jitra2Stay adalah sebuah homestay Semi-D 2 tingkat yang luas,
-bersih dan selesa, sesuai untuk penginapan keluarga dan rombongan.
-            </p>
-
-            <p>
-Kebanyakan tetamu kami menginap untuk kenduri, majlis keluarga,
-acara sukan serta konvokesyen.
-
-            </p>
-            <p>
-                Kami menawarkan kadar sewaan yang fleksibel mengikut bilangan bilik
-dan keperluan tetamu.
-            </p>
-
-            <ul class="about-list">
-                <li>🏠 Semi-D 2 Tingkat</li>
-                <li>🛏️ 5 Bilik Tidur</li>
-                <li>🚿 3 Bilik Air</li>
-                <li>❄️ Fully Aircond & Kipas</li>
-            </ul>
-        </div>
-
-        <!-- RIGHT: IMAGE -->
-        <div class="about-right">
-            <img src="images/halaman.jpg" alt="Ruang Tamu Jitra2Stay">
-        </div>
-
-    </div>
-</section>
-
-
-<!-- ================= SIAPA SESUAI ================= -->
-<section class="who-for reveal">
-    <h3>Siapa Sesuai Menginap di Jitra2Stay?</h3>
-    <p class="who-desc">
-        Homestay kami sesuai untuk pelbagai jenis tetamu & acara.
-    </p>
-
-    <div class="who-grid">
-
-        <div class="who-card">
-            👨‍👩‍👧‍👦
-            <h4>Keluarga Besar</h4>
-            <p>Sesuai untuk percutian keluarga & cuti sekolah.</p>
-        </div>
-
-        <div class="who-card">
-            💍
-            <h4>Kenduri & Majlis</h4>
-            <p>Penginapan selesa untuk tetamu kenduri & majlis keluarga.</p>
-        </div>
-
-        <div class="who-card">
-            🎓
-            <h4>Konvokesyen</h4>
-            <p>Dekat dengan lokasi institusi & dewan sekitar Jitra.</p>
-        </div>
-
-        <div class="who-card">
-            ⚽
-            <h4>Acara Sukan</h4>
-            <p>Ruang luas & parking mudah untuk rombongan besar.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- ================= KENAPA PILIH KAMI ================= -->
-<section class="why-us reveal">
-    <h3>Kenapa Pilih Jitra2Stay?</h3>
-    <p class="why-desc">
-        Kami utamakan keselesaan, kebersihan dan pengalaman menginap yang terbaik.
-    </p>
-
-    <div class="why-grid">
-
-        <div class="why-item">
-            🧼
-            <h4>Bersih & Terjaga</h4>
-            <p>Rumah sentiasa dibersihkan dan diselenggara sebelum setiap tetamu.</p>
-        </div>
-
-        <div class="why-item">
-            📍
-            <h4>Lokasi Strategik</h4>
-            <p>Dekat Hospital Jitra, Lotus’s, MRSM & pusat bandar.</p>
-        </div>
-
-        <div class="why-item">
-            🏡
-            <h4>1 Rumah Sahaja</h4>
-            <p>Privasi penuh untuk keluarga & rombongan anda.</p>
-        </div>
-
-        <div class="why-item">
-            📲
-            <h4>Host Respons Pantas</h4>
-            <p>Mudah dihubungi & respon pantas melalui WhatsApp.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- ================= KEMUDAHAN ================= -->
-<section id="kemudahan" class="facilities reveal">
-    <h3>Kemudahan Disediakan</h3>
-
-    <div class="facility-list">
-        <div class="facility-item">❄️ Fully Air-Conditioned</div>
-        <div class="facility-item">🌀 Kipas di Setiap Bilik</div>
-        <div class="facility-item">📶 WiFi Percuma</div>
-        <div class="facility-item">📺 TV</div>
-        <div class="facility-item">🍳 Dapur Lengkap</div>
-        <div class="facility-item">🚗 Parking Luas</div>
-        <div class="facility-item">🧼 Rumah Bersih & Kemas</div>
-    </div>
-</section>
-
-<!-- ================= KADAR ================= -->
-<section id="kadar" class="pricing reveal">
-    <h3>Kadar Sewaan</h3>
-    <p class="pricing-desc">
-        Kadar sewaan fleksibel mengikut bilangan bilik yang ditempah.
-    </p>
-
-    <div class="pricing-grid">
-
-        <div class="price-card">
-            <h4>2 Bilik</h4>
-            <p>Fully Aircond</p>
-            <span>RM170 / malam</span>
-        </div>
-
-        <div class="price-card">
-            <h4>3 Bilik</h4>
-            <p>Fully Aircond</p>
-            <span>RM220 / malam</span>
-        </div>
-
-        <div class="price-card">
-            <h4>4 Bilik</h4>
-            <p>Fully Aircond</p>
-            <span>RM280 / malam</span>
-        </div>
-
-        <div class="price-card best">
-            <span class="badge">Paling Popular</span>
-            <h4>5 Bilik</h4>
-            <p>Fully Aircond</p>
-            <span>RM330 / malam</span>
-        </div>
-
-    </div>
-
-    <div class="deposit-box">
-        🔐 <strong>Security Deposit:</strong> RM100  
-        <span>(Dipulangkan selepas check-out jika tiada kerosakan)</span>
-    </div>
-</section>
-
-<!-- ================= GALLERY PREVIEW ================= -->
-<section class="gallery reveal">
-    <h3>Gambar Sekitar Homestay</h3>
-    <p class="section-desc">
-        Ruang luas, bersih dan selesa untuk keluarga & rombongan.
-    </p>
-
-    <div class="gallery-grid">
-
-        <div class="gallery-item">
-            <img src="images/ruang-tamu.jpg" alt="Ruang Tamu">
-            <div class="gallery-label">Ruang Tamu</div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/bilik-tidur.jpg" alt="Bilik Tidur">
-            <div class="gallery-label">Bilik Tidur</div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/dapur.jpg" alt="Dapur">
-            <div class="gallery-label">Dapur</div>
-        </div>
-
-        <div class="gallery-item">
-            <img src="images/luar-rumah.jpg" alt="Luar Rumah">
-            <div class="gallery-label">Luar Rumah</div>
-        </div>
-
-    </div>
-
-    <a href="https://www.facebook.com/media/set/?set=a.2393864657563587&type=3" 
-    class="btn-primary gallery-btn">
-        Lihat Semua Gambar
-    </a>
-</section>
-
-<!-- ================= LOKASI ================= -->
-<section id="lokasi" class="location-section reveal">
-    <div class="location-container">
-
-        <!-- LEFT : INFO -->
-        <div class="location-info">
-            <h3>Lokasi Homestay</h3>
-
-            <p class="address">
-                49, Taman Jitra Indah,<br>
-                Jalan Hospital Daerah,<br>
-                06000 Jitra, Kedah
-            </p>
-
-            <p class="note">
-                (Sebelah pagar sisi Hospital Jitra)
-            </p>
-
-            <a href="https://goo.gl/maps/pjnMbwm5Pk2QqPeP8"
-               target="_blank"
-               class="map-btn">
-                📍 Buka di Google Maps
-            </a>
-        </div>
-
-        <!-- RIGHT : GOOGLE MAP -->
-        <div class="location-map">
-        <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8720554542947!2d100.4151952!3d6.2805462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304b592244adad0b%3A0x5a66d4c44467c0f6!2sJitra2Stay!5e0!3m2!1sen!2sus!4v1770206439318!5m2!1sen!2sus" 
-        width="600" 
-        height="450" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- ================= TEMPAT BERDEKATAN ================= -->
-<section class="nearby reveal">
-    <h3>Tempat Berdekatan</h3>
-    <p class="nearby-desc">
-        Lokasi strategik dan mudah diakses ke pelbagai tempat penting sekitar Jitra.
-    </p>
-
-    <div class="nearby-grid">
-
-        <div class="nearby-item">
-            🛒
-            <span>Lotus’s Jitra</span>
-            <small>± 5 min</small>
-        </div>
-
-        <div class="nearby-item">
-            🏫
-            <span>MRSM Kubang Pasu</span>
-            <small>± 10 min</small>
-        </div>
-
-        <div class="nearby-item">
-            🎓
-            <span>POLIMAS</span>
-            <small>± 15 min</small>
-        </div>
-
-        <div class="nearby-item">
-            🕌
-            <span>Masjid Sharifah Fatimah</span>
-            <small>± 10 min</small>
-        </div>
-
-        <div class="nearby-item">
-            🎢
-            <span>Darulaman Aquapark</span>
-            <small>± 20 min</small>
-        </div>
-
-        <div class="nearby-item">
-            🏥
-            <span>Hospital Jitra</span>
-            <small>Berhampiran</small>
-        </div>
-
-    </div>
-</section>
-
-<section class="trust reveal">
-    <h3>Kenapa Tetamu Pilih Jitra2Stay?</h3>
-    <p class="section-desc">
-        Kami utamakan keselesaan, kebersihan dan pengalaman menginap yang terbaik.
-    </p>
-
-    <div class="trust-grid">
-
-        <div class="trust-card">
-            ⭐⭐⭐⭐⭐
-            <p>
-                “Rumah sangat bersih & luas. Sesuai untuk keluarga besar.
-                Host sangat responsif.”
-            </p>
-            <span>- Tetamu Kenduri</span>
-        </div>
-
-        <div class="trust-card">
-            ⭐⭐⭐⭐⭐
-            <p>
-                “Lokasi dekat hospital & bandar Jitra. Mudah urusan.
-                Akan repeat.”
-            </p>
-            <span>- Tetamu Keluarga</span>
-        </div>
-
-        <div class="trust-card">
-            ⭐⭐⭐⭐⭐
-            <p>
-                “Check-in senang, rumah lengkap dengan WiFi & aircond.
-                Sangat selesa.”
-            </p>
-            <span>- Tetamu Konvokesyen</span>
-        </div>
-
-    </div>
-
-    <div class="trust-icons">
-        <div>🧼 Rumah Bersih</div>
-        <div>📍 Lokasi Strategik</div>
-        <div>📶 WiFi Percuma</div>
-        <div>💬 Respon Pantas</div>
-    </div>
-</section>
-
-<!-- ================= FAQ ================= -->
-<section class="faq reveal">
-    <h3>Soalan Lazim (FAQ)</h3>
-
-    <div class="faq-list">
-
-        <div class="faq-item">
-            <h4>⏰ Pukul berapa check-in & check-out?</h4>
-            <p>Check-in: 3.00 petang | Check-out: 12.00 tengah hari</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>🍳 Boleh masak?</h4>
-            <p>Ya, dapur lengkap disediakan untuk kegunaan tetamu.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>👶 Sesuai untuk kanak-kanak?</h4>
-            <p>Sangat sesuai untuk keluarga & kanak-kanak.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>🚭 Boleh merokok?</h4>
-            <p>Tidak dibenarkan merokok di dalam rumah.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- ================= FINAL CTA ================= -->
-<section class="final-cta reveal">
-    <div class="final-cta-container">
-
-        <h2>Sedia Untuk Menginap di Jitra2Stay?</h2>
         <p>
-            Semak tarikh, harga & ketersediaan bilik sekarang.<br>
-            Tempahan pantas melalui WhatsApp.
+          Ruang luas, bersih dan selesa untuk keluarga &amp; rombongan.<br>
+          Sesuai untuk kenduri, majlis, acara sukan dan konvokesyen.
         </p>
 
         <a
-            href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
-            class="btn-cta"
-            target="_blank"
+          href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay.%20Boleh%20saya%20tahu%20kadar%20dan%20tarikh%20yang%20ada?"
+          class="btn-primary"
+          target="_blank"
+          rel="noopener"
         >
-            📲 WhatsApp Untuk Tempahan
+          WhatsApp Sekarang
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= QUICK HIGHLIGHTS ================= -->
+    <section class="highlights reveal">
+      <div class="highlight-container">
+        <div class="highlight-item">
+          &#127968;
+          <span>Semi-D 2 Tingkat</span>
+        </div>
+
+        <div class="highlight-item">
+          &#128106;
+          <span>Muat 6 &ndash; 10 Orang</span>
+        </div>
+
+        <div class="highlight-item">
+          &#128205;
+          <span>Sebelah Hospital Jitra</span>
+        </div>
+
+        <div class="highlight-item">
+          &#128246;
+          <span>WiFi &amp; Fully Aircond</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TENTANG ================= -->
+    <section class="about-split reveal">
+      <div class="about-split-container">
+        <div class="about-left">
+          <h3>Tentang Homestay</h3>
+
+          <p>
+            Jitra2Stay adalah sebuah homestay Semi-D 2 tingkat yang luas, bersih dan
+            selesa, sesuai untuk penginapan keluarga dan rombongan.
+          </p>
+
+          <p>
+            Kebanyakan tetamu kami menginap untuk kenduri, majlis keluarga, acara
+            sukan serta konvokesyen.
+          </p>
+
+          <p>
+            Kami menawarkan kadar sewaan yang fleksibel mengikut bilangan bilik
+            dan keperluan tetamu.
+          </p>
+
+          <ul class="about-list">
+            <li>&#127968; Semi-D 2 Tingkat</li>
+            <li>&#128719; 5 Bilik Tidur</li>
+            <li>&#128703; 3 Bilik Air</li>
+            <li>&#10052; Fully Aircond &amp; Kipas</li>
+          </ul>
+        </div>
+
+        <div class="about-right">
+          <img src="images/halaman.jpg" alt="Ruang Tamu Jitra2Stay">
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SIAPA SESUAI ================= -->
+    <section class="who-for reveal">
+      <h3>Siapa Sesuai Menginap di Jitra2Stay?</h3>
+      <p class="who-desc">
+        Homestay kami sesuai untuk pelbagai jenis tetamu &amp; acara.
+      </p>
+
+      <div class="who-grid">
+        <div class="who-card">
+          &#128106;
+          <h4>Keluarga Besar</h4>
+          <p>Sesuai untuk percutian keluarga &amp; cuti sekolah.</p>
+        </div>
+
+        <div class="who-card">
+          &#128141;
+          <h4>Kenduri &amp; Majlis</h4>
+          <p>Penginapan selesa untuk tetamu kenduri &amp; majlis keluarga.</p>
+        </div>
+
+        <div class="who-card">
+          &#127891;
+          <h4>Konvokesyen</h4>
+          <p>Dekat dengan lokasi institusi &amp; dewan sekitar Jitra.</p>
+        </div>
+
+        <div class="who-card">
+          &#9917;
+          <h4>Acara Sukan</h4>
+          <p>Ruang luas &amp; parking mudah untuk rombongan besar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KENAPA PILIH KAMI ================= -->
+    <section class="why-us reveal">
+      <h3>Kenapa Pilih Jitra2Stay?</h3>
+      <p class="why-desc">
+        Kami utamakan keselesaan, kebersihan dan pengalaman menginap yang terbaik.
+      </p>
+
+      <div class="why-grid">
+        <div class="why-item">
+          &#129532;
+          <h4>Bersih &amp; Terjaga</h4>
+          <p>Rumah sentiasa dibersihkan dan diselenggara sebelum setiap tetamu.</p>
+        </div>
+
+        <div class="why-item">
+          &#128205;
+          <h4>Lokasi Strategik</h4>
+          <p>Dekat Hospital Jitra, Lotus&#8217;s, MRSM &amp; pusat bandar.</p>
+        </div>
+
+        <div class="why-item">
+          &#127969;
+          <h4>1 Rumah Sahaja</h4>
+          <p>Privasi penuh untuk keluarga &amp; rombongan anda.</p>
+        </div>
+
+        <div class="why-item">
+          &#128242;
+          <h4>Host Respons Pantas</h4>
+          <p>Mudah dihubungi &amp; respon pantas melalui WhatsApp.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KEMUDAHAN ================= -->
+    <section id="kemudahan" class="facilities reveal">
+      <h3>Kemudahan Disediakan</h3>
+
+      <div class="facility-list">
+        <div class="facility-item">&#10052; Fully Air-Conditioned</div>
+        <div class="facility-item">&#127744; Kipas di Setiap Bilik</div>
+        <div class="facility-item">&#128246; WiFi Percuma</div>
+        <div class="facility-item">&#128250; TV</div>
+        <div class="facility-item">&#127859; Dapur Lengkap</div>
+        <div class="facility-item">&#128663; Parking Luas</div>
+        <div class="facility-item">&#129532; Rumah Bersih &amp; Kemas</div>
+      </div>
+    </section>
+
+    <!-- ================= KADAR ================= -->
+    <section id="kadar" class="pricing reveal">
+      <h3>Kadar Sewaan</h3>
+      <p class="pricing-desc">
+        Kadar sewaan fleksibel mengikut bilangan bilik yang ditempah.
+      </p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h4>2 Bilik</h4>
+          <p>Fully Aircond</p>
+          <span>RM170 / malam</span>
+        </div>
+
+        <div class="price-card">
+          <h4>3 Bilik</h4>
+          <p>Fully Aircond</p>
+          <span>RM220 / malam</span>
+        </div>
+
+        <div class="price-card">
+          <h4>4 Bilik</h4>
+          <p>Fully Aircond</p>
+          <span>RM280 / malam</span>
+        </div>
+
+        <div class="price-card best">
+          <span class="badge">Paling Popular</span>
+          <h4>5 Bilik</h4>
+          <p>Fully Aircond</p>
+          <span>RM330 / malam</span>
+        </div>
+      </div>
+
+      <div class="deposit-box">
+        &#128272; <strong>Security Deposit:</strong> RM100
+        <span>(Dipulangkan selepas check-out jika tiada kerosakan)</span>
+      </div>
+    </section>
+
+    <!-- ================= GALLERY PREVIEW ================= -->
+    <section class="gallery reveal">
+      <h3>Gambar Sekitar Homestay</h3>
+      <p class="section-desc">
+        Ruang luas, bersih dan selesa untuk keluarga &amp; rombongan.
+      </p>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="images/ruang-tamu.jpg" alt="Ruang Tamu">
+          <div class="gallery-label">Ruang Tamu</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="images/bilik-tidur.jpg" alt="Bilik Tidur">
+          <div class="gallery-label">Bilik Tidur</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="images/dapur.jpg" alt="Dapur">
+          <div class="gallery-label">Dapur</div>
+        </div>
+
+        <div class="gallery-item">
+          <img src="images/luar-rumah.jpg" alt="Luar Rumah">
+          <div class="gallery-label">Luar Rumah</div>
+        </div>
+      </div>
+
+      <a
+        href="https://www.facebook.com/media/set/?set=a.2393864657563587&type=3"
+        class="btn-primary gallery-btn"
+        target="_blank"
+        rel="noopener"
+      >
+        Lihat Semua Gambar
+      </a>
+    </section>
+
+    <!-- ================= LOKASI ================= -->
+    <section id="lokasi" class="location-section reveal">
+      <div class="location-container">
+        <div class="location-info">
+          <h3>Lokasi Homestay</h3>
+
+          <p class="address">
+            49, Taman Jitra Indah,<br>
+            Jalan Hospital Daerah,<br>
+            06000 Jitra, Kedah
+          </p>
+
+          <p class="note">(Sebelah pagar sisi Hospital Jitra)</p>
+
+          <a
+            href="https://goo.gl/maps/pjnMbwm5Pk2QqPeP8"
+            target="_blank"
+            rel="noopener"
+            class="map-btn"
+          >
+            &#128205; Buka di Google Maps
+          </a>
+        </div>
+
+        <div class="location-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8720554542947!2d100.4151952!3d6.2805462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304b592244adad0b%3A0x5a66d4c44467c0f6!2sJitra2Stay!5e0!3m2!1sen!2sus!4v1770206439318!5m2!1sen!2sus"
+            width="600"
+            height="450"
+            style="border: 0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lokasi Jitra2Stay"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TEMPAT BERDEKATAN ================= -->
+    <section class="nearby reveal">
+      <h3>Tempat Berdekatan</h3>
+      <p class="nearby-desc">
+        Lokasi strategik dan mudah diakses ke pelbagai tempat penting sekitar Jitra.
+      </p>
+
+      <div class="nearby-grid">
+        <div class="nearby-item">
+          &#128722;
+          <span>Lotus&#8217;s Jitra</span>
+          <small>&plusmn; 5 min</small>
+        </div>
+
+        <div class="nearby-item">
+          &#127979;
+          <span>MRSM Kubang Pasu</span>
+          <small>&plusmn; 10 min</small>
+        </div>
+
+        <div class="nearby-item">
+          &#127891;
+          <span>POLIMAS</span>
+          <small>&plusmn; 15 min</small>
+        </div>
+
+        <div class="nearby-item">
+          &#128348;
+          <span>Masjid Sharifah Fatimah</span>
+          <small>&plusmn; 10 min</small>
+        </div>
+
+        <div class="nearby-item">
+          &#127914;
+          <span>Darulaman Aquapark</span>
+          <small>&plusmn; 20 min</small>
+        </div>
+
+        <div class="nearby-item">
+          &#127973;
+          <span>Hospital Jitra</span>
+          <small>Berhampiran</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust reveal">
+      <h3>Kenapa Tetamu Pilih Jitra2Stay?</h3>
+      <p class="section-desc">
+        Kami utamakan keselesaan, kebersihan dan pengalaman menginap yang terbaik.
+      </p>
+
+      <div class="trust-grid">
+        <div class="trust-card">
+          &#11088;&#11088;&#11088;&#11088;&#11088;
+          <p>
+            &ldquo;Rumah sangat bersih &amp; luas. Sesuai untuk keluarga besar. Host
+            sangat responsif.&rdquo;
+          </p>
+          <span>- Tetamu Kenduri</span>
+        </div>
+
+        <div class="trust-card">
+          &#11088;&#11088;&#11088;&#11088;&#11088;
+          <p>
+            &ldquo;Lokasi dekat hospital &amp; bandar Jitra. Mudah urusan. Akan
+            repeat.&rdquo;
+          </p>
+          <span>- Tetamu Keluarga</span>
+        </div>
+
+        <div class="trust-card">
+          &#11088;&#11088;&#11088;&#11088;&#11088;
+          <p>
+            &ldquo;Check-in senang, rumah lengkap dengan WiFi &amp; aircond. Sangat
+            selesa.&rdquo;
+          </p>
+          <span>- Tetamu Konvokesyen</span>
+        </div>
+      </div>
+
+      <div class="trust-icons">
+        <div>&#129532; Rumah Bersih</div>
+        <div>&#128205; Lokasi Strategik</div>
+        <div>&#128246; WiFi Percuma</div>
+        <div>&#128172; Respon Pantas</div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="faq reveal">
+      <h3>Soalan Lazim (FAQ)</h3>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>&#9200; Pukul berapa check-in &amp; check-out?</h4>
+          <p>Check-in: 3.00 petang | Check-out: 12.00 tengah hari</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>&#127859; Boleh masak?</h4>
+          <p>Ya, dapur lengkap disediakan untuk kegunaan tetamu.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>&#128118; Sesuai untuk kanak-kanak?</h4>
+          <p>Sangat sesuai untuk keluarga &amp; kanak-kanak.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>&#128685; Boleh merokok?</h4>
+          <p>Tidak dibenarkan merokok di dalam rumah.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="final-cta reveal" id="hubungi">
+      <div class="final-cta-container">
+        <h2>Sedia Untuk Menginap di Jitra2Stay?</h2>
+        <p>
+          Semak tarikh, harga &amp; ketersediaan bilik sekarang.<br>
+          Tempahan pantas melalui WhatsApp.
+        </p>
+
+        <a
+          href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+          class="btn-cta"
+          target="_blank"
+          rel="noopener"
+        >
+          &#128242; WhatsApp Untuk Tempahan
         </a>
 
         <div class="cta-trust">
-            <span>⚡ Respon pantas</span>
-            <span>😊 Mesra pelanggan</span>
-            <span>✅ Mudah urusan</span>
+          <span>&#9889; Respon pantas</span>
+          <span>&#128522; Mesra pelanggan</span>
+          <span>&#9989; Mudah urusan</span>
         </div>
+      </div>
+    </section>
 
-    </div>
-</section>
+    <!-- ================= FOOTER ================= -->
+    <footer>
+      &copy; 2026 Jitra2Stay &middot; Homestay di Jitra
+    </footer>
 
-<!-- ================= FOOTER ================= -->
-<footer>
-    © 2026 Jitra2Stay · Homestay di Jitra
-</footer>
+    <!-- ================= FLOATING WHATSAPP ================= -->
+    <a
+      href="https://wa.me/60194410666"
+      class="floating-whatsapp"
+      aria-label="WhatsApp"
+      target="_blank"
+      rel="noopener"
+    >
+      &#128172;
+    </a>
 
-<!-- ================= FLOATING WHATSAPP ================= -->
-<a href="https://wa.me/60194410666" class="floating-whatsapp" aria-label="WhatsApp">💬</a>
+    <script>
+      const reveals = document.querySelectorAll(".reveal");
 
-<script>
-/* ================= SCROLL REVEAL ================= */
-const reveals = document.querySelectorAll(".reveal");
+      function revealOnScroll() {
+        const windowHeight = window.innerHeight;
 
-function revealOnScroll() {
-    const windowHeight = window.innerHeight;
+        reveals.forEach((section) => {
+          const sectionTop = section.getBoundingClientRect().top;
+          const revealPoint = 120;
 
-    reveals.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const revealPoint = 120;
-
-        if (sectionTop < windowHeight - revealPoint) {
+          if (sectionTop < windowHeight - revealPoint) {
             section.classList.add("active");
-        }
-    });
-}
+          }
+        });
+      }
 
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
+      window.addEventListener("scroll", revealOnScroll);
+      revealOnScroll();
 
-const header = document.getElementById("siteHeader");
+      const header = document.getElementById("siteHeader");
+      if (header) {
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 80) {
+            header.classList.add("shrink");
+          } else {
+            header.classList.remove("shrink");
+          }
+        });
+      }
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 80) {
-        header.classList.add("shrink");
-    } else {
-        header.classList.remove("shrink");
-    }
-});
+      const toggle = document.getElementById("menuToggle");
+      const nav = document.getElementById("mainNav");
 
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          const isOpen = nav.classList.toggle("show");
+          toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+      }
 
- const toggle = document.getElementById("menuToggle");
-  const nav = document.getElementById("mainNav");
+      const finalCTA = document.querySelector(".final-cta");
+      if (finalCTA) {
+        window.addEventListener("scroll", () => {
+          const top = finalCTA.getBoundingClientRect().top;
+          const trigger = window.innerHeight - 100;
 
-  toggle.addEventListener("click", () => {
-    nav.classList.toggle("show");
-  });
+          if (top < trigger) {
+            finalCTA.classList.add("show");
+          }
+        });
+      }
+    </script>
 
-
-const finalCTA = document.querySelector(".final-cta");
-
-window.addEventListener("scroll", () => {
-    const top = finalCTA.getBoundingClientRect().top;
-    const trigger = window.innerHeight - 100;
-
-    if (top < trigger) {
-        finalCTA.classList.add("show");
-    }
-});
-
-</script>
-<!-- ================= MOBILE STICKY WHATSAPP ================= -->
-<a
-  href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
-  class="mobile-whatsapp"
-  target="_blank"
->
-  📲 WhatsApp Untuk Tempahan
-</a>
-
-</body>
+    <!-- ================= MOBILE STICKY WHATSAPP ================= -->
+    <a
+      href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+      class="mobile-whatsapp"
+      target="_blank"
+      rel="noopener"
+    >
+      &#128242; WhatsApp Untuk Tempahan
+    </a>
+  </body>
 </html>
