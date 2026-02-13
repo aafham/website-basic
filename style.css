@@ -746,6 +746,41 @@ textarea:focus-visible {
   justify-self: center;
 }
 
+.availability-board {
+  max-width: 850px;
+  margin: 18px auto 0;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: left;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+}
+
+.availability-board h4 {
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.availability-board p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.availability-list {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+}
+
+.availability-list li {
+  background: var(--surface-soft);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 600;
+}
+
 .gallery h3 {
   font-size: 32px;
   color: var(--primary);
@@ -857,11 +892,34 @@ textarea:focus-visible {
   height: 280px;
   border-radius: 16px;
   overflow: hidden;
+  background: var(--surface-soft);
+  display: grid;
+  place-items: center;
+  padding: 14px;
 }
 
 .location-map iframe {
   width: 100%;
   height: 100%;
+  display: none;
+}
+
+.location-map.loaded iframe {
+  display: block;
+}
+
+.map-load-btn {
+  border: none;
+  border-radius: 999px;
+  background: var(--primary);
+  color: white;
+  padding: 12px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.location-map.loaded .map-load-btn {
+  display: none;
 }
 
 /* ================= NEARBY ================= */
@@ -1510,5 +1568,9 @@ footer {
   .form-full,
   .date-form button {
     grid-column: span 1;
+  }
+
+  .availability-board {
+    padding: 16px;
   }
 }

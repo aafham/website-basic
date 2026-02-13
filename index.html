@@ -24,9 +24,12 @@
     >
     <meta name="theme-color" content="#1f4f46">
     <meta name="twitter:image" content="images/halaman.jpg">
+    <meta name="robots" content="index,follow">
     <link rel="preconnect" href="https://wa.me">
     <link rel="preconnect" href="https://www.google.com">
     <link rel="preload" as="image" href="images/ruang-tamu.jpg">
+    <link rel="canonical" href="https://jitra2stay.example.com/">
+    <script type="application/ld+json" id="lodgingSchema"></script>
     <link
       rel="icon"
       type="image/svg+xml"
@@ -341,6 +344,17 @@
           Hantar ke WhatsApp
         </button>
       </form>
+
+      <div class="availability-board" id="availabilityBoard">
+        <h4 data-bm="Tarikh Tidak Tersedia (Contoh)" data-en="Unavailable Dates (Sample)">Tarikh Tidak Tersedia (Contoh)</h4>
+        <p
+          data-bm="Tarikh di bawah biasanya telah ditempah. WhatsApp kami untuk semakan akhir."
+          data-en="Dates below are usually booked. WhatsApp us for final confirmation."
+        >
+          Tarikh di bawah biasanya telah ditempah. WhatsApp kami untuk semakan akhir.
+        </p>
+        <ul class="availability-list" id="availabilityList"></ul>
+      </div>
     </section>
 
     <!-- ================= GALLERY PREVIEW ================= -->
@@ -354,10 +368,12 @@
         <div class="gallery-item">
           <img
             src="images/ruang-tamu.jpg"
-            srcset="images/ruang-tamu.jpg 1x, images/ruang-tamu.jpg 2x"
             alt="Ruang Tamu"
             data-bm-alt="Ruang Tamu"
             data-en-alt="Living Room"
+            width="1200"
+            height="800"
+            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             loading="lazy"
             decoding="async"
           >
@@ -367,10 +383,12 @@
         <div class="gallery-item">
           <img
             src="images/bilik-tidur.jpg"
-            srcset="images/bilik-tidur.jpg 1x, images/bilik-tidur.jpg 2x"
             alt="Bilik Tidur"
             data-bm-alt="Bilik Tidur"
             data-en-alt="Bedroom"
+            width="1200"
+            height="800"
+            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             loading="lazy"
             decoding="async"
           >
@@ -380,10 +398,12 @@
         <div class="gallery-item">
           <img
             src="images/dapur.jpg"
-            srcset="images/dapur.jpg 1x, images/dapur.jpg 2x"
             alt="Dapur"
             data-bm-alt="Dapur"
             data-en-alt="Kitchen"
+            width="1200"
+            height="800"
+            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             loading="lazy"
             decoding="async"
           >
@@ -393,10 +413,12 @@
         <div class="gallery-item">
           <img
             src="images/luar-rumah.jpg"
-            srcset="images/luar-rumah.jpg 1x, images/luar-rumah.jpg 2x"
             alt="Luar Rumah"
             data-bm-alt="Luar Rumah"
             data-en-alt="Exterior"
+            width="1200"
+            height="800"
+            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             loading="lazy"
             decoding="async"
           >
@@ -453,10 +475,12 @@
         <div class="about-right">
           <img
             src="images/halaman.jpg"
-            srcset="images/halaman.jpg 1x, images/halaman.jpg 2x"
             alt="Ruang Tamu Jitra2Stay"
             data-bm-alt="Ruang Tamu Jitra2Stay"
             data-en-alt="Jitra2Stay Living Room"
+            width="1200"
+            height="800"
+            sizes="(max-width: 768px) 100vw, 50vw"
             loading="lazy"
             decoding="async"
           >
@@ -577,9 +601,21 @@
           </a>
         </div>
 
-        <div class="location-map">
+        <div class="location-map" id="locationMap">
+          <button
+            class="map-load-btn"
+            id="loadMapBtn"
+            type="button"
+            data-bm="&#128506; Paparkan Peta Interaktif"
+            data-en="&#128506; Load Interactive Map"
+            aria-controls="locationMapFrame"
+            aria-expanded="false"
+          >
+            &#128506; Paparkan Peta Interaktif
+          </button>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8720554542947!2d100.4151952!3d6.2805462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304b592244adad0b%3A0x5a66d4c44467c0f6!2sJitra2Stay!5e0!3m2!1sen!2sus!4v1770206439318!5m2!1sen!2sus"
+            id="locationMapFrame"
+            data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8720554542947!2d100.4151952!3d6.2805462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304b592244adad0b%3A0x5a66d4c44467c0f6!2sJitra2Stay!5e0!3m2!1sen!2sus!4v1770206439318!5m2!1sen!2sus"
             width="600"
             height="450"
             style="border: 0;"
@@ -587,7 +623,8 @@
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="Lokasi Jitra2Stay"
-            data-bm-title="Lokasi Jitra2Stay" data-en-title="Jitra2Stay Location"
+            data-bm-title="Lokasi Jitra2Stay"
+            data-en-title="Jitra2Stay Location"
           ></iframe>
         </div>
       </div>
@@ -655,7 +692,7 @@
             &ldquo;Rumah sangat bersih &amp; luas. Sesuai untuk keluarga besar. Host
             sangat responsif.&rdquo;
           </p>
-          <span data-bm="- Tetamu Kenduri" data-en="- Event Guest">- Tetamu Kenduri</span>
+          <span data-bm="&mdash; Keluarga dari Perlis" data-en="&mdash; Family from Perlis">&mdash; Keluarga dari Perlis</span>
         </div>
 
         <div class="trust-card">
@@ -667,7 +704,7 @@
             &ldquo;Lokasi dekat hospital &amp; bandar Jitra. Mudah urusan. Akan
             repeat.&rdquo;
           </p>
-          <span data-bm="&mdash; Tetamu Keluarga" data-en="&mdash; Family Guest">&mdash; Tetamu Keluarga</span>
+          <span data-bm="&mdash; Tetamu Konvokesyen UUM" data-en="&mdash; UUM Convocation Guest">&mdash; Tetamu Konvokesyen UUM</span>
         </div>
 
         <div class="trust-card">
@@ -679,7 +716,7 @@
             &ldquo;Check-in senang, rumah lengkap dengan WiFi &amp; aircond. Sangat
             selesa.&rdquo;
           </p>
-          <span data-bm="- Tetamu Konvokesyen" data-en="- Convocation Guest">- Tetamu Konvokesyen</span>
+          <span data-bm="&mdash; Rombongan Sukan Kedah" data-en="&mdash; Kedah Sports Group">&mdash; Rombongan Sukan Kedah</span>
         </div>
       </div>
 
@@ -714,6 +751,26 @@
         <div class="faq-item">
           <h4 data-bm="&#128685; Boleh merokok?" data-en="&#128685; Smoking allowed?">&#128685; Boleh merokok?</h4>
           <p data-bm="Tidak dibenarkan merokok di dalam rumah." data-en="Smoking is not allowed inside the house.">Tidak dibenarkan merokok di dalam rumah.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 data-bm="&#128176; Polisi pembatalan &amp; refund?" data-en="&#128176; Cancellation &amp; refund policy?">&#128176; Polisi pembatalan &amp; refund?</h4>
+          <p data-bm="Deposit tempahan tidak dipulangkan jika batal saat akhir (kurang 7 hari)." data-en="Booking deposit is non-refundable for last-minute cancellations (less than 7 days).">Deposit tempahan tidak dipulangkan jika batal saat akhir (kurang 7 hari).</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 data-bm="&#128663; Berapa banyak parking tersedia?" data-en="&#128663; How many parking spaces are available?">&#128663; Berapa banyak parking tersedia?</h4>
+          <p data-bm="Biasanya muat 3 hingga 4 kereta di kawasan rumah." data-en="Usually fits 3 to 4 cars within the house compound.">Biasanya muat 3 hingga 4 kereta di kawasan rumah.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 data-bm="&#127769; Ada waktu senyap?" data-en="&#127769; Is there a quiet hour policy?">&#127769; Ada waktu senyap?</h4>
+          <p data-bm="Ya, sila kurangkan bunyi bising selepas 11:00 malam demi kejiranan." data-en="Yes, please keep noise low after 11:00 PM out of respect for neighbors.">Ya, sila kurangkan bunyi bising selepas 11:00 malam demi kejiranan.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4 data-bm="&#128101; Caj untuk tetamu tambahan?" data-en="&#128101; Extra guest charges?">&#128101; Caj untuk tetamu tambahan?</h4>
+          <p data-bm="Sila maklumkan awal jika lebih 10 orang; caj tambahan mungkin dikenakan." data-en="Please inform us in advance if more than 10 guests; extra charges may apply.">Sila maklumkan awal jika lebih 10 orang; caj tambahan mungkin dikenakan.</p>
         </div>
       </div>
     </section>
@@ -781,6 +838,9 @@
               alt="Ruang tamu Jitra2Stay"
               data-bm-alt="Ruang tamu Jitra2Stay"
               data-en-alt="Jitra2Stay living room"
+              width="1200"
+              height="800"
+              sizes="(max-width: 768px) 100vw, 320px"
               loading="lazy"
               decoding="async"
             >
@@ -858,6 +918,7 @@
     >
       &#128242; WhatsApp Untuk Tempahan
     </a>
+    <script src="app.config.js" defer></script>
     <script src="app.js" defer></script>
   </body>
 </html>

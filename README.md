@@ -16,7 +16,11 @@ Website ini dibina untuk:
 Projek ini ialah **static website** (tanpa backend framework):
 - `index.html` -> struktur halaman.
 - `app.js` -> script interaktif (menu, bahasa, tema, form, scroll behavior).
+- `app.config.js` -> konfigurasi business info, analytics, unavailable dates.
 - `style.css` -> styling, tema, responsive layout.
+- `thank-you.html` -> halaman selepas klik CTA WhatsApp (conversion step).
+- `sitemap.xml` -> sitemap SEO.
+- `robots.txt` -> arahan crawler.
 - `images/` -> aset gambar utama.
 
 Ringkasnya, aplikasi ini boleh dihoskan di mana-mana static hosting (Vercel, Netlify, cPanel, dll).
@@ -48,7 +52,7 @@ python -m http.server 5500
 3. Terus dapat URL live.
 
 ### cPanel / Shared Hosting
-1. Upload `index.html`, `app.js`, `style.css`, dan folder `images` ke `public_html`.
+1. Upload semua fail root (`index.html`, `app.js`, `app.config.js`, `style.css`, `thank-you.html`, `sitemap.xml`, `robots.txt`) dan folder `images` ke `public_html`.
 2. Website akan live pada domain.
 
 ## 5) Fungsi Dalam App
@@ -85,6 +89,7 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 - Intercept submit pada `#dateForm`.
 - Ambil nilai form: check-in, check-out, tetamu, bilik, nota.
 - Tambah validasi tarikh (`check-out` mesti selepas `check-in`).
+- Semak pertindihan dengan tarikh unavailable dari `app.config.js`.
 - Jana mesej BM/EN ikut bahasa aktif.
 - Buka link `wa.me` dengan mesej encoded.
 
@@ -105,6 +110,20 @@ Semua fungsi di bawah berada dalam script di `app.js`.
   - document title
 - Simpan pilihan bahasa dalam `localStorage` (`preferredLang`).
 
+### 5.9 Analytics & Tracking
+- Konfigurasi analytics melalui `app.config.js` (`gaMeasurementId` / `plausibleDomain`).
+- Event utama ditrack:
+  - klik WhatsApp CTA
+  - submit form tarikh
+  - tukar bahasa
+  - tukar tema
+  - load peta
+
+### 5.10 Map Lazy Load
+- Peta Google Maps tidak terus diload semasa page initial render.
+- Peta hanya dimuatkan selepas pengguna klik butang `Paparkan Peta Interaktif`.
+- Kurangkan beban render awal halaman.
+
 ## 6) Ciri-ciri Utama Website
 
 - Header sticky + navigation section.
@@ -114,11 +133,13 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 - Kadar sewaan (2-5 bilik) + deposit info.
 - Cara tempah 1-2-3.
 - Form semak tarikh.
+- Papan ringkas unavailable dates (manual update).
 - Gallery gambar.
 - About, target guest, why us.
 - Lokasi + info berhampiran.
 - Testimoni + trust section.
 - FAQ.
+- FAQ diperluas (refund, parking, quiet hour, caj tetamu tambahan).
 - Final CTA besar.
 - Floating CTA desktop + sticky WhatsApp mobile.
 - Multi-language BM/EN.
@@ -142,6 +163,17 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 ### Warna & Theme
 - Ubah variable CSS di `:root` dan `:root[data-theme="dark"]` dalam `style.css`.
 
+### Konfigurasi Utama
+- Semua tetapan utama kini di `app.config.js`:
+  - info bisnes (`name`, `phone`, `siteUrl`)
+  - analytics IDs
+  - `enableThankYouRedirect`
+  - `unavailableRanges`
+- Gantikan domain contoh `jitra2stay.example.com` kepada domain live sebenar pada:
+  - `app.config.js`
+  - `index.html` (`canonical`)
+  - `sitemap.xml` dan `robots.txt`
+
 ## 8) Nota Teknikal
 
 - Tiada backend/database.
@@ -157,11 +189,11 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 
 ## 10) Cadangan Penambahbaikan
 
-1. Tambah optimasi imej (WebP/AVIF + saiz berbeza).
-2. Tambah SEO lanjut (structured data schema).
-3. Integrasi analytics (contoh: GA4/Plausible).
-4. Tambah borang backup (email/API) jika WhatsApp gagal.
-5. Tambah fail `sitemap.xml` dan `robots.txt`.
+1. Sediakan fail imej WebP/AVIF sebenar untuk setiap gambar utama.
+2. Integrasi API backup tempahan (email/API) jika WhatsApp gagal.
+3. Tambah dashboard mini untuk edit `unavailableRanges` tanpa ubah kod.
+4. Tambah A/B test copy CTA untuk naikkan conversion.
+5. Tambah halaman polisi penuh (refund, house rules, privacy).
 
 ## 11) Ringkasan
 
@@ -177,3 +209,23 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
 - Ditambah `skip-link`, `focus-visible`, dan `aria-pressed` untuk accessibility.
 - Ditambah validasi tarikh check-in/check-out dalam borang semakan.
 - Scroll behavior dioptimumkan menggunakan `requestAnimationFrame`.
+- Ditambah `app.config.js` untuk central config + analytics setup.
+- Ditambah halaman `thank-you.html` untuk step conversion selepas klik WhatsApp.
+- Ditambah `sitemap.xml` dan `robots.txt` untuk SEO.
+- Ditambah schema `LodgingBusiness` dan map lazy-load.
+
+## 13) Checklist Sebelum Live
+
+1. Tukar domain contoh `jitra2stay.example.com` kepada domain sebenar dalam:
+   - `app.config.js`
+   - `index.html` (canonical URL)
+   - `sitemap.xml`
+   - `robots.txt`
+2. Isi `gaMeasurementId` atau `plausibleDomain` dalam `app.config.js` jika mahu analytics aktif.
+3. Semak nombor WhatsApp dalam semua CTA serta di `app.config.js`.
+4. Kemas kini `unavailableRanges` dalam `app.config.js` ikut tarikh tempahan sebenar.
+5. Uji aliran lengkap:
+   - klik CTA WhatsApp
+   - redirect ke `thank-you.html`
+   - submit borang tarikh
+   - klik butang load map
