@@ -387,6 +387,12 @@
       return;
     }
     lightbox.hidden = true;
+    if (lightboxImage) {
+      lightboxImage.src = "";
+    }
+    if (lightboxCaption) {
+      lightboxCaption.textContent = "";
+    }
     document.body.style.overflow = "";
   };
 

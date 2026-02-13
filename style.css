@@ -938,6 +938,10 @@ textarea:focus-visible {
   padding: 20px;
 }
 
+.lightbox[hidden] {
+  display: none !important;
+}
+
 .lightbox img {
   max-width: min(92vw, 1050px);
   max-height: 78vh;
