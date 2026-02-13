@@ -290,3 +290,25 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
    - buka `admin.html`
    - masukkan password owner
    - kemas kini tarikh/testimoni/polisi/funnel dari dashboard.
+
+## 14) Setup Wajib (Step-by-step Paling Ringkas)
+
+Ikut urutan ini supaya website terus jalan dengan betul:
+
+1. Buka `app.config.js`.
+2. Set nilai asas business:
+   - `business.phone: "+6019440666"`
+   - `business.siteUrl: "https://jitra2stay.vercel.app"`
+   - `business.image: "https://jitra2stay.vercel.app/images/halaman.jpg"` (sementara, boleh tukar kemudian)
+3. Simpan fail, kemudian refresh browser (`Ctrl + F5`).
+4. Buka `index.html` dan semak URL canonical/hreflang guna domain sama (`https://jitra2stay.vercel.app`).
+5. Buka `robots.txt` dan pastikan `Sitemap` URL guna domain sama.
+6. Buka `sitemap.xml` dan pastikan semua URL guna domain sama.
+7. Uji fungsi utama:
+   - Klik CTA WhatsApp
+   - Submit borang semak tarikh
+   - Buka `admin.html` dan login owner
+
+Jika `business.image` belum ada gambar rasmi:
+- Guna dulu `images/halaman.jpg` seperti di atas.
+- Bila gambar baru siap, upload ke folder `images/` dan tukar URL `business.image` sahaja.
