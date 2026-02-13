@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Admin | Jitra2Stay</title>
+    <meta name="robots" content="noindex,nofollow">
+    <style>
+      :root {
+        --bg: #0f172a;
+        --surface: #111827;
+        --card: #1f2937;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --accent: #34d399;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 20px; }
+      .card { background: var(--surface); border-radius: 14px; padding: 14px; margin-top: 12px; }
+      h1,h2 { margin: 0 0 8px; }
+      .muted { color: var(--muted); }
+      textarea, input {
+        width: 100%;
+        margin-top: 8px;
+        border-radius: 10px;
+        border: 1px solid #334155;
+        background: #0b1220;
+        color: var(--text);
+        padding: 10px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .row { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+      button {
+        margin-top: 8px;
+        border: none;
+        border-radius: 10px;
+        background: var(--accent);
+        color: #052e22;
+        font-weight: 700;
+        padding: 9px 12px;
+        cursor: pointer;
+      }
+      .ghost { background: #475569; color: #fff; }
+      table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+      th, td { text-align: left; border-bottom: 1px solid #334155; padding: 6px; font-size: 13px; }
+      .hidden { display: none; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Owner Admin</h1>
+      <p class="muted">Update jadual tempahan, testimoni, polisi, dan pantau funnel analytics.</p>
+
+      <section id="lockedCard" class="card">
+        <h2>Login Owner</h2>
+        <input id="passwordInput" type="password" placeholder="Masukkan password owner">
+        <button id="loginBtn" type="button">Masuk</button>
+      </section>
+
+      <section id="adminPanel" class="hidden">
+        <section class="card">
+          <h2>1) Tarikh Tidak Tersedia</h2>
+          <p class="muted">Format setiap baris: `YYYY-MM-DD|YYYY-MM-DD|Label BM|Label EN`</p>
+          <textarea id="rangesInput" rows="8"></textarea>
+          <div>
+            <button id="saveRangesBtn" type="button">Simpan Tarikh</button>
+            <button id="resetRangesBtn" type="button" class="ghost">Reset Asal</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>2) Testimoni</h2>
+          <p class="muted">Format setiap baris: `Quote BM|Quote EN|Author BM|Author EN`</p>
+          <textarea id="testimonialsInput" rows="6"></textarea>
+          <button id="saveTestimonialsBtn" type="button">Simpan Testimoni</button>
+        </section>
+
+        <section class="card">
+          <h2>3) Polisi (policies.html)</h2>
+          <label>Polisi Tempahan & Pembatalan</label>
+          <textarea id="policy1" rows="4"></textarea>
+          <label>House Rules</label>
+          <textarea id="policy2" rows="4"></textarea>
+          <label>Privasi</label>
+          <textarea id="policy3" rows="4"></textarea>
+          <button id="savePolicyBtn" type="button">Simpan Polisi</button>
+        </section>
+
+        <section class="card">
+          <h2>4) Funnel Analytics</h2>
+          <div class="row">
+            <div>
+              <label>Owner Reply Count</label>
+              <input id="replyCount" type="number" min="0">
+            </div>
+            <div>
+              <label>Booking Confirmed Count</label>
+              <input id="confirmCount" type="number" min="0">
+            </div>
+          </div>
+          <button id="saveFunnelBtn" type="button">Simpan Funnel Manual</button>
+
+          <h3>Event Summary (Auto)</h3>
+          <table>
+            <thead><tr><th>Event</th><th>Count</th></tr></thead>
+            <tbody id="eventSummary"></tbody>
+          </table>
+          <h3>Funnel Ringkas</h3>
+          <table>
+            <tbody id="funnelSummary"></tbody>
+          </table>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.config.js" defer></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const cfg = window.APP_CONFIG || {};
+        const ownerPassword = String(cfg.ownerPassword || "1234");
+        const defaultRanges = Array.isArray(cfg.unavailableRanges) ? cfg.unavailableRanges : [];
+
+        const keys = {
+          ranges: "ownerUnavailableRanges",
+          rangesAt: "ownerUnavailableRangesUpdatedAt",
+          testimonials: "ownerTestimonials",
+          policy1: "policySection1",
+          policy2: "policySection2",
+          policy3: "policySection3",
+          events: "analyticsEvents",
+          funnel: "funnelMetrics"
+        };
+
+        const $ = (id) => document.getElementById(id);
+        const lockedCard = $("lockedCard");
+        const adminPanel = $("adminPanel");
+        const passwordInput = $("passwordInput");
+
+        const rangesInput = $("rangesInput");
+        const testimonialsInput = $("testimonialsInput");
+        const policy1 = $("policy1");
+        const policy2 = $("policy2");
+        const policy3 = $("policy3");
+        const replyCount = $("replyCount");
+        const confirmCount = $("confirmCount");
+        const eventSummary = $("eventSummary");
+        const funnelSummary = $("funnelSummary");
+
+        const read = (k) => {
+          try { return localStorage.getItem(k); } catch (e) { return null; }
+        };
+        const write = (k, v) => {
+          try { localStorage.setItem(k, v); } catch (e) {}
+        };
+        const readJson = (k, fallback) => {
+          const raw = read(k);
+          if (!raw) return fallback;
+          try { return JSON.parse(raw); } catch (e) { return fallback; }
+        };
+
+        const rangesToText = (ranges) => ranges
+          .map((r) => `${r.start}|${r.end}|${r.labelBm || ""}|${r.labelEn || ""}`)
+          .join("\n");
+
+        const parseRanges = (text) => text
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .map((line) => {
+            const [start, end, labelBm = "", labelEn = ""] = line.split("|").map((x) => x.trim());
+            return { start, end, labelBm, labelEn };
+          });
+
+        const testimonialsToText = (items) => items
+          .map((i) => `${i.quoteBm || ""}|${i.quoteEn || ""}|${i.authorBm || ""}|${i.authorEn || ""}`)
+          .join("\n");
+
+        const parseTestimonials = (text) => text
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .map((line) => {
+            const [quoteBm = "", quoteEn = "", authorBm = "", authorEn = ""] = line.split("|").map((x) => x.trim());
+            return { quoteBm, quoteEn, authorBm, authorEn };
+          });
+
+        const refreshSummary = () => {
+          const events = readJson(keys.events, []);
+          const map = {};
+          events.forEach((e) => {
+            map[e.event] = (map[e.event] || 0) + 1;
+          });
+          eventSummary.innerHTML = "";
+          Object.keys(map).sort().forEach((name) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `<td>${name}</td><td>${map[name]}</td>`;
+            eventSummary.appendChild(tr);
+          });
+
+          const funnel = readJson(keys.funnel, { replied: 0, confirmed: 0 });
+          const visits = map.page_view || 0;
+          const ctaClicks = map.whatsapp_click || 0;
+          const replied = Number(funnel.replied || 0);
+          const confirmed = Number(funnel.confirmed || 0);
+          const pct = (a, b) => (b > 0 ? `${Math.round((a / b) * 100)}%` : "-");
+          funnelSummary.innerHTML = `
+            <tr><td>Visits</td><td>${visits}</td></tr>
+            <tr><td>CTA Clicks</td><td>${ctaClicks} (${pct(ctaClicks, visits)})</td></tr>
+            <tr><td>Owner Replied</td><td>${replied} (${pct(replied, ctaClicks)})</td></tr>
+            <tr><td>Booking Confirmed</td><td>${confirmed} (${pct(confirmed, replied)})</td></tr>
+          `;
+        };
+
+        const loadPanel = () => {
+          const ranges = readJson(keys.ranges, defaultRanges);
+          rangesInput.value = rangesToText(ranges);
+          testimonialsInput.value = testimonialsToText(readJson(keys.testimonials, []));
+          policy1.value = read(keys.policy1) || "";
+          policy2.value = read(keys.policy2) || "";
+          policy3.value = read(keys.policy3) || "";
+          const funnel = readJson(keys.funnel, { replied: 0, confirmed: 0 });
+          replyCount.value = String(funnel.replied || 0);
+          confirmCount.value = String(funnel.confirmed || 0);
+          refreshSummary();
+        };
+
+        $("loginBtn").addEventListener("click", () => {
+          if (passwordInput.value !== ownerPassword) {
+            alert("Password salah.");
+            return;
+          }
+          lockedCard.classList.add("hidden");
+          adminPanel.classList.remove("hidden");
+          loadPanel();
+        });
+
+        $("saveRangesBtn").addEventListener("click", () => {
+          write(keys.ranges, JSON.stringify(parseRanges(rangesInput.value)));
+          write(keys.rangesAt, new Date().toISOString());
+          alert("Tarikh berjaya disimpan.");
+        });
+
+        $("resetRangesBtn").addEventListener("click", () => {
+          write(keys.ranges, JSON.stringify(defaultRanges));
+          write(keys.rangesAt, "");
+          rangesInput.value = rangesToText(defaultRanges);
+          alert("Tarikh reset ke asal.");
+        });
+
+        $("saveTestimonialsBtn").addEventListener("click", () => {
+          write(keys.testimonials, JSON.stringify(parseTestimonials(testimonialsInput.value)));
+          alert("Testimoni berjaya disimpan.");
+        });
+
+        $("savePolicyBtn").addEventListener("click", () => {
+          write(keys.policy1, policy1.value.trim());
+          write(keys.policy2, policy2.value.trim());
+          write(keys.policy3, policy3.value.trim());
+          alert("Polisi berjaya disimpan.");
+        });
+
+        $("saveFunnelBtn").addEventListener("click", () => {
+          write(keys.funnel, JSON.stringify({
+            replied: Number(replyCount.value || 0),
+            confirmed: Number(confirmCount.value || 0)
+          }));
+          alert("Funnel manual berjaya disimpan.");
+          refreshSummary();
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -12,6 +12,7 @@ window.APP_CONFIG = {
   },
   ownerPassword: "1234",
   ownerApiEndpoint: "",
+  bookingCalendarIcsUrl: "",
   enableThankYouRedirect: true,
   unavailableRanges: [
     {

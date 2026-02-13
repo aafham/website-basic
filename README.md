@@ -17,9 +17,11 @@ Projek ini ialah **static website** (tanpa backend framework):
 - `index.html` -> struktur halaman.
 - `app.js` -> script interaktif (menu, bahasa, tema, form, scroll behavior).
 - `app.config.js` -> konfigurasi business info, analytics, unavailable dates.
+- `admin.html` -> owner admin panel (login password, CRUD data, funnel dashboard).
 - `style.css` -> styling, tema, responsive layout.
 - `thank-you.html` -> halaman selepas klik CTA WhatsApp (conversion step).
 - `policies.html` -> polisi tempahan, house rules, dan privasi.
+- `ms.html` / `en.html` -> landing URL BM/EN untuk SEO multilingual.
 - `sitemap.xml` -> sitemap SEO.
 - `robots.txt` -> arahan crawler.
 - `images/` -> aset gambar utama.
@@ -100,6 +102,10 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 - Password semasa: `1234` (boleh ubah di `app.config.js` pada key `ownerPassword`).
 - Data tarikh owner disimpan dalam `localStorage` browser yang digunakan.
 
+### 5.6.2 iCal / Calendar Sync
+- Jika `bookingCalendarIcsUrl` diisi dalam `app.config.js`, website akan fetch iCal (.ics) secara automatik.
+- Tarikh dari iCal akan digabungkan ke senarai unavailable dates.
+
 ### 5.7 Theme Toggle (Light/Dark)
 - `getPreferredTheme()` baca pilihan simpanan / ikut system preference.
 - `setTheme(theme, persist)`
@@ -127,6 +133,7 @@ Semua fungsi di bawah berada dalam script di `app.js`.
   - load peta
   - buka lightbox gallery
   - assignment A/B CTA
+- Event disimpan juga ke `localStorage` (`analyticsEvents`) untuk dashboard owner.
 
 ### 5.10 Map Lazy Load
 - Peta Google Maps tidak terus diload semasa page initial render.
@@ -148,6 +155,14 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 
 ### 5.14 Form Feedback
 - Borang semak tarikh memaparkan status ringkas semasa validasi dan sebelum membuka WhatsApp.
+
+### 5.15 Owner Admin Dashboard
+- Buka `admin.html` dan login menggunakan password owner.
+- Owner boleh:
+  - edit unavailable dates
+  - edit testimoni
+  - edit polisi (diguna oleh `policies.html`)
+  - lihat ringkasan funnel: visit -> CTA click -> replied -> confirmed
 
 ## 6) Ciri-ciri Utama Website
 
@@ -174,6 +189,7 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 - Multi-language BM/EN.
 - Light/Dark mode.
 - Responsive untuk mobile.
+- URL BM/EN tersedia melalui `ms.html` dan `en.html`.
 
 ## 7) Panduan Edit Kandungan
 
@@ -199,6 +215,7 @@ Semua fungsi di bawah berada dalam script di `app.js`.
   - `enableThankYouRedirect`
   - `unavailableRanges`
   - `ownerApiEndpoint` (optional backend sync)
+  - `bookingCalendarIcsUrl` (public iCal URL)
 - Pastikan domain live sebenar digunakan pada:
   - `app.config.js` (`business.siteUrl`)
   - `index.html` (`canonical`)
@@ -213,9 +230,8 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 
 ## 9) Limitasi Semasa
 
-- Data borang tidak disimpan ke server, terus dihantar ke WhatsApp.
-- Tiada panel admin/CMS.
-- Kandungan perlu dikemaskini secara manual di fail HTML/CSS.
+- Data borang masih dihantar ke WhatsApp (tiada booking engine penuh).
+- Admin panel masih frontend-centric; untuk security production, disarankan backend auth.
 
 ## 10) Cadangan Penambahbaikan
 
@@ -246,6 +262,7 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
 - Ditambah A/B test CTA, lightbox gallery, dan `last updated` pada availability.
 - Ditambah `policies.html` dan contact fallback.
 - Ditambah UI polish: hero chips, FAQ accordion, form feedback, footer quick-links, dan lightbox navigation.
+- Ditambah iCal sync, admin dashboard owner, dan multilingual SEO pages (`ms.html` / `en.html`).
 
 ## 13) Checklist Sebelum Live
 
@@ -267,3 +284,9 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
    - Accessibility >= 95
    - Best Practices >= 95
    - SEO >= 95
+7. Jika guna calendar sync:
+   - isi `bookingCalendarIcsUrl` (public .ics URL) dalam `app.config.js`.
+8. Login owner:
+   - buka `admin.html`
+   - masukkan password owner
+   - kemas kini tarikh/testimoni/polisi/funnel dari dashboard.

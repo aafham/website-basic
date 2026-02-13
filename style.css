@@ -68,6 +68,11 @@ section[id] {
   scroll-margin-top: var(--header-offset);
 }
 
+main > section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 760px;
+}
+
 .skip-link {
   position: absolute;
   top: 10px;

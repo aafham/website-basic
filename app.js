@@ -6,9 +6,12 @@
   const defaultUnavailableRanges = Array.isArray(config.unavailableRanges) ? config.unavailableRanges : [];
   const ownerPassword = `${config.ownerPassword || "1234"}`;
   const ownerApiEndpoint = `${config.ownerApiEndpoint || ""}`.trim();
+  const bookingCalendarIcsUrl = `${config.bookingCalendarIcsUrl || ""}`.trim();
   const ownerRangesStorageKey = "ownerUnavailableRanges";
   const ownerRangesUpdatedAtKey = "ownerUnavailableRangesUpdatedAt";
   const abVariantStorageKey = "abCtaVariant";
+  const analyticsEventsStorageKey = "analyticsEvents";
+  const funnelMetricsStorageKey = "funnelMetrics";
   let unavailableRanges = defaultUnavailableRanges.slice();
   let abVariantTracked = false;
 
@@ -51,9 +54,26 @@
   const lightboxNext = document.getElementById("lightboxNext");
   const galleryOpenImages = Array.from(document.querySelectorAll(".gallery-open"));
   const faqItems = Array.from(document.querySelectorAll(".faq-item"));
+  const trustCards = Array.from(document.querySelectorAll(".trust-card"));
   const waLinks = Array.from(document.querySelectorAll('a[href*="wa.me/"]'));
   const schemaNode = document.getElementById("lodgingSchema");
   const canonicalLink = document.querySelector('link[rel="canonical"]');
+
+  const getSessionId = () => {
+    try {
+      const existing = sessionStorage.getItem("sessionId");
+      if (existing) {
+        return existing;
+      }
+      const next = `s_${Date.now()}_${Math.random().toString(16).slice(2, 8)}`;
+      sessionStorage.setItem("sessionId", next);
+      return next;
+    } catch (error) {
+      return `s_${Date.now()}`;
+    }
+  };
+
+  const sessionId = getSessionId();
 
   const readStorage = (key) => {
     try {
@@ -94,6 +114,47 @@
 
   const saveOwnerRanges = (ranges) => {
     writeStorage(ownerRangesStorageKey, JSON.stringify(ranges));
+  };
+
+  const loadAnalyticsEvents = () => {
+    const raw = readStorage(analyticsEventsStorageKey);
+    if (!raw) {
+      return [];
+    }
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      return [];
+    }
+  };
+
+  const saveAnalyticsEvents = (events) => {
+    writeStorage(analyticsEventsStorageKey, JSON.stringify(events.slice(-500)));
+  };
+
+  const recordLocalEvent = (eventName, params = {}) => {
+    const events = loadAnalyticsEvents();
+    events.push({
+      event: eventName,
+      ts: new Date().toISOString(),
+      sessionId,
+      params
+    });
+    saveAnalyticsEvents(events);
+  };
+
+  const loadOwnerTestimonials = () => {
+    const raw = readStorage("ownerTestimonials");
+    if (!raw) {
+      return [];
+    }
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      return [];
+    }
   };
 
   const markRangesUpdatedAt = () => {
@@ -139,6 +200,76 @@
       return response.ok;
     } catch (error) {
       return false;
+    }
+  };
+
+  const parseIcsDateToIso = (rawDate) => {
+    if (!rawDate) {
+      return "";
+    }
+    const clean = rawDate.trim();
+    const match = clean.match(/^(\d{4})(\d{2})(\d{2})/);
+    if (!match) {
+      return "";
+    }
+    return `${match[1]}-${match[2]}-${match[3]}`;
+  };
+
+  const minusOneDayIso = (isoDate) => {
+    const date = new Date(`${isoDate}T00:00:00`);
+    if (Number.isNaN(date.getTime())) {
+      return isoDate;
+    }
+    date.setDate(date.getDate() - 1);
+    return date.toISOString().slice(0, 10);
+  };
+
+  const parseIcsRanges = (icsText) => {
+    const ranges = [];
+    if (!icsText) {
+      return ranges;
+    }
+    const normalized = icsText.replace(/\r\n[ \t]/g, "");
+    const blocks = normalized.match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g) || [];
+
+    blocks.forEach((block) => {
+      const dtStartRaw = (block.match(/DTSTART(?:;[^:]+)?:([^\r\n]+)/) || [])[1];
+      const dtEndRaw = (block.match(/DTEND(?:;[^:]+)?:([^\r\n]+)/) || [])[1];
+      const summary = (block.match(/SUMMARY:([^\r\n]+)/) || [])[1] || "Booked";
+      const start = parseIcsDateToIso(dtStartRaw);
+      let end = parseIcsDateToIso(dtEndRaw);
+      if (end) {
+        end = minusOneDayIso(end);
+      } else {
+        end = start;
+      }
+      if (!start || !end) {
+        return;
+      }
+      ranges.push({
+        start,
+        end: end < start ? start : end,
+        labelBm: `Tempahan Kalendar: ${summary}`,
+        labelEn: `Calendar Booking: ${summary}`
+      });
+    });
+
+    return ranges;
+  };
+
+  const fetchIcsRanges = async () => {
+    if (!bookingCalendarIcsUrl) {
+      return [];
+    }
+    try {
+      const response = await fetch(bookingCalendarIcsUrl, { method: "GET" });
+      if (!response.ok) {
+        return [];
+      }
+      const text = await response.text();
+      return parseIcsRanges(text);
+    } catch (error) {
+      return [];
     }
   };
 
@@ -205,6 +336,7 @@
   };
 
   const trackEvent = (eventName, params = {}) => {
+    recordLocalEvent(eventName, params);
     if (window.gtag) {
       window.gtag("event", eventName, params);
     }
@@ -273,7 +405,8 @@
       return;
     }
     const siteUrl = getSiteUrl();
-    const currentPath = window.location.pathname === "/" ? "/" : window.location.pathname;
+    const path = window.location.pathname;
+    const currentPath = (path === "/" || path.endsWith("/index.html")) ? "/" : path;
     canonicalLink.href = `${siteUrl}${currentPath}`;
   };
 
@@ -346,6 +479,36 @@
     }
 
     return { ok: true, ranges: parsed };
+  };
+
+  const applyOwnerTestimonials = (lang) => {
+    if (trustCards.length === 0) {
+      return;
+    }
+    const ownerTestimonials = loadOwnerTestimonials();
+    if (ownerTestimonials.length === 0) {
+      return;
+    }
+
+    trustCards.forEach((card, index) => {
+      const item = ownerTestimonials[index];
+      if (!item) {
+        return;
+      }
+      const quoteEl = card.querySelector("p");
+      const authorEl = card.querySelector("span");
+      if (quoteEl) {
+        quoteEl.textContent = lang === "en"
+          ? (item.quoteEn || item.quoteBm || "")
+          : (item.quoteBm || item.quoteEn || "");
+      }
+      if (authorEl) {
+        const name = lang === "en"
+          ? (item.authorEn || item.authorBm || "")
+          : (item.authorBm || item.authorEn || "");
+        authorEl.textContent = name ? `- ${name}` : authorEl.textContent;
+      }
+    });
   };
 
   const getOrCreateAbVariant = () => {
@@ -555,6 +718,7 @@
     });
 
     renderAvailability(lang);
+    applyOwnerTestimonials(lang);
     applyAbCta();
     updateThemeToggleUI();
   };
@@ -875,11 +1039,17 @@
   }
 
   let initialLang = root.dataset.lang || "ms";
+  const urlLang = new URLSearchParams(window.location.search).get("lang");
+  if (urlLang === "ms" || urlLang === "en") {
+    initialLang = urlLang;
+    writeStorage("preferredLang", urlLang);
+  }
   const savedLang = readStorage("preferredLang");
-  if (savedLang === "ms" || savedLang === "en") {
+  if ((!urlLang || (urlLang !== "ms" && urlLang !== "en")) && (savedLang === "ms" || savedLang === "en")) {
     initialLang = savedLang;
   }
   applyLanguage(initialLang);
+  trackEvent("page_view", { page: window.location.pathname, lang: initialLang });
 
   fetchOwnerRangesFromApi().then((ranges) => {
     if (!ranges) {
@@ -889,6 +1059,22 @@
     saveOwnerRanges(unavailableRanges);
     markRangesUpdatedAt();
     renderAvailability(root.dataset.lang || "ms");
+  });
+
+  fetchIcsRanges().then((calendarRanges) => {
+    if (!calendarRanges || calendarRanges.length === 0) {
+      return;
+    }
+    const map = new Map();
+    unavailableRanges.forEach((range) => {
+      map.set(`${range.start}|${range.end}|${range.labelBm || ""}|${range.labelEn || ""}`, range);
+    });
+    calendarRanges.forEach((range) => {
+      map.set(`${range.start}|${range.end}|${range.labelBm || ""}|${range.labelEn || ""}`, range);
+    });
+    unavailableRanges = Array.from(map.values()).sort((a, b) => a.start.localeCompare(b.start));
+    renderAvailability(root.dataset.lang || "ms");
+    trackEvent("ical_sync_loaded", { count: calendarRanges.length });
   });
 
   langButtons.forEach((btn) => {

@@ -64,26 +64,21 @@
 
       <section>
         <h2>1) Polisi Tempahan & Pembatalan</h2>
-        <ul>
-          <li>Deposit diperlukan untuk sahkan tempahan.</li>
-          <li>Pembatalan kurang 7 hari sebelum check-in: deposit tidak dipulangkan.</li>
-          <li>Pembatalan lebih awal: pertukaran tarikh bergantung ketersediaan.</li>
-        </ul>
+        <p id="policySection1" class="muted">
+          Deposit diperlukan untuk sahkan tempahan. Pembatalan kurang 7 hari sebelum check-in: deposit tidak dipulangkan. Pembatalan lebih awal: pertukaran tarikh bergantung ketersediaan.
+        </p>
       </section>
 
       <section>
         <h2>2) House Rules</h2>
-        <ul>
-          <li>Check-in 3:00 PM, check-out 12:00 PM.</li>
-          <li>Dilarang merokok di dalam rumah.</li>
-          <li>Kurangkan bunyi selepas 11:00 malam.</li>
-          <li>Maklumkan awal jika bilangan tetamu melebihi had.</li>
-        </ul>
+        <p id="policySection2" class="muted">
+          Check-in 3:00 PM, check-out 12:00 PM. Dilarang merokok di dalam rumah. Kurangkan bunyi selepas 11:00 malam. Maklumkan awal jika bilangan tetamu melebihi had.
+        </p>
       </section>
 
       <section>
         <h2>3) Polisi Privasi Ringkas</h2>
-        <p class="muted">
+        <p class="muted" id="policySection3">
           Data yang dihantar melalui WhatsApp/form hanya digunakan untuk urusan tempahan dan komunikasi berkaitan penginapan.
           Kami tidak menjual data pelanggan kepada pihak ketiga.
         </p>
@@ -97,5 +92,19 @@
 
       <a class="back" href="index.html">Kembali ke Laman Utama</a>
     </main>
+    <script>
+      const p1 = localStorage.getItem("policySection1");
+      const p2 = localStorage.getItem("policySection2");
+      const p3 = localStorage.getItem("policySection3");
+      if (p1) {
+        document.getElementById("policySection1").textContent = p1;
+      }
+      if (p2) {
+        document.getElementById("policySection2").textContent = p2;
+      }
+      if (p3) {
+        document.getElementById("policySection3").textContent = p3;
+      }
+    </script>
   </body>
 </html>
