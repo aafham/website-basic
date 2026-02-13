@@ -93,7 +93,7 @@ section[id] {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   position: relative;
   transition: padding 0.35s ease;
 }
@@ -115,13 +115,15 @@ section[id] {
 .main-nav {
   display: flex;
   align-items: center;
+  gap: 18px;
+  min-width: 0;
 }
 
 .main-nav a {
   color: white;
   text-decoration: none;
-  margin-left: 18px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .main-nav a:hover,
@@ -133,6 +135,7 @@ section[id] {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .header-call {
@@ -1222,6 +1225,40 @@ footer {
 /* ================= MOBILE STICKY WHATSAPP ================= */
 .mobile-whatsapp {
   display: none;
+}
+
+@media (max-width: 1200px) {
+  .header-container {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .logo span {
+    display: none;
+  }
+
+  .main-nav {
+    gap: 12px;
+  }
+
+  .main-nav a {
+    font-size: 15px;
+  }
+
+  .header-call {
+    display: none;
+  }
+
+  .header-cta {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .header-cta {
+    display: none;
+  }
 }
 
 /* ================= RESPONSIVE ================= */
