@@ -783,6 +783,12 @@ textarea:focus-visible {
   font-size: 14px;
 }
 
+.availability-updated {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--note);
+}
+
 .availability-list {
   margin-top: 12px;
   display: grid;
@@ -898,6 +904,7 @@ textarea:focus-visible {
   height: 100%;
   object-fit: cover;
   transition: transform 0.35s ease;
+  cursor: zoom-in;
 }
 
 .gallery-item:hover img {
@@ -919,6 +926,45 @@ textarea:focus-visible {
 .gallery-btn {
   margin-top: 40px;
   display: inline-block;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: grid;
+  place-items: center;
+  z-index: 4000;
+  padding: 20px;
+}
+
+.lightbox img {
+  max-width: min(92vw, 1050px);
+  max-height: 78vh;
+  border-radius: 12px;
+  display: block;
+}
+
+.lightbox p {
+  margin-top: 10px;
+  color: #e5e7eb;
+  font-weight: 600;
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 /* ================= LOCATION ================= */
@@ -1268,6 +1314,25 @@ textarea:focus-visible {
   color: rgba(255, 255, 255, 0.9);
   max-width: 560px;
   text-align: left;
+}
+
+.contact-fallback {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.contact-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #e6ffef;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .btn-cta:hover {

@@ -5,7 +5,10 @@
   const analyticsConfig = config.analytics || {};
   const defaultUnavailableRanges = Array.isArray(config.unavailableRanges) ? config.unavailableRanges : [];
   const ownerPassword = `${config.ownerPassword || "1234"}`;
+  const ownerApiEndpoint = `${config.ownerApiEndpoint || ""}`.trim();
   const ownerRangesStorageKey = "ownerUnavailableRanges";
+  const ownerRangesUpdatedAtKey = "ownerUnavailableRangesUpdatedAt";
+  const abVariantStorageKey = "abCtaVariant";
   let unavailableRanges = defaultUnavailableRanges.slice();
 
   const header = document.getElementById("siteHeader");
@@ -17,6 +20,7 @@
   const backToTop = document.getElementById("backToTop");
   const dateForm = document.getElementById("dateForm");
   const availabilityList = document.getElementById("availabilityList");
+  const availabilityUpdated = document.getElementById("availabilityUpdated");
   const ownerEditBtn = document.getElementById("ownerEditBtn");
   const ownerEditor = document.getElementById("ownerEditor");
   const ownerRangesInput = document.getElementById("ownerRangesInput");
@@ -36,8 +40,15 @@
   const titleTranslatable = document.querySelectorAll("[data-bm-title][data-en-title]");
   const hrefTranslatable = document.querySelectorAll("[data-bm-href][data-en-href]");
   const placeholderTranslatable = document.querySelectorAll("[data-bm-placeholder][data-en-placeholder]");
+  const abCtaLinks = Array.from(document.querySelectorAll(".ab-cta"));
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxCaption = document.getElementById("lightboxCaption");
+  const lightboxClose = document.getElementById("lightboxClose");
+  const galleryOpenImages = Array.from(document.querySelectorAll(".gallery-open"));
   const waLinks = Array.from(document.querySelectorAll('a[href*="wa.me/"]'));
   const schemaNode = document.getElementById("lodgingSchema");
+  const canonicalLink = document.querySelector('link[rel="canonical"]');
 
   const readStorage = (key) => {
     try {
@@ -78,6 +89,52 @@
 
   const saveOwnerRanges = (ranges) => {
     writeStorage(ownerRangesStorageKey, JSON.stringify(ranges));
+  };
+
+  const markRangesUpdatedAt = () => {
+    writeStorage(ownerRangesUpdatedAtKey, new Date().toISOString());
+  };
+
+  const getRangesUpdatedAt = () => readStorage(ownerRangesUpdatedAtKey) || "";
+
+  const getSiteUrl = () => {
+    const fromConfig = `${business.siteUrl || ""}`.trim().replace(/\/+$/, "");
+    if (fromConfig) {
+      return fromConfig;
+    }
+    return window.location.origin.replace(/\/+$/, "");
+  };
+
+  const fetchOwnerRangesFromApi = async () => {
+    if (!ownerApiEndpoint) {
+      return null;
+    }
+    try {
+      const response = await fetch(ownerApiEndpoint, { method: "GET" });
+      if (!response.ok) {
+        return null;
+      }
+      const payload = await response.json();
+      return Array.isArray(payload?.ranges) ? payload.ranges : null;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const saveOwnerRangesToApi = async (ranges, password) => {
+    if (!ownerApiEndpoint) {
+      return true;
+    }
+    try {
+      const response = await fetch(ownerApiEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password, ranges })
+      });
+      return response.ok;
+    } catch (error) {
+      return false;
+    }
   };
 
   const isDateWithinRange = (day, start, end) => day >= start && day <= end;
@@ -181,17 +238,18 @@
   };
 
   const renderSchema = () => {
-    if (!schemaNode || !business.siteUrl) {
+    const siteUrl = getSiteUrl();
+    if (!schemaNode || !siteUrl) {
       return;
     }
     const schema = {
       "@context": "https://schema.org",
       "@type": "LodgingBusiness",
       "name": business.name || "Jitra2Stay",
-      "url": business.siteUrl,
+      "url": siteUrl,
       "telephone": business.phone || "",
       "description": business.description || "Homestay Semi-D 2 tingkat di Jitra.",
-      "image": business.image || `${business.siteUrl}/images/halaman.jpg`,
+      "image": business.image || `${siteUrl}/images/halaman.jpg`,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "49, Taman Jitra Indah, Jalan Hospital Daerah",
@@ -205,9 +263,31 @@
     schemaNode.textContent = JSON.stringify(schema);
   };
 
+  const applyCanonical = () => {
+    if (!canonicalLink) {
+      return;
+    }
+    const siteUrl = getSiteUrl();
+    const currentPath = window.location.pathname === "/" ? "/" : window.location.pathname;
+    canonicalLink.href = `${siteUrl}${currentPath}`;
+  };
+
   const renderAvailability = (lang) => {
     if (!availabilityList) {
       return;
+    }
+    if (availabilityUpdated) {
+      const updatedAt = getRangesUpdatedAt();
+      if (updatedAt) {
+        const formatted = new Date(updatedAt).toLocaleString(lang === "en" ? "en-MY" : "ms-MY");
+        availabilityUpdated.textContent = lang === "en"
+          ? `Last updated: ${formatted}`
+          : `Dikemas kini: ${formatted}`;
+      } else {
+        availabilityUpdated.textContent = lang === "en"
+          ? "Last updated: default schedule"
+          : "Dikemas kini: jadual asal";
+      }
     }
     availabilityList.innerHTML = "";
     if (unavailableRanges.length === 0) {
@@ -261,6 +341,53 @@
     }
 
     return { ok: true, ranges: parsed };
+  };
+
+  const getOrCreateAbVariant = () => {
+    const saved = readStorage(abVariantStorageKey);
+    if (saved === "A" || saved === "B") {
+      return saved;
+    }
+    const generated = Math.random() < 0.5 ? "A" : "B";
+    writeStorage(abVariantStorageKey, generated);
+    return generated;
+  };
+
+  const applyAbCta = () => {
+    const variant = getOrCreateAbVariant();
+    const lang = root.dataset.lang || "ms";
+
+    abCtaLinks.forEach((link) => {
+      const bmText = variant === "A" ? link.dataset.abABm : link.dataset.abBBm;
+      const enText = variant === "A" ? link.dataset.abAEn : link.dataset.abBEn;
+      const nextHref = variant === "A" ? link.dataset.abAHref : link.dataset.abBHref;
+
+      const text = lang === "en" ? (enText || bmText) : (bmText || enText);
+      if (text) {
+        link.innerHTML = text;
+      }
+      if (nextHref) {
+        link.setAttribute("href", nextHref);
+      }
+      const isAnchor = nextHref ? nextHref.startsWith("#") : false;
+      if (isAnchor) {
+        link.removeAttribute("target");
+        link.removeAttribute("rel");
+      } else {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener");
+      }
+    });
+
+    trackEvent("ab_variant_assigned", { variant });
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox) {
+      return;
+    }
+    lightbox.hidden = true;
+    document.body.style.overflow = "";
   };
 
   const updateThemeToggleUI = () => {
@@ -371,6 +498,7 @@
     });
 
     renderAvailability(lang);
+    applyAbCta();
     updateThemeToggleUI();
   };
 
@@ -419,6 +547,38 @@
     });
   }
 
+  if (lightbox && lightboxImage && lightboxCaption) {
+    galleryOpenImages.forEach((img) => {
+      img.addEventListener("click", () => {
+        const full = img.dataset.full || img.currentSrc || img.src;
+        const lang = root.dataset.lang || "ms";
+        const caption = lang === "en" ? (img.dataset.enCaption || img.alt) : (img.dataset.bmCaption || img.alt);
+        lightboxImage.src = full;
+        lightboxImage.alt = caption || "Gallery image";
+        lightboxCaption.textContent = caption || "";
+        lightbox.hidden = false;
+        document.body.style.overflow = "hidden";
+        trackEvent("gallery_lightbox_open", { image: full });
+      });
+    });
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener("click", closeLightbox);
+    }
+
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !lightbox.hidden) {
+        closeLightbox();
+      }
+    });
+  }
+
   if (ownerEditBtn && ownerEditor && ownerRangesInput) {
     ownerEditBtn.addEventListener("click", () => {
       const input = window.prompt("Owner password:");
@@ -441,15 +601,22 @@
   }
 
   if (ownerSaveBtn && ownerEditor && ownerRangesInput) {
-    ownerSaveBtn.addEventListener("click", () => {
+    ownerSaveBtn.addEventListener("click", async () => {
       const parsed = parseEditorRanges(ownerRangesInput.value);
       if (!parsed.ok) {
         window.alert(parsed.error || "Data tidak sah.");
         return;
       }
 
+      const apiSaved = await saveOwnerRangesToApi(parsed.ranges || [], ownerPassword);
+      if (!apiSaved) {
+        window.alert("Simpan ke server gagal. Semak ownerApiEndpoint.");
+        return;
+      }
+
       unavailableRanges = parsed.ranges || [];
       saveOwnerRanges(unavailableRanges);
+      markRangesUpdatedAt();
       renderAvailability(root.dataset.lang || "ms");
       ownerEditor.hidden = true;
       window.alert("Tarikh berjaya disimpan.");
@@ -461,6 +628,7 @@
     ownerResetBtn.addEventListener("click", () => {
       unavailableRanges = defaultUnavailableRanges.slice();
       deleteStorage(ownerRangesStorageKey);
+      deleteStorage(ownerRangesUpdatedAtKey);
       ownerRangesInput.value = rangesToEditorText(unavailableRanges);
       renderAvailability(root.dataset.lang || "ms");
       window.alert("Tarikh reset ke data asal.");
@@ -470,6 +638,10 @@
 
   waLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href") || "";
+      if (!href.includes("wa.me/")) {
+        return;
+      }
       event.preventDefault();
       openWhatsApp(link.href, link.className || "wa_link");
     });
@@ -554,6 +726,7 @@
   }
 
   setupAnalytics();
+  applyCanonical();
   renderSchema();
   setTheme(getPreferredTheme(), false);
 
@@ -571,6 +744,16 @@
     initialLang = savedLang;
   }
   applyLanguage(initialLang);
+
+  fetchOwnerRangesFromApi().then((ranges) => {
+    if (!ranges) {
+      return;
+    }
+    unavailableRanges = ranges;
+    saveOwnerRanges(unavailableRanges);
+    markRangesUpdatedAt();
+    renderAvailability(root.dataset.lang || "ms");
+  });
 
   langButtons.forEach((btn) => {
     btn.addEventListener("click", () => {

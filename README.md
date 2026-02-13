@@ -19,6 +19,7 @@ Projek ini ialah **static website** (tanpa backend framework):
 - `app.config.js` -> konfigurasi business info, analytics, unavailable dates.
 - `style.css` -> styling, tema, responsive layout.
 - `thank-you.html` -> halaman selepas klik CTA WhatsApp (conversion step).
+- `policies.html` -> polisi tempahan, house rules, dan privasi.
 - `sitemap.xml` -> sitemap SEO.
 - `robots.txt` -> arahan crawler.
 - `images/` -> aset gambar utama.
@@ -124,11 +125,22 @@ Semua fungsi di bawah berada dalam script di `app.js`.
   - tukar bahasa
   - tukar tema
   - load peta
+  - buka lightbox gallery
+  - assignment A/B CTA
 
 ### 5.10 Map Lazy Load
 - Peta Google Maps tidak terus diload semasa page initial render.
 - Peta hanya dimuatkan selepas pengguna klik butang `Paparkan Peta Interaktif`.
 - Kurangkan beban render awal halaman.
+
+### 5.11 A/B Test CTA
+- CTA utama menggunakan variant `A` atau `B` secara rawak (disimpan di `localStorage`).
+- Variant A: fokus terus WhatsApp.
+- Variant B: fokus ke seksyen semak tarikh.
+
+### 5.12 Gallery Lightbox
+- Klik gambar gallery akan buka preview penuh (lightbox).
+- Sokong tutup dengan butang `X`, klik backdrop, atau `Esc`.
 
 ## 6) Ciri-ciri Utama Website
 
@@ -141,11 +153,13 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 - Form semak tarikh.
 - Papan ringkas unavailable dates (manual update).
 - Gallery gambar.
+- Gallery boleh dibuka dalam lightbox.
 - About, target guest, why us.
 - Lokasi + info berhampiran.
 - Testimoni + trust section.
 - FAQ.
 - FAQ diperluas (refund, parking, quiet hour, caj tetamu tambahan).
+- Contact fallback (email/call) jika WhatsApp tidak tersedia.
 - Final CTA besar.
 - Floating CTA desktop + sticky WhatsApp mobile.
 - Multi-language BM/EN.
@@ -175,8 +189,9 @@ Semua fungsi di bawah berada dalam script di `app.js`.
   - analytics IDs
   - `enableThankYouRedirect`
   - `unavailableRanges`
-- Gantikan domain contoh `jitra2stay.example.com` kepada domain live sebenar pada:
-  - `app.config.js`
+  - `ownerApiEndpoint` (optional backend sync)
+- Pastikan domain live sebenar digunakan pada:
+  - `app.config.js` (`business.siteUrl`)
   - `index.html` (`canonical`)
   - `sitemap.xml` dan `robots.txt`
 
@@ -198,8 +213,8 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 1. Sediakan fail imej WebP/AVIF sebenar untuk setiap gambar utama.
 2. Integrasi API backup tempahan (email/API) jika WhatsApp gagal.
 3. Tambah dashboard mini untuk edit `unavailableRanges` tanpa ubah kod.
-4. Tambah A/B test copy CTA untuk naikkan conversion.
-5. Tambah halaman polisi penuh (refund, house rules, privacy).
+4. Buat endpoint owner API sebenar dan aktifkan `ownerApiEndpoint`.
+5. Tambah notifikasi auto (contoh Telegram/email) bila owner kemas kini tarikh.
 
 ## 11) Ringkasan
 
@@ -219,10 +234,12 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
 - Ditambah halaman `thank-you.html` untuk step conversion selepas klik WhatsApp.
 - Ditambah `sitemap.xml` dan `robots.txt` untuk SEO.
 - Ditambah schema `LodgingBusiness` dan map lazy-load.
+- Ditambah A/B test CTA, lightbox gallery, dan `last updated` pada availability.
+- Ditambah `policies.html` dan contact fallback.
 
 ## 13) Checklist Sebelum Live
 
-1. Tukar domain contoh `jitra2stay.example.com` kepada domain sebenar dalam:
+1. Tukar domain kepada domain sebenar dalam:
    - `app.config.js`
    - `index.html` (canonical URL)
    - `sitemap.xml`
@@ -235,3 +252,8 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
    - redirect ke `thank-you.html`
    - submit borang tarikh
    - klik butang load map
+6. Semak `Lighthouse` sasaran:
+   - Performance >= 90
+   - Accessibility >= 95
+   - Best Practices >= 95
+   - SEO >= 95

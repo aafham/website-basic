@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://wa.me">
     <link rel="preconnect" href="https://www.google.com">
     <link rel="preload" as="image" href="images/ruang-tamu.jpg">
-    <link rel="canonical" href="https://jitra2stay.example.com/">
+    <link rel="canonical" href="https://jitra2stay.com/">
     <script type="application/ld+json" id="lodgingSchema"></script>
     <link
       rel="icon"
@@ -154,7 +154,14 @@
           href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay.%20Boleh%20saya%20tahu%20kadar%20dan%20tarikh%20yang%20ada?"
           data-bm-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay.%20Boleh%20saya%20tahu%20kadar%20dan%20tarikh%20yang%20ada?"
           data-en-href="https://wa.me/60194410666?text=Hi%20Jitra2Stay,%20I%20would%20like%20to%20book%20a%20homestay.%20Could%20you%20share%20the%20rates%20and%20available%20dates?"
-          class="btn-primary"
+          class="btn-primary ab-cta"
+          id="heroPrimaryCta"
+          data-ab-a-bm="WhatsApp Sekarang"
+          data-ab-a-en="WhatsApp Now"
+          data-ab-b-bm="Semak Tarikh Sekarang"
+          data-ab-b-en="Check Dates Now"
+          data-ab-a-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay.%20Boleh%20saya%20tahu%20kadar%20dan%20tarikh%20yang%20ada?"
+          data-ab-b-href="#semak-tarikh"
           target="_blank"
           rel="noopener"
           data-bm="WhatsApp Sekarang"
@@ -299,7 +306,7 @@
     </section>
 
     <!-- ================= SEMAK TARIKH ================= -->
-    <section class="date-check reveal">
+    <section class="date-check reveal" id="semak-tarikh">
       <h3 data-bm="Semak Tarikh" data-en="Check Availability">Semak Tarikh</h3>
       <p
         class="section-desc"
@@ -353,6 +360,7 @@
         >
           Tarikh di bawah biasanya telah ditempah. WhatsApp kami untuk semakan akhir.
         </p>
+        <p class="availability-updated" id="availabilityUpdated"></p>
         <ul class="availability-list" id="availabilityList"></ul>
 
         <div class="availability-owner">
@@ -413,6 +421,10 @@
             sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             loading="lazy"
             decoding="async"
+            class="gallery-open"
+            data-full="images/ruang-tamu.jpg"
+            data-bm-caption="Ruang Tamu"
+            data-en-caption="Living Room"
           >
           <div class="gallery-label" data-bm="Ruang Tamu" data-en="Living Room">Ruang Tamu</div>
         </div>
@@ -428,6 +440,10 @@
             sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             loading="lazy"
             decoding="async"
+            class="gallery-open"
+            data-full="images/bilik-tidur.jpg"
+            data-bm-caption="Bilik Tidur"
+            data-en-caption="Bedroom"
           >
           <div class="gallery-label" data-bm="Bilik Tidur" data-en="Bedroom">Bilik Tidur</div>
         </div>
@@ -443,6 +459,10 @@
             sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             loading="lazy"
             decoding="async"
+            class="gallery-open"
+            data-full="images/dapur.jpg"
+            data-bm-caption="Dapur"
+            data-en-caption="Kitchen"
           >
           <div class="gallery-label" data-bm="Dapur" data-en="Kitchen">Dapur</div>
         </div>
@@ -458,6 +478,10 @@
             sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
             loading="lazy"
             decoding="async"
+            class="gallery-open"
+            data-full="images/luar-rumah.jpg"
+            data-bm-caption="Luar Rumah"
+            data-en-caption="Exterior"
           >
           <div class="gallery-label" data-bm="Luar Rumah" data-en="Exterior">Luar Rumah</div>
         </div>
@@ -837,7 +861,14 @@
           href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
           data-bm-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
           data-en-href="https://wa.me/60194410666?text=Hi%20Jitra2Stay,%20I%20would%20like%20to%20book%20a%20homestay."
-          class="btn-cta"
+          class="btn-cta ab-cta"
+          id="finalPrimaryCta"
+          data-ab-a-bm="&#128242; WhatsApp Untuk Tempahan"
+          data-ab-a-en="&#128242; WhatsApp to Book"
+          data-ab-b-bm="&#128197; Semak Tarikh Dulu"
+          data-ab-b-en="&#128197; Check Dates First"
+          data-ab-a-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20saya%20berminat%20untuk%20tempahan%20homestay."
+          data-ab-b-href="#semak-tarikh"
           target="_blank"
           rel="noopener"
           data-bm="&#128242; WhatsApp Untuk Tempahan"
@@ -845,6 +876,15 @@
         >
           &#128242; WhatsApp Untuk Tempahan
         </a>
+
+        <div class="contact-fallback">
+          <a href="mailto:jitra2stay@gmail.com" class="contact-chip" data-bm="Email: jitra2stay@gmail.com" data-en="Email: jitra2stay@gmail.com">
+            Email: jitra2stay@gmail.com
+          </a>
+          <a href="tel:+60194410666" class="contact-chip" data-bm="Call: +60 19-441 0666" data-en="Call: +60 19-441 0666">
+            Call: +60 19-441 0666
+          </a>
+        </div>
 
         <div class="policy-list">
           <div data-bm="&#128679; Check-in 3.00 petang" data-en="&#128679; Check-in 3:00 PM">
@@ -896,9 +936,15 @@
     </main>
 
     <!-- ================= FOOTER ================= -->
-    <footer data-bm="&copy; 2026 Jitra2Stay &middot; Homestay di Jitra" data-en="&copy; 2026 Jitra2Stay &middot; Homestay in Jitra">
-      &copy; 2026 Jitra2Stay &middot; Homestay di Jitra
+    <footer data-bm="&copy; 2026 Jitra2Stay &middot; Homestay di Jitra &middot; <a href=&quot;policies.html&quot; style=&quot;color:#d1fae5;&quot;>Polisi</a>" data-en="&copy; 2026 Jitra2Stay &middot; Homestay in Jitra &middot; <a href=&quot;policies.html&quot; style=&quot;color:#d1fae5;&quot;>Policies</a>">
+      &copy; 2026 Jitra2Stay &middot; Homestay di Jitra &middot; <a href="policies.html" style="color:#d1fae5;">Polisi</a>
     </footer>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close image">&times;</button>
+      <img id="lightboxImage" src="" alt="Gallery preview">
+      <p id="lightboxCaption"></p>
+    </div>
 
     <!-- ================= FLOATING WHATSAPP ================= -->
     <a

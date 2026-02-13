@@ -2,8 +2,8 @@ window.APP_CONFIG = {
   business: {
     name: "Jitra2Stay",
     phone: "+60194410666",
-    siteUrl: "https://jitra2stay.example.com",
-    image: "https://jitra2stay.example.com/images/halaman.jpg",
+    siteUrl: "https://jitra2stay.com",
+    image: "https://jitra2stay.com/images/halaman.jpg",
     description: "Homestay Semi-D 2 tingkat di Jitra. Luas, bersih dan selesa untuk keluarga dan rombongan."
   },
   analytics: {
@@ -11,6 +11,7 @@ window.APP_CONFIG = {
     plausibleDomain: ""
   },
   ownerPassword: "1234",
+  ownerApiEndpoint: "",
   enableThankYouRedirect: true,
   unavailableRanges: [
     {
