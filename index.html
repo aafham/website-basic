@@ -22,7 +22,11 @@
       name="twitter:description"
       content="Homestay Semi-D 2 tingkat di Jitra. Luas, bersih dan selesa untuk keluarga & rombongan."
     >
+    <meta name="theme-color" content="#1f4f46">
     <meta name="twitter:image" content="images/halaman.jpg">
+    <link rel="preconnect" href="https://wa.me">
+    <link rel="preconnect" href="https://www.google.com">
+    <link rel="preload" as="image" href="images/ruang-tamu.jpg">
     <link
       rel="icon"
       type="image/svg+xml"
@@ -31,6 +35,10 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <a class="skip-link" href="#mainContent" data-bm="Terus ke kandungan utama" data-en="Skip to main content">
+      Terus ke kandungan utama
+    </a>
+
     <!-- ================= HEADER ================= -->
     <header class="site-header" id="siteHeader">
       <div class="header-container">
@@ -97,15 +105,16 @@
           </button>
 
           <div class="lang-toggle" role="group" aria-label="Language toggle">
-            <button class="lang-btn active" type="button" data-lang="ms">BM</button>
-            <button class="lang-btn" type="button" data-lang="en">EN</button>
+            <button class="lang-btn active" type="button" data-lang="ms" aria-pressed="true">BM</button>
+            <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">EN</button>
           </div>
         </div>
       </div>
     </header>
 
+    <main id="mainContent">
     <!-- ================= HERO ================= -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" aria-labelledby="heroTitle">
       <div class="hero-content">
         <span
           class="hero-badge"
@@ -115,7 +124,7 @@
           &#11088; Pilihan Popular Keluarga di Jitra
         </span>
 
-        <h2 data-bm="Homestay Semi-D 2 Tingkat di Jitra" data-en="2-Storey Semi-D Homestay in Jitra">
+        <h2 id="heroTitle" data-bm="Homestay Semi-D 2 Tingkat di Jitra" data-en="2-Storey Semi-D Homestay in Jitra">
           Homestay Semi-D 2 Tingkat di Jitra
         </h2>
         <p class="hero-trust" data-bm="Dipercayai tetamu dari seluruh Kedah &amp; Perlis." data-en="Trusted by guests across Kedah &amp; Perlis.">
@@ -167,10 +176,8 @@
       <div class="video-card">
         <video
           controls
-          autoplay
-          muted
-          loop
           playsinline
+          preload="metadata"
           poster="images/ruang-tamu.jpg"
           aria-label="Video walkthrough Jitra2Stay"
         >
@@ -660,7 +667,7 @@
             &ldquo;Lokasi dekat hospital &amp; bandar Jitra. Mudah urusan. Akan
             repeat.&rdquo;
           </p>
-          <span data-bm="- Tetamu Keluarga" data-en="- Family Guest">- Tetamu Keluarga</span>
+          <span data-bm="&mdash; Tetamu Keluarga" data-en="&mdash; Family Guest">&mdash; Tetamu Keluarga</span>
         </div>
 
         <div class="trust-card">
@@ -779,15 +786,17 @@
             >
           </div>
           <div class="cta-quote">
-            <div class="stars">★★★★★</div>
+            <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p data-bm="&ldquo;Rumah sangat bersih &amp; luas. Tempah mudah dan host mesra.&rdquo;" data-en="&ldquo;Very clean &amp; spacious. Easy booking and friendly host.&rdquo;">
               &ldquo;Rumah sangat bersih &amp; luas. Tempah mudah dan host mesra.&rdquo;
             </p>
-            <span data-bm="— Tetamu Keluarga" data-en="— Family Guest">— Tetamu Keluarga</span>
+            <span data-bm="&mdash; Tetamu Keluarga" data-en="&mdash; Family Guest">&mdash; Tetamu Keluarga</span>
           </div>
         </aside>
       </div>
     </section>
+
+    </main>
 
     <!-- ================= FOOTER ================= -->
     <footer data-bm="&copy; 2026 Jitra2Stay &middot; Homestay di Jitra" data-en="&copy; 2026 Jitra2Stay &middot; Homestay in Jitra">
@@ -833,293 +842,8 @@
       type="button"
       aria-label="Back to top"
     >
-      ↑
+      &#8593;
     </button>
-
-    <script>
-      const reveals = document.querySelectorAll(".reveal");
-
-      function revealOnScroll() {
-        const windowHeight = window.innerHeight;
-
-        reveals.forEach((section) => {
-          const sectionTop = section.getBoundingClientRect().top;
-          const revealPoint = 120;
-
-          if (sectionTop < windowHeight - revealPoint) {
-            section.classList.add("active");
-          }
-        });
-      }
-
-      window.addEventListener("scroll", revealOnScroll);
-      revealOnScroll();
-
-      const header = document.getElementById("siteHeader");
-      const rootStyles = document.documentElement.style;
-      const updateHeaderOffset = () => {
-        if (!header) {
-          return;
-        }
-        const height = header.getBoundingClientRect().height;
-        rootStyles.setProperty("--header-offset", `${Math.ceil(height + 16)}px`);
-      };
-      if (header) {
-        window.addEventListener("scroll", () => {
-          if (window.scrollY > 80) {
-            header.classList.add("shrink");
-          } else {
-            header.classList.remove("shrink");
-          }
-          updateHeaderOffset();
-        });
-      }
-      window.addEventListener("resize", updateHeaderOffset);
-      updateHeaderOffset();
-
-      const toggle = document.getElementById("menuToggle");
-      const nav = document.getElementById("mainNav");
-
-      if (toggle && nav) {
-        toggle.addEventListener("click", () => {
-          const isOpen = nav.classList.toggle("show");
-          toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        });
-
-        nav.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            nav.classList.remove("show");
-            toggle.setAttribute("aria-expanded", "false");
-          });
-        });
-      }
-
-      const finalCTA = document.querySelector(".final-cta");
-      if (finalCTA) {
-        window.addEventListener("scroll", () => {
-          const top = finalCTA.getBoundingClientRect().top;
-          const trigger = window.innerHeight - 100;
-
-          if (top < trigger) {
-            finalCTA.classList.add("show");
-          }
-        });
-      }
-
-      const floatingCta = document.getElementById("floatingCta");
-      const backToTop = document.getElementById("backToTop");
-
-      const updateFloatingUI = () => {
-        const show = window.scrollY > 500;
-        if (floatingCta) {
-          floatingCta.classList.toggle("show", show);
-        }
-        if (backToTop) {
-          backToTop.classList.toggle("show", show);
-        }
-      };
-
-      window.addEventListener("scroll", updateFloatingUI);
-      updateFloatingUI();
-
-      if (backToTop) {
-        backToTop.addEventListener("click", () => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-      }
-
-      const dateForm = document.getElementById("dateForm");
-      if (dateForm) {
-        dateForm.addEventListener("submit", (event) => {
-          event.preventDefault();
-          const data = new FormData(dateForm);
-          const checkin = data.get("checkin");
-          const checkout = data.get("checkout");
-          const guests = data.get("guests");
-          const rooms = data.get("rooms");
-          const notes = data.get("notes");
-          const lang = document.documentElement.dataset.lang || "ms";
-
-          const lines = [];
-          if (lang === "en") {
-            lines.push("Hi Jitra2Stay, I would like to check availability:");
-            lines.push(`Check-in: ${checkin}`);
-            lines.push(`Check-out: ${checkout}`);
-            lines.push(`Guests: ${guests}`);
-            lines.push(`Rooms: ${rooms}`);
-            if (notes) {
-              lines.push(`Notes: ${notes}`);
-            }
-          } else {
-            lines.push("Hai Jitra2Stay, saya ingin semak ketersediaan:");
-            lines.push(`Check-in: ${checkin}`);
-            lines.push(`Check-out: ${checkout}`);
-            lines.push(`Tetamu: ${guests}`);
-            lines.push(`Bilik: ${rooms}`);
-            if (notes) {
-              lines.push(`Nota: ${notes}`);
-            }
-          }
-
-          const message = encodeURIComponent(lines.join("\n"));
-          window.open(`https://wa.me/60194410666?text=${message}`, "_blank", "noopener");
-        });
-      }
-
-      const root = document.documentElement;
-      const themeToggle = document.getElementById("themeToggle");
-      const themeLabel = themeToggle ? themeToggle.querySelector(".theme-label") : null;
-      const themeIcon = themeToggle ? themeToggle.querySelector(".theme-icon") : null;
-
-      function updateThemeToggleUI() {
-        if (!themeToggle) {
-          return;
-        }
-        const theme = root.dataset.theme || "light";
-        const lang = root.dataset.lang || "ms";
-        const isDark = theme === "dark";
-
-        if (themeIcon) {
-          const icon = isDark ? themeIcon.dataset.dark : themeIcon.dataset.light;
-          if (icon) {
-            themeIcon.innerHTML = icon;
-          }
-        }
-
-        if (themeLabel) {
-          const label = isDark
-            ? (lang === "en" ? themeLabel.dataset.enDark : themeLabel.dataset.bmDark)
-            : (lang === "en" ? themeLabel.dataset.enLight : themeLabel.dataset.bmLight);
-          if (label) {
-            themeLabel.textContent = label;
-          }
-        }
-
-        const ariaLabel = isDark
-          ? (lang === "en" ? "Switch to light mode" : "Tukar ke mod terang")
-          : (lang === "en" ? "Switch to dark mode" : "Tukar ke mod gelap");
-        themeToggle.setAttribute("aria-label", ariaLabel);
-        themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
-      }
-
-      function setTheme(theme, persist = true) {
-        root.dataset.theme = theme;
-        updateThemeToggleUI();
-        if (!persist) {
-          return;
-        }
-        try {
-          localStorage.setItem("preferredTheme", theme);
-        } catch (error) {
-          // Ignore storage errors (private mode, etc.)
-        }
-      }
-
-      function getPreferredTheme() {
-        try {
-          const savedTheme = localStorage.getItem("preferredTheme");
-          if (savedTheme === "light" || savedTheme === "dark") {
-            return savedTheme;
-          }
-        } catch (error) {
-          // Ignore storage errors (private mode, etc.)
-        }
-        if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
-        }
-        return "light";
-      }
-
-      const initialTheme = getPreferredTheme();
-      setTheme(initialTheme, false);
-
-      if (themeToggle) {
-        themeToggle.addEventListener("click", () => {
-          const nextTheme = (root.dataset.theme || "light") === "dark" ? "light" : "dark";
-          setTheme(nextTheme);
-        });
-      }
-
-      const langButtons = document.querySelectorAll(".lang-btn");
-      const translatable = document.querySelectorAll("[data-bm][data-en]");
-      const ariaTranslatable = document.querySelectorAll("[data-bm-aria-label][data-en-aria-label]");
-      const altTranslatable = document.querySelectorAll("[data-bm-alt][data-en-alt]");
-      const titleTranslatable = document.querySelectorAll("[data-bm-title][data-en-title]");
-      const hrefTranslatable = document.querySelectorAll("[data-bm-href][data-en-href]");
-
-      function applyLanguage(lang) {
-        root.lang = lang;
-        root.dataset.lang = lang;
-
-        const title = lang === "en" ? root.dataset.titleEn : root.dataset.titleBm;
-        if (title) {
-          document.title = title;
-        }
-
-        translatable.forEach((el) => {
-          const text = lang === "en" ? el.dataset.en : el.dataset.bm;
-          if (text !== undefined) {
-            el.innerHTML = text;
-          }
-        });
-
-        ariaTranslatable.forEach((el) => {
-          const label = lang === "en" ? el.dataset.enAriaLabel : el.dataset.bmAriaLabel;
-          if (label) {
-            el.setAttribute("aria-label", label);
-          }
-        });
-
-        altTranslatable.forEach((el) => {
-          const alt = lang === "en" ? el.dataset.enAlt : el.dataset.bmAlt;
-          if (alt) {
-            el.setAttribute("alt", alt);
-          }
-        });
-
-        titleTranslatable.forEach((el) => {
-          const titleText = lang === "en" ? el.dataset.enTitle : el.dataset.bmTitle;
-          if (titleText) {
-            el.setAttribute("title", titleText);
-          }
-        });
-
-        hrefTranslatable.forEach((el) => {
-          const href = lang === "en" ? el.dataset.enHref : el.dataset.bmHref;
-          if (href) {
-            el.setAttribute("href", href);
-          }
-        });
-
-        langButtons.forEach((btn) => {
-          btn.classList.toggle("active", btn.dataset.lang === lang);
-        });
-
-        updateThemeToggleUI();
-      }
-
-      let initialLang = root.dataset.lang || "ms";
-      try {
-        const savedLang = localStorage.getItem("preferredLang");
-        if (savedLang === "ms" || savedLang === "en") {
-          initialLang = savedLang;
-        }
-      } catch (error) {
-        initialLang = root.dataset.lang || "ms";
-      }
-      applyLanguage(initialLang);
-
-      langButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          applyLanguage(btn.dataset.lang);
-          try {
-            localStorage.setItem("preferredLang", btn.dataset.lang);
-          } catch (error) {
-            // Ignore storage errors (private mode, etc.)
-          }
-        });
-      });
-    </script>
 
     <!-- ================= MOBILE STICKY WHATSAPP ================= -->
     <a
@@ -1134,9 +858,7 @@
     >
       &#128242; WhatsApp Untuk Tempahan
     </a>
+    <script src="app.js" defer></script>
   </body>
 </html>
-
-
-
 

@@ -14,7 +14,8 @@ Website ini dibina untuk:
 ## 2) Stack & Struktur Projek
 
 Projek ini ialah **static website** (tanpa backend framework):
-- `index.html` -> struktur halaman + script interaktif.
+- `index.html` -> struktur halaman.
+- `app.js` -> script interaktif (menu, bahasa, tema, form, scroll behavior).
 - `style.css` -> styling, tema, responsive layout.
 - `images/` -> aset gambar utama.
 
@@ -47,15 +48,15 @@ python -m http.server 5500
 3. Terus dapat URL live.
 
 ### cPanel / Shared Hosting
-1. Upload `index.html`, `style.css`, dan folder `images` ke `public_html`.
+1. Upload `index.html`, `app.js`, `style.css`, dan folder `images` ke `public_html`.
 2. Website akan live pada domain.
 
 ## 5) Fungsi Dalam App
 
-Semua fungsi di bawah berada dalam script di `index.html`.
+Semua fungsi di bawah berada dalam script di `app.js`.
 
 ### 5.1 UI Reveal On Scroll
-- `revealOnScroll()`
+- Scroll observer dalam `updateOnScroll()`
 - Menambah class `active` pada elemen `.reveal` bila elemen masuk viewport.
 
 ### 5.2 Sticky Header + Offset Anchor
@@ -68,12 +69,13 @@ Semua fungsi di bawah berada dalam script di `index.html`.
 - Toggle class `.show` pada `#mainNav` melalui `#menuToggle`.
 - Update `aria-expanded` untuk aksesibiliti.
 - Tutup menu automatik bila link nav diklik.
+- Sokong tutup menu melalui `Esc` dan klik di luar menu.
 
 ### 5.4 Final CTA Reveal
 - Bila seksyen `.final-cta` masuk hampir viewport, class `.show` ditambah.
 
 ### 5.5 Floating CTA + Back To Top
-- `updateFloatingUI()`
+- Dikendalikan dalam `updateOnScroll()` (dioptimumkan dengan `requestAnimationFrame`)
 - Bila scroll > 500px:
   - Tunjuk kotak `#floatingCta`
   - Tunjuk butang `#backToTop`
@@ -82,6 +84,7 @@ Semua fungsi di bawah berada dalam script di `index.html`.
 ### 5.6 Borang Semak Tarikh ke WhatsApp
 - Intercept submit pada `#dateForm`.
 - Ambil nilai form: check-in, check-out, tetamu, bilik, nota.
+- Tambah validasi tarikh (`check-out` mesti selepas `check-in`).
 - Jana mesej BM/EN ikut bahasa aktif.
 - Buka link `wa.me` dengan mesej encoded.
 
@@ -154,11 +157,11 @@ Semua fungsi di bawah berada dalam script di `index.html`.
 
 ## 10) Cadangan Penambahbaikan
 
-1. Pisahkan JavaScript ke fail `app.js` untuk maintainability.
-2. Tambah optimasi imej (WebP/AVIF + saiz berbeza).
-3. Tambah SEO lanjut (structured data schema).
-4. Integrasi analytics (contoh: GA4/Plausible).
-5. Tambah borang backup (email/API) jika WhatsApp gagal.
+1. Tambah optimasi imej (WebP/AVIF + saiz berbeza).
+2. Tambah SEO lanjut (structured data schema).
+3. Integrasi analytics (contoh: GA4/Plausible).
+4. Tambah borang backup (email/API) jika WhatsApp gagal.
+5. Tambah fail `sitemap.xml` dan `robots.txt`.
 
 ## 11) Ringkasan
 
@@ -167,3 +170,10 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
 - tindakan cepat (WhatsApp),
 - pengalaman pengguna kemas pada desktop/mobile,
 - sokongan BM/EN dan light/dark mode.
+
+## 12) Update Terkini (Februari 2026)
+
+- JavaScript dipisahkan ke `app.js` untuk struktur kod lebih kemas.
+- Ditambah `skip-link`, `focus-visible`, dan `aria-pressed` untuk accessibility.
+- Ditambah validasi tarikh check-in/check-out dalam borang semakan.
+- Scroll behavior dioptimumkan menggunakan `requestAnimationFrame`.

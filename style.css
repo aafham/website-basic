@@ -67,6 +67,35 @@ section[id] {
   scroll-margin-top: var(--header-offset);
 }
 
+.skip-link {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  transform: translateY(-140%);
+  z-index: 2000;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
 /* ================= HEADER ================= */
 .site-header {
   position: sticky;
@@ -1225,6 +1254,25 @@ footer {
 /* ================= MOBILE STICKY WHATSAPP ================= */
 .mobile-whatsapp {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 1200px) {
