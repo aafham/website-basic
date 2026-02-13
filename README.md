@@ -140,27 +140,36 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 
 ### 5.12 Gallery Lightbox
 - Klik gambar gallery akan buka preview penuh (lightbox).
-- Sokong tutup dengan butang `X`, klik backdrop, atau `Esc`.
+- Sokong `prev/next`, swipe mobile, tutup dengan butang `X`, klik backdrop, atau `Esc`.
+
+### 5.13 FAQ Accordion
+- FAQ kini style accordion (satu jawapan aktif pada satu masa).
+- Mesra keyboard (`Enter` / `Space` pada tajuk soalan).
+
+### 5.14 Form Feedback
+- Borang semak tarikh memaparkan status ringkas semasa validasi dan sebelum membuka WhatsApp.
 
 ## 6) Ciri-ciri Utama Website
 
 - Header sticky + navigation section.
-- Hero banner dengan CTA WhatsApp.
+- Hero banner dengan CTA utama + CTA sekunder (`Semak Tarikh`) dan trust chips.
 - Video walkthrough section.
 - Highlights homestay.
-- Kadar sewaan (2-5 bilik) + deposit info.
+- Kadar sewaan (2-5 bilik) + deposit info + anggaran kos per tetamu.
 - Cara tempah 1-2-3.
 - Form semak tarikh.
 - Papan ringkas unavailable dates (manual update).
 - Gallery gambar.
-- Gallery boleh dibuka dalam lightbox.
+- Gallery boleh dibuka dalam lightbox (prev/next + swipe).
 - About, target guest, why us.
 - Lokasi + info berhampiran.
 - Testimoni + trust section.
 - FAQ.
 - FAQ diperluas (refund, parking, quiet hour, caj tetamu tambahan).
+- FAQ kini accordion.
 - Contact fallback (email/call) jika WhatsApp tidak tersedia.
 - Final CTA besar.
+- Footer kini ada quick links + contact block.
 - Floating CTA desktop + sticky WhatsApp mobile.
 - Multi-language BM/EN.
 - Light/Dark mode.
@@ -236,6 +245,7 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
 - Ditambah schema `LodgingBusiness` dan map lazy-load.
 - Ditambah A/B test CTA, lightbox gallery, dan `last updated` pada availability.
 - Ditambah `policies.html` dan contact fallback.
+- Ditambah UI polish: hero chips, FAQ accordion, form feedback, footer quick-links, dan lightbox navigation.
 
 ## 13) Checklist Sebelum Live
 

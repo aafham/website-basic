@@ -327,6 +327,41 @@ textarea:focus-visible {
   text-decoration: underline;
 }
 
+.hero-actions {
+  margin-top: 12px;
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  font-weight: 700;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.hero-chips {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hero-chips span {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
 /* ================= VIDEO ================= */
 .video-tour {
   padding: 70px 20px;
@@ -641,6 +676,13 @@ textarea:focus-visible {
   color: var(--primary);
 }
 
+.price-estimate {
+  display: block;
+  margin-top: 8px;
+  color: var(--note);
+  font-size: 12px;
+}
+
 .badge {
   position: absolute;
   top: -40px;
@@ -763,6 +805,13 @@ textarea:focus-visible {
   justify-self: center;
 }
 
+.form-feedback {
+  grid-column: span 2;
+  font-size: 13px;
+  color: var(--note);
+  min-height: 20px;
+}
+
 .availability-board {
   max-width: 850px;
   margin: 18px auto 0;
@@ -802,6 +851,19 @@ textarea:focus-visible {
   border-radius: 10px;
   padding: 10px 12px;
   font-weight: 600;
+  border-left: 4px solid #ef4444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.availability-list li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
 }
 
 .availability-owner {
@@ -969,6 +1031,28 @@ textarea:focus-visible {
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.lightbox-nav.prev {
+  left: 16px;
+}
+
+.lightbox-nav.next {
+  right: 16px;
 }
 
 /* ================= LOCATION ================= */
@@ -1190,13 +1274,26 @@ textarea:focus-visible {
 
 .faq-item h4 {
   color: var(--primary);
-  margin-bottom: 8px;
+  margin-bottom: 0;
   font-size: 16px;
+  cursor: pointer;
+}
+
+.faq-item h4:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 6px;
 }
 
 .faq-item p {
+  margin-top: 10px;
   font-size: 14px;
   color: var(--muted);
+  display: none;
+}
+
+.faq-item.open p {
+  display: block;
 }
 
 /* ================= FINAL CTA ================= */
@@ -1358,8 +1455,47 @@ textarea:focus-visible {
 footer {
   background: var(--footer-bg);
   color: white;
+  padding: 24px 20px 18px;
+}
+
+.footer-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.footer-grid strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.footer-grid p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.footer-links {
+  display: grid;
+  gap: 4px;
+}
+
+.footer-links a {
+  color: #d1fae5;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-copy {
+  max-width: 1100px;
+  margin: 14px auto 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 12px;
+  color: rgba(255, 255, 255, 0.86);
   text-align: center;
-  padding: 20px;
 }
 
 /* ================= SCROLL REVEAL ================= */
@@ -1727,8 +1863,19 @@ footer {
   }
 
   .form-full,
-  .date-form button {
+  .date-form button,
+  .form-feedback {
     grid-column: span 1;
+  }
+
+  .hero-chips {
+    justify-content: center;
+  }
+
+  .lightbox-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
   }
 
   .availability-board {

@@ -10,6 +10,7 @@
   const ownerRangesUpdatedAtKey = "ownerUnavailableRangesUpdatedAt";
   const abVariantStorageKey = "abCtaVariant";
   let unavailableRanges = defaultUnavailableRanges.slice();
+  let abVariantTracked = false;
 
   const header = document.getElementById("siteHeader");
   const nav = document.getElementById("mainNav");
@@ -19,6 +20,7 @@
   const floatingCta = document.getElementById("floatingCta");
   const backToTop = document.getElementById("backToTop");
   const dateForm = document.getElementById("dateForm");
+  const formFeedback = document.getElementById("formFeedback");
   const availabilityList = document.getElementById("availabilityList");
   const availabilityUpdated = document.getElementById("availabilityUpdated");
   const ownerEditBtn = document.getElementById("ownerEditBtn");
@@ -45,7 +47,10 @@
   const lightboxImage = document.getElementById("lightboxImage");
   const lightboxCaption = document.getElementById("lightboxCaption");
   const lightboxClose = document.getElementById("lightboxClose");
+  const lightboxPrev = document.getElementById("lightboxPrev");
+  const lightboxNext = document.getElementById("lightboxNext");
   const galleryOpenImages = Array.from(document.querySelectorAll(".gallery-open"));
+  const faqItems = Array.from(document.querySelectorAll(".faq-item"));
   const waLinks = Array.from(document.querySelectorAll('a[href*="wa.me/"]'));
   const schemaNode = document.getElementById("lodgingSchema");
   const canonicalLink = document.querySelector('link[rel="canonical"]');
@@ -379,7 +384,10 @@
       }
     });
 
-    trackEvent("ab_variant_assigned", { variant });
+    if (!abVariantTracked) {
+      trackEvent("ab_variant_assigned", { variant });
+      abVariantTracked = true;
+    }
   };
 
   const closeLightbox = () => {
@@ -394,6 +402,49 @@
       lightboxCaption.textContent = "";
     }
     document.body.style.overflow = "";
+  };
+
+  let activeGalleryIndex = -1;
+  let touchStartX = 0;
+
+  const openGalleryAtIndex = (index) => {
+    if (!lightbox || !lightboxImage || !lightboxCaption) {
+      return;
+    }
+    const item = galleryOpenImages[index];
+    if (!item) {
+      return;
+    }
+    activeGalleryIndex = index;
+    const full = item.dataset.full || item.currentSrc || item.src;
+    const lang = root.dataset.lang || "ms";
+    const caption = lang === "en" ? (item.dataset.enCaption || item.alt) : (item.dataset.bmCaption || item.alt);
+    lightboxImage.src = full;
+    lightboxImage.alt = caption || "Gallery image";
+    lightboxCaption.textContent = caption || "";
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+    trackEvent("gallery_lightbox_open", { image: full, index });
+  };
+
+  const showNextGallery = () => {
+    if (galleryOpenImages.length === 0) {
+      return;
+    }
+    const nextIndex = activeGalleryIndex < 0
+      ? 0
+      : (activeGalleryIndex + 1) % galleryOpenImages.length;
+    openGalleryAtIndex(nextIndex);
+  };
+
+  const showPrevGallery = () => {
+    if (galleryOpenImages.length === 0) {
+      return;
+    }
+    const prevIndex = activeGalleryIndex <= 0
+      ? galleryOpenImages.length - 1
+      : activeGalleryIndex - 1;
+    openGalleryAtIndex(prevIndex);
   };
 
   const updateThemeToggleUI = () => {
@@ -542,6 +593,42 @@
     });
   }
 
+  if (faqItems.length > 0) {
+    faqItems.forEach((item, index) => {
+      const heading = item.querySelector("h4");
+      if (!heading) {
+        return;
+      }
+      heading.setAttribute("role", "button");
+      heading.setAttribute("tabindex", "0");
+      heading.setAttribute("aria-expanded", index === 0 ? "true" : "false");
+      item.classList.toggle("open", index === 0);
+
+      const toggle = () => {
+        const willOpen = !item.classList.contains("open");
+        faqItems.forEach((other) => {
+          other.classList.remove("open");
+          const h = other.querySelector("h4");
+          if (h) {
+            h.setAttribute("aria-expanded", "false");
+          }
+        });
+        if (willOpen) {
+          item.classList.add("open");
+          heading.setAttribute("aria-expanded", "true");
+        }
+      };
+
+      heading.addEventListener("click", toggle);
+      heading.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggle();
+        }
+      });
+    });
+  }
+
   if (loadMapBtn && locationMap && locationMapFrame) {
     loadMapBtn.addEventListener("click", () => {
       if (!locationMapFrame.src) {
@@ -554,22 +641,20 @@
   }
 
   if (lightbox && lightboxImage && lightboxCaption) {
-    galleryOpenImages.forEach((img) => {
+    galleryOpenImages.forEach((img, index) => {
       img.addEventListener("click", () => {
-        const full = img.dataset.full || img.currentSrc || img.src;
-        const lang = root.dataset.lang || "ms";
-        const caption = lang === "en" ? (img.dataset.enCaption || img.alt) : (img.dataset.bmCaption || img.alt);
-        lightboxImage.src = full;
-        lightboxImage.alt = caption || "Gallery image";
-        lightboxCaption.textContent = caption || "";
-        lightbox.hidden = false;
-        document.body.style.overflow = "hidden";
-        trackEvent("gallery_lightbox_open", { image: full });
+        openGalleryAtIndex(index);
       });
     });
 
     if (lightboxClose) {
       lightboxClose.addEventListener("click", closeLightbox);
+    }
+    if (lightboxPrev) {
+      lightboxPrev.addEventListener("click", showPrevGallery);
+    }
+    if (lightboxNext) {
+      lightboxNext.addEventListener("click", showNextGallery);
     }
 
     lightbox.addEventListener("click", (event) => {
@@ -578,9 +663,30 @@
       }
     });
 
+    lightbox.addEventListener("touchstart", (event) => {
+      touchStartX = event.changedTouches[0]?.clientX || 0;
+    }, { passive: true });
+
+    lightbox.addEventListener("touchend", (event) => {
+      const endX = event.changedTouches[0]?.clientX || 0;
+      const delta = endX - touchStartX;
+      if (Math.abs(delta) < 40) {
+        return;
+      }
+      if (delta < 0) {
+        showNextGallery();
+      } else {
+        showPrevGallery();
+      }
+    }, { passive: true });
+
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && !lightbox.hidden) {
         closeLightbox();
+      } else if (event.key === "ArrowRight" && !lightbox.hidden) {
+        showNextGallery();
+      } else if (event.key === "ArrowLeft" && !lightbox.hidden) {
+        showPrevGallery();
       }
     });
   }
@@ -663,6 +769,9 @@
       checkoutInput.setAttribute("min", today);
 
       checkinInput.addEventListener("change", () => {
+        if (formFeedback) {
+          formFeedback.textContent = "";
+        }
         if (checkinInput.value) {
           checkoutInput.setAttribute("min", checkinInput.value);
           if (checkoutInput.value && checkoutInput.value <= checkinInput.value) {
@@ -671,6 +780,12 @@
         }
       });
     }
+
+    dateForm.addEventListener("input", () => {
+      if (formFeedback) {
+        formFeedback.textContent = "";
+      }
+    });
 
     dateForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -683,6 +798,11 @@
       const lang = root.dataset.lang || "ms";
 
       if (checkin && checkout && checkout <= checkin) {
+        if (formFeedback) {
+          formFeedback.textContent = lang === "en"
+            ? "Please choose a valid check-out date."
+            : "Sila pilih tarikh check-out yang sah.";
+        }
         window.alert(
           lang === "en"
             ? "Check-out date must be after check-in date."
@@ -693,6 +813,11 @@
 
       const conflict = overlapsWithUnavailable(checkin, checkout);
       if (conflict) {
+        if (formFeedback) {
+          formFeedback.textContent = lang === "en"
+            ? "Selected dates are unavailable. Please choose different dates."
+            : "Tarikh dipilih tidak tersedia. Sila pilih tarikh lain.";
+        }
         const label = lang === "en"
           ? (conflict.labelEn || conflict.labelBm || "")
           : (conflict.labelBm || conflict.labelEn || "");
@@ -727,6 +852,11 @@
 
       const phone = (business.phone || "+60194410666").replace(/\D/g, "");
       const message = encodeURIComponent(lines.join("\n"));
+      if (formFeedback) {
+        formFeedback.textContent = lang === "en"
+          ? "Opening WhatsApp with your details..."
+          : "Membuka WhatsApp dengan maklumat anda...";
+      }
       openWhatsApp(`https://wa.me/${phone}?text=${message}`, "date_form_submit");
     });
   }
