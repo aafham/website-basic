@@ -60,6 +60,7 @@ body {
   color: var(--text);
   line-height: 1.75;
   font-size: 17px;
+  padding-top: calc(var(--header-offset) - 16px);
   scroll-padding-top: var(--header-offset);
 }
 
@@ -98,8 +99,10 @@ textarea:focus-visible {
 
 /* ================= HEADER ================= */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   background: var(--header-bg);
   backdrop-filter: blur(12px);
