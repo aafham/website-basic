@@ -263,6 +263,7 @@ Jitra2Stay ialah website static promosi dan tempahan homestay yang fokus kepada:
 - Ditambah `policies.html` dan contact fallback.
 - Ditambah UI polish: hero chips, FAQ accordion, form feedback, footer quick-links, dan lightbox navigation.
 - Ditambah iCal sync, admin dashboard owner, dan multilingual SEO pages (`ms.html` / `en.html`).
+- Footer diperbaharui dengan layout card (brand/quick links/contact), hover/focus state lebih jelas, dan spacing mobile lebih kemas.
 
 ## 13) Checklist Sebelum Live
 
@@ -312,3 +313,11 @@ Ikut urutan ini supaya website terus jalan dengan betul:
 Jika `business.image` belum ada gambar rasmi:
 - Guna dulu `images/halaman.jpg` seperti di atas.
 - Bila gambar baru siap, upload ke folder `images/` dan tukar URL `business.image` sahaja.
+
+## 15) Nota UI Footer (Baru)
+
+- Struktur footer kini guna class `site-footer` dengan 3 blok utama: brand, pautan pantas, dan contact.
+- Contact dipaparkan dengan label ringkas (`Call`, `Email`, `Chat`) untuk mudahkan scan pengguna.
+- Jika mahu ubah kandungan footer:
+  - edit markup di `index.html` (bahagian `<footer class="site-footer">`)
+  - edit gaya di `style.css` (seksyen `/* ================= FOOTER ================= */`)
