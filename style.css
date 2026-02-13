@@ -1457,50 +1457,121 @@ textarea:focus-visible {
 }
 
 /* ================= FOOTER ================= */
-footer {
+.site-footer {
   background: var(--footer-bg);
   color: white;
-  padding: 24px 20px 18px;
+  padding: 28px 20px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .footer-grid {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  gap: 16px;
+  gap: 14px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.footer-grid strong {
-  display: block;
-  margin-bottom: 6px;
+.footer-card {
+  background: rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+  backdrop-filter: blur(2px);
+}
+
+.footer-title {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(240, 255, 248, 0.95);
 }
 
 .footer-grid p {
+  margin: 0;
+  line-height: 1.65;
+  font-size: 15px;
   color: rgba(255, 255, 255, 0.88);
 }
 
 .footer-links {
   display: grid;
-  gap: 4px;
+  gap: 8px;
 }
 
 .footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  min-height: 32px;
+  padding: 4px 10px;
+  border-radius: 8px;
   color: #d1fae5;
   text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.footer-links a:hover {
-  text-decoration: underline;
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  background: rgba(110, 231, 183, 0.16);
+  color: #ecfff6;
+  transform: translateX(2px);
+  text-decoration: none;
+  outline: none;
+}
+
+.footer-link-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(167, 243, 208, 0.18);
+  border: 1px solid rgba(167, 243, 208, 0.35);
+  color: #d9fff0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .footer-copy {
   max-width: 1100px;
-  margin: 14px auto 0;
+  margin: 16px auto 0;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 12px;
+  padding-top: 14px;
   color: rgba(255, 255, 255, 0.86);
   text-align: center;
+  font-size: 15px;
+}
+
+@media (max-width: 760px) {
+  .site-footer {
+    padding: 22px 14px 16px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .footer-card {
+    border-radius: 12px;
+    padding: 14px 14px 12px;
+  }
+
+  .footer-title {
+    font-size: 12px;
+  }
+
+  .footer-copy {
+    margin-top: 12px;
+    font-size: 14px;
+  }
 }
 
 /* ================= SCROLL REVEAL ================= */
