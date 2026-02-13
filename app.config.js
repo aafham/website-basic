@@ -10,6 +10,7 @@ window.APP_CONFIG = {
     gaMeasurementId: "",
     plausibleDomain: ""
   },
+  ownerPassword: "1234",
   enableThankYouRedirect: true,
   unavailableRanges: [
     {

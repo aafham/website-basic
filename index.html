@@ -354,6 +354,43 @@
           Tarikh di bawah biasanya telah ditempah. WhatsApp kami untuk semakan akhir.
         </p>
         <ul class="availability-list" id="availabilityList"></ul>
+
+        <div class="availability-owner">
+          <button
+            type="button"
+            class="owner-edit-btn"
+            id="ownerEditBtn"
+            data-bm="Owner: Edit Tarikh"
+            data-en="Owner: Edit Dates"
+          >
+            Owner: Edit Tarikh
+          </button>
+
+          <div class="owner-editor" id="ownerEditor" hidden>
+            <p
+              class="owner-help"
+              data-bm="Format setiap baris: YYYY-MM-DD|YYYY-MM-DD|Label BM|Label EN"
+              data-en="Use one line per range: YYYY-MM-DD|YYYY-MM-DD|BM Label|EN Label"
+            >
+              Format setiap baris: YYYY-MM-DD|YYYY-MM-DD|Label BM|Label EN
+            </p>
+
+            <textarea
+              id="ownerRangesInput"
+              rows="6"
+              class="owner-ranges-input"
+              data-bm-placeholder="Contoh: 2026-06-10|2026-06-12|Tempahan Keluarga|Family Booking"
+              data-en-placeholder="Example: 2026-06-10|2026-06-12|Family Booking|Family Booking"
+              placeholder="Contoh: 2026-06-10|2026-06-12|Tempahan Keluarga|Family Booking"
+            ></textarea>
+
+            <div class="owner-actions">
+              <button type="button" class="owner-save-btn" id="ownerSaveBtn" data-bm="Simpan" data-en="Save">Simpan</button>
+              <button type="button" class="owner-cancel-btn" id="ownerCancelBtn" data-bm="Batal" data-en="Cancel">Batal</button>
+              <button type="button" class="owner-reset-btn" id="ownerResetBtn" data-bm="Reset Asal" data-en="Reset Default">Reset Asal</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

@@ -93,6 +93,12 @@ Semua fungsi di bawah berada dalam script di `app.js`.
 - Jana mesej BM/EN ikut bahasa aktif.
 - Buka link `wa.me` dengan mesej encoded.
 
+### 5.6.1 Owner Edit Tarikh Tidak Tersedia
+- Owner boleh tekan butang `Owner: Edit Tarikh` pada papan unavailable dates.
+- Sistem akan minta password sebelum panel edit dibuka.
+- Password semasa: `1234` (boleh ubah di `app.config.js` pada key `ownerPassword`).
+- Data tarikh owner disimpan dalam `localStorage` browser yang digunakan.
+
 ### 5.7 Theme Toggle (Light/Dark)
 - `getPreferredTheme()` baca pilihan simpanan / ikut system preference.
 - `setTheme(theme, persist)`

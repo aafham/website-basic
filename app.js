@@ -3,7 +3,10 @@
   const config = window.APP_CONFIG || {};
   const business = config.business || {};
   const analyticsConfig = config.analytics || {};
-  const unavailableRanges = Array.isArray(config.unavailableRanges) ? config.unavailableRanges : [];
+  const defaultUnavailableRanges = Array.isArray(config.unavailableRanges) ? config.unavailableRanges : [];
+  const ownerPassword = `${config.ownerPassword || "1234"}`;
+  const ownerRangesStorageKey = "ownerUnavailableRanges";
+  let unavailableRanges = defaultUnavailableRanges.slice();
 
   const header = document.getElementById("siteHeader");
   const nav = document.getElementById("mainNav");
@@ -14,6 +17,12 @@
   const backToTop = document.getElementById("backToTop");
   const dateForm = document.getElementById("dateForm");
   const availabilityList = document.getElementById("availabilityList");
+  const ownerEditBtn = document.getElementById("ownerEditBtn");
+  const ownerEditor = document.getElementById("ownerEditor");
+  const ownerRangesInput = document.getElementById("ownerRangesInput");
+  const ownerSaveBtn = document.getElementById("ownerSaveBtn");
+  const ownerCancelBtn = document.getElementById("ownerCancelBtn");
+  const ownerResetBtn = document.getElementById("ownerResetBtn");
   const themeToggle = document.getElementById("themeToggle");
   const themeLabel = themeToggle ? themeToggle.querySelector(".theme-label") : null;
   const themeIcon = themeToggle ? themeToggle.querySelector(".theme-icon") : null;
@@ -26,6 +35,7 @@
   const altTranslatable = document.querySelectorAll("[data-bm-alt][data-en-alt]");
   const titleTranslatable = document.querySelectorAll("[data-bm-title][data-en-title]");
   const hrefTranslatable = document.querySelectorAll("[data-bm-href][data-en-href]");
+  const placeholderTranslatable = document.querySelectorAll("[data-bm-placeholder][data-en-placeholder]");
   const waLinks = Array.from(document.querySelectorAll('a[href*="wa.me/"]'));
   const schemaNode = document.getElementById("lodgingSchema");
 
@@ -45,12 +55,42 @@
     }
   };
 
+  const deleteStorage = (key) => {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      // Ignore storage errors.
+    }
+  };
+
+  const loadOwnerRanges = () => {
+    const raw = readStorage(ownerRangesStorageKey);
+    if (!raw) {
+      return null;
+    }
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : null;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const saveOwnerRanges = (ranges) => {
+    writeStorage(ownerRangesStorageKey, JSON.stringify(ranges));
+  };
+
   const isDateWithinRange = (day, start, end) => day >= start && day <= end;
 
   const getDateValue = (value) => {
     const date = new Date(value);
     return Number.isNaN(date.getTime()) ? null : date;
   };
+
+  const savedOwnerRanges = loadOwnerRanges();
+  if (savedOwnerRanges && savedOwnerRanges.length >= 0) {
+    unavailableRanges = savedOwnerRanges;
+  }
 
   const overlapsWithUnavailable = (startDateText, endDateText) => {
     const startDate = getDateValue(startDateText);
@@ -187,6 +227,42 @@
     });
   };
 
+  const rangesToEditorText = (ranges) => ranges
+    .map((range) => `${range.start}|${range.end}|${range.labelBm || ""}|${range.labelEn || ""}`)
+    .join("\n");
+
+  const parseEditorRanges = (text) => {
+    const lines = text
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    const parsed = [];
+    for (const line of lines) {
+      const parts = line.split("|").map((item) => item.trim());
+      if (parts.length < 2) {
+        return { ok: false, error: `Format tidak sah: ${line}` };
+      }
+
+      const [start, end, labelBm = "", labelEn = ""] = parts;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(start) || !/^\d{4}-\d{2}-\d{2}$/.test(end)) {
+        return { ok: false, error: `Tarikh mesti format YYYY-MM-DD: ${line}` };
+      }
+      if (end < start) {
+        return { ok: false, error: `Tarikh akhir mesti selepas tarikh mula: ${line}` };
+      }
+
+      parsed.push({
+        start,
+        end,
+        labelBm,
+        labelEn
+      });
+    }
+
+    return { ok: true, ranges: parsed };
+  };
+
   const updateThemeToggleUI = () => {
     if (!themeToggle) {
       return;
@@ -281,6 +357,13 @@
       }
     });
 
+    placeholderTranslatable.forEach((el) => {
+      const placeholder = lang === "en" ? el.dataset.enPlaceholder : el.dataset.bmPlaceholder;
+      if (placeholder) {
+        el.setAttribute("placeholder", placeholder);
+      }
+    });
+
     langButtons.forEach((btn) => {
       const isActive = btn.dataset.lang === lang;
       btn.classList.toggle("active", isActive);
@@ -333,6 +416,55 @@
       locationMap.classList.add("loaded");
       loadMapBtn.setAttribute("aria-expanded", "true");
       trackEvent("map_load_click");
+    });
+  }
+
+  if (ownerEditBtn && ownerEditor && ownerRangesInput) {
+    ownerEditBtn.addEventListener("click", () => {
+      const input = window.prompt("Owner password:");
+      if (input !== ownerPassword) {
+        window.alert("Password salah.");
+        return;
+      }
+
+      ownerEditor.hidden = false;
+      ownerRangesInput.value = rangesToEditorText(unavailableRanges);
+      ownerRangesInput.focus();
+      trackEvent("owner_editor_open");
+    });
+  }
+
+  if (ownerCancelBtn && ownerEditor) {
+    ownerCancelBtn.addEventListener("click", () => {
+      ownerEditor.hidden = true;
+    });
+  }
+
+  if (ownerSaveBtn && ownerEditor && ownerRangesInput) {
+    ownerSaveBtn.addEventListener("click", () => {
+      const parsed = parseEditorRanges(ownerRangesInput.value);
+      if (!parsed.ok) {
+        window.alert(parsed.error || "Data tidak sah.");
+        return;
+      }
+
+      unavailableRanges = parsed.ranges || [];
+      saveOwnerRanges(unavailableRanges);
+      renderAvailability(root.dataset.lang || "ms");
+      ownerEditor.hidden = true;
+      window.alert("Tarikh berjaya disimpan.");
+      trackEvent("owner_editor_save", { count: unavailableRanges.length });
+    });
+  }
+
+  if (ownerResetBtn && ownerRangesInput) {
+    ownerResetBtn.addEventListener("click", () => {
+      unavailableRanges = defaultUnavailableRanges.slice();
+      deleteStorage(ownerRangesStorageKey);
+      ownerRangesInput.value = rangesToEditorText(unavailableRanges);
+      renderAvailability(root.dataset.lang || "ms");
+      window.alert("Tarikh reset ke data asal.");
+      trackEvent("owner_editor_reset");
     });
   }
 

@@ -798,6 +798,72 @@ textarea:focus-visible {
   font-weight: 600;
 }
 
+.availability-owner {
+  margin-top: 12px;
+}
+
+.owner-edit-btn,
+.owner-save-btn,
+.owner-cancel-btn,
+.owner-reset-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.owner-edit-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.owner-editor {
+  margin-top: 10px;
+  background: var(--surface-soft);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.owner-help {
+  font-size: 13px;
+  color: var(--note);
+}
+
+.owner-ranges-input {
+  margin-top: 8px;
+  width: 100%;
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.owner-actions {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.owner-save-btn {
+  background: var(--accent);
+  color: white;
+}
+
+.owner-cancel-btn {
+  background: #6b7280;
+  color: white;
+}
+
+.owner-reset-btn {
+  background: #b45309;
+  color: white;
+}
+
 .gallery h3 {
   font-size: 32px;
   color: var(--primary);
@@ -1108,7 +1174,7 @@ textarea:focus-visible {
 }
 
 .cta-side {
-  width: 320px;
+  width: clamp(240px, 28vw, 300px);
   background: rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   padding: 16px;
@@ -1117,10 +1183,19 @@ textarea:focus-visible {
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
 }
 
+.cta-photo {
+  aspect-ratio: 4 / 5;
+  max-height: 420px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
 .cta-photo img {
   width: 100%;
+  height: 100%;
   border-radius: 14px;
   display: block;
+  object-fit: cover;
 }
 
 .cta-quote {
