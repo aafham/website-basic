@@ -3540,9 +3540,55 @@ textarea:focus-visible {
     line-height: 1.12;
   }
 
+  .final-cta p {
+    margin-top: 6px;
+    margin-bottom: 22px;
+    max-width: 58ch;
+    line-height: 1.62;
+  }
+
+  .btn-cta {
+    box-shadow:
+      0 14px 28px rgba(8, 26, 22, 0.34),
+      0 0 0 1px rgba(255, 255, 255, 0.16) inset;
+  }
+
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 18px 34px rgba(8, 26, 22, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.22) inset;
+  }
+
+  .contact-fallback {
+    margin-top: 14px;
+    row-gap: 10px;
+    column-gap: 10px;
+  }
+
+  .contact-chip {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
   .policy-list {
     margin-top: 14px;
-    gap: 8px 12px;
+    row-gap: 12px;
+    column-gap: 12px;
+  }
+
+  .policy-list > div {
+    border-color: rgba(255, 255, 255, 0.13);
+  }
+
+  .cta-quote {
+    font-size: 15px;
+    line-height: 1.78;
+    max-width: 34ch;
+  }
+
+  .cta-quote span {
+    margin-top: 10px;
+    display: inline-block;
   }
 
   .site-footer {
@@ -3552,6 +3598,21 @@ textarea:focus-visible {
   .footer-grid {
     max-width: 1180px;
     grid-template-columns: 1.2fr 1fr 1fr;
+  }
+
+  .footer-card {
+    min-height: 286px;
+    padding: 18px 18px 16px;
+  }
+
+  .footer-links {
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .footer-copy {
+    opacity: 0.72;
+    letter-spacing: 0.01em;
   }
 
   .floating-cta {
