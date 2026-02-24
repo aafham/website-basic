@@ -3524,7 +3524,7 @@ textarea:focus-visible {
   .final-cta {
     background: linear-gradient(135deg, #103c34, #1a564a);
     padding-top: 84px;
-    padding-bottom: 86px;
+    padding-bottom: 72px;
   }
 
   .final-cta-container {
@@ -3548,6 +3548,10 @@ textarea:focus-visible {
   }
 
   .btn-cta {
+    padding: 16px 28px;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
     box-shadow:
       0 14px 28px rgba(8, 26, 22, 0.34),
       0 0 0 1px rgba(255, 255, 255, 0.16) inset;
@@ -3568,6 +3572,10 @@ textarea:focus-visible {
 
   .contact-chip {
     border-color: rgba(255, 255, 255, 0.2);
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
   }
 
   .policy-list {
@@ -3578,12 +3586,30 @@ textarea:focus-visible {
 
   .policy-list > div {
     border-color: rgba(255, 255, 255, 0.13);
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .cta-trust span {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 12px;
+    border-radius: 999px;
   }
 
   .cta-quote {
     font-size: 15px;
     line-height: 1.78;
     max-width: 34ch;
+    margin-top: 14px;
+  }
+
+  .cta-quote .stars {
+    margin-bottom: 12px;
   }
 
   .cta-quote span {
@@ -3592,7 +3618,7 @@ textarea:focus-visible {
   }
 
   .site-footer {
-    padding: 34px 24px 22px;
+    padding: 28px 24px 20px;
   }
 
   .footer-grid {
@@ -3605,9 +3631,19 @@ textarea:focus-visible {
     padding: 18px 18px 16px;
   }
 
+  .footer-grid p {
+    font-size: 15px;
+    line-height: 1.66;
+  }
+
   .footer-links {
     gap: 10px;
     margin-top: 8px;
+  }
+
+  .footer-links a {
+    font-size: 15px;
+    line-height: 1.45;
   }
 
   .footer-copy {
