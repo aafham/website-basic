@@ -198,15 +198,25 @@
 
       <div class="video-card">
         <video
+          id="walkthroughVideo"
           controls
           playsinline
           preload="metadata"
           poster="images/ruang-tamu.jpg"
           aria-label="Video walkthrough Jitra2Stay"
         >
-          <source src="videos/jitra2stay-walkthrough.mp4" type="video/mp4">
+          <source id="walkthroughSource" src="" type="video/mp4">
           Your browser does not support the video tag.
         </video>
+        <p
+          class="video-fallback"
+          id="videoFallback"
+          data-bm="Video walkthrough sedang dikemas kini. Sementara itu, lihat galeri foto di bawah."
+          data-en="The walkthrough video is being updated. Meanwhile, view the photo gallery below."
+          hidden
+        >
+          Video walkthrough sedang dikemas kini. Sementara itu, lihat galeri foto di bawah.
+        </p>
         <p class="video-note" data-bm="Template video disediakan. Gantikan fail video bila siap." data-en="Video template is ready. Replace the video file when available.">
           Template video disediakan. Gantikan fail video bila siap.
         </p>
@@ -333,89 +343,176 @@
         Hantar maklumat ringkas, kami akan semak ketersediaan.
       </p>
 
-      <form class="date-form" id="dateForm">
-        <label class="form-field">
-          <span data-bm="Tarikh Check-in" data-en="Check-in Date">Tarikh Check-in</span>
-          <input type="date" name="checkin" required>
-        </label>
+      <div class="date-check-layout">
+        <div class="date-check-main">
+          <form class="date-form" id="dateForm">
+            <label class="form-field">
+              <span data-bm="Tarikh Check-in" data-en="Check-in Date">Tarikh Check-in</span>
+              <input type="date" name="checkin" required>
+            </label>
 
-        <label class="form-field">
-          <span data-bm="Tarikh Check-out" data-en="Check-out Date">Tarikh Check-out</span>
-          <input type="date" name="checkout" required>
-        </label>
+            <label class="form-field">
+              <span data-bm="Tarikh Check-out" data-en="Check-out Date">Tarikh Check-out</span>
+              <input type="date" name="checkout" required>
+            </label>
 
-        <label class="form-field">
-          <span data-bm="Bilangan Tetamu" data-en="Number of Guests">Bilangan Tetamu</span>
-          <input type="number" name="guests" min="1" max="12" placeholder="6" required>
-        </label>
+            <label class="form-field">
+              <span data-bm="Bilangan Tetamu" data-en="Number of Guests">Bilangan Tetamu</span>
+              <input type="number" name="guests" min="1" max="12" placeholder="6" required>
+            </label>
 
-        <label class="form-field">
-          <span data-bm="Bilangan Bilik" data-en="Number of Rooms">Bilangan Bilik</span>
-          <select name="rooms" required>
-            <option value="2">2 Bilik</option>
-            <option value="3">3 Bilik</option>
-            <option value="4">4 Bilik</option>
-            <option value="5">5 Bilik</option>
-          </select>
-        </label>
+            <label class="form-field">
+              <span data-bm="Bilangan Bilik" data-en="Number of Rooms">Bilangan Bilik</span>
+              <select name="rooms" required>
+                <option value="2">2 Bilik</option>
+                <option value="3">3 Bilik</option>
+                <option value="4">4 Bilik</option>
+                <option value="5">5 Bilik</option>
+              </select>
+            </label>
 
-        <label class="form-field form-full">
-          <span data-bm="Nota (optional)" data-en="Notes (optional)">Nota (optional)</span>
-          <textarea name="notes" rows="3" placeholder="Contoh: datang konvokesyen..."></textarea>
-        </label>
+            <label class="form-field form-full">
+              <span data-bm="Nota (optional)" data-en="Notes (optional)">Nota (optional)</span>
+              <textarea name="notes" rows="3" placeholder="Contoh: datang konvokesyen..."></textarea>
+            </label>
 
-        <button type="submit" class="btn-primary" data-bm="Hantar ke WhatsApp" data-en="Send to WhatsApp">
-          Hantar ke WhatsApp
-        </button>
-        <p class="form-feedback" id="formFeedback" aria-live="polite"></p>
-      </form>
+            <button type="submit" class="btn-primary" data-bm="Hantar ke WhatsApp" data-en="Send to WhatsApp">
+              Hantar ke WhatsApp
+            </button>
+            <p class="form-feedback" id="formFeedback" aria-live="polite"></p>
+          </form>
 
-      <div class="availability-board" id="availabilityBoard">
-        <h4 data-bm="Tarikh Tidak Tersedia (Contoh)" data-en="Unavailable Dates (Sample)">Tarikh Tidak Tersedia (Contoh)</h4>
-        <p
-          data-bm="Tarikh di bawah biasanya telah ditempah. WhatsApp kami untuk semakan akhir."
-          data-en="Dates below are usually booked. WhatsApp us for final confirmation."
-        >
-          Tarikh di bawah biasanya telah ditempah. WhatsApp kami untuk semakan akhir.
-        </p>
-        <p class="availability-updated" id="availabilityUpdated"></p>
-        <ul class="availability-list" id="availabilityList"></ul>
-
-        <div class="availability-owner">
-          <button
-            type="button"
-            class="owner-edit-btn"
-            id="ownerEditBtn"
-            data-bm="Owner: Edit Tarikh"
-            data-en="Owner: Edit Dates"
-          >
-            Owner: Edit Tarikh
-          </button>
-
-          <div class="owner-editor" id="ownerEditor" hidden>
+          <div class="availability-board" id="availabilityBoard">
+            <h4 data-bm="Tarikh Tidak Tersedia (Contoh)" data-en="Unavailable Dates (Sample)">Tarikh Tidak Tersedia (Contoh)</h4>
             <p
-              class="owner-help"
-              data-bm="Format setiap baris: YYYY-MM-DD|YYYY-MM-DD|Label BM|Label EN"
-              data-en="Use one line per range: YYYY-MM-DD|YYYY-MM-DD|BM Label|EN Label"
+              data-bm="Tarikh di bawah biasanya telah ditempah. WhatsApp kami untuk semakan akhir."
+              data-en="Dates below are usually booked. WhatsApp us for final confirmation."
             >
-              Format setiap baris: YYYY-MM-DD|YYYY-MM-DD|Label BM|Label EN
+              Tarikh di bawah biasanya telah ditempah. WhatsApp kami untuk semakan akhir.
             </p>
+            <p class="availability-updated" id="availabilityUpdated"></p>
+            <ul class="availability-list" id="availabilityList"></ul>
 
-            <textarea
-              id="ownerRangesInput"
-              rows="6"
-              class="owner-ranges-input"
-              data-bm-placeholder="Contoh: 2026-06-10|2026-06-12|Tempahan Keluarga|Family Booking"
-              data-en-placeholder="Example: 2026-06-10|2026-06-12|Family Booking|Family Booking"
-              placeholder="Contoh: 2026-06-10|2026-06-12|Tempahan Keluarga|Family Booking"
-            ></textarea>
+            <div class="availability-calendar-wrap">
+              <h5 data-bm="Ringkasan Kalendar (2 Bulan)" data-en="Calendar Preview (2 Months)">
+                Ringkasan Kalendar (2 Bulan)
+              </h5>
+              <div class="availability-legend">
+                <span class="legend-item legend-open" data-bm="Tersedia" data-en="Available">Tersedia</span>
+                <span class="legend-item legend-blocked" data-bm="Ditempah" data-en="Booked">Ditempah</span>
+              </div>
+              <div class="availability-calendar" id="availabilityCalendar"></div>
+            </div>
 
-            <div class="owner-actions">
-              <button type="button" class="owner-save-btn" id="ownerSaveBtn" data-bm="Simpan" data-en="Save">Simpan</button>
-              <button type="button" class="owner-cancel-btn" id="ownerCancelBtn" data-bm="Batal" data-en="Cancel">Batal</button>
-              <button type="button" class="owner-reset-btn" id="ownerResetBtn" data-bm="Reset Asal" data-en="Reset Default">Reset Asal</button>
+            <div class="availability-owner">
+              <button
+                type="button"
+                class="owner-edit-btn"
+                id="ownerEditBtn"
+                data-bm="Owner: Edit Tarikh"
+                data-en="Owner: Edit Dates"
+              >
+                Owner: Edit Tarikh
+              </button>
+
+              <div class="owner-editor" id="ownerEditor" hidden>
+                <p
+                  class="owner-help"
+                  data-bm="Format setiap baris: YYYY-MM-DD|YYYY-MM-DD|Label BM|Label EN"
+                  data-en="Use one line per range: YYYY-MM-DD|YYYY-MM-DD|BM Label|EN Label"
+                >
+                  Format setiap baris: YYYY-MM-DD|YYYY-MM-DD|Label BM|Label EN
+                </p>
+
+                <textarea
+                  id="ownerRangesInput"
+                  rows="6"
+                  class="owner-ranges-input"
+                  data-bm-placeholder="Contoh: 2026-06-10|2026-06-12|Tempahan Keluarga|Family Booking"
+                  data-en-placeholder="Example: 2026-06-10|2026-06-12|Family Booking|Family Booking"
+                  placeholder="Contoh: 2026-06-10|2026-06-12|Tempahan Keluarga|Family Booking"
+                ></textarea>
+
+                <div class="owner-actions">
+                  <button type="button" class="owner-save-btn" id="ownerSaveBtn" data-bm="Simpan" data-en="Save">Simpan</button>
+                  <button type="button" class="owner-cancel-btn" id="ownerCancelBtn" data-bm="Batal" data-en="Cancel">Batal</button>
+                  <button type="button" class="owner-reset-btn" id="ownerResetBtn" data-bm="Reset Asal" data-en="Reset Default">Reset Asal</button>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+
+        <aside class="booking-summary">
+          <h4 data-bm="Ringkasan Tempahan" data-en="Booking Summary">Ringkasan Tempahan</h4>
+          <p
+            data-bm="Panduan ringkas untuk buat keputusan tempahan lebih cepat."
+            data-en="A quick guide to make booking decisions faster."
+          >
+            Panduan ringkas untuk buat keputusan tempahan lebih cepat.
+          </p>
+          <ul class="booking-summary-list">
+            <li data-bm="Harga: RM170 - RM330 / malam" data-en="Rates: RM170 - RM330 / night">
+              Harga: RM170 - RM330 / malam
+            </li>
+            <li data-bm="Kapasiti sesuai: 6 - 10 tetamu" data-en="Ideal capacity: 6 - 10 guests">
+              Kapasiti sesuai: 6 - 10 tetamu
+            </li>
+            <li data-bm="Deposit keselamatan: RM100" data-en="Security deposit: RM100">
+              Deposit keselamatan: RM100
+            </li>
+            <li data-bm="Respon WhatsApp biasa: 5 - 15 minit" data-en="Typical WhatsApp response: 5 - 15 minutes">
+              Respon WhatsApp biasa: 5 - 15 minit
+            </li>
+          </ul>
+          <a
+            href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20boleh%20kongsi%20slot%20tarikh%20terdekat%20yang%20masih%20available?"
+            data-bm-href="https://wa.me/60194410666?text=Hai%20Jitra2Stay,%20boleh%20kongsi%20slot%20tarikh%20terdekat%20yang%20masih%20available?"
+            data-en-href="https://wa.me/60194410666?text=Hi%20Jitra2Stay,%20could%20you%20share%20the%20nearest%20available%20dates?"
+            class="btn-primary booking-summary-btn"
+            data-bm="Semak Slot Terdekat"
+            data-en="Check Nearest Slots"
+          >
+            Semak Slot Terdekat
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="house-rules reveal">
+      <h3 data-bm="Peraturan Ringkas Penginapan" data-en="Quick Stay Rules">Peraturan Ringkas Penginapan</h3>
+      <p
+        class="section-desc"
+        data-bm="Ringkas dan jelas supaya urusan check-in lebih lancar untuk semua."
+        data-en="Short and clear rules for a smoother check-in experience for everyone."
+      >
+        Ringkas dan jelas supaya urusan check-in lebih lancar untuk semua.
+      </p>
+
+      <div class="house-rules-grid">
+        <div class="house-rule-item">
+          <h4 data-bm="Waktu Check-in/out" data-en="Check-in/out Time">Waktu Check-in/out</h4>
+          <p data-bm="Check-in 3.00 petang, check-out 12.00 tengah hari." data-en="Check-in 3:00 PM, check-out 12:00 PM.">
+            Check-in 3.00 petang, check-out 12.00 tengah hari.
+          </p>
+        </div>
+        <div class="house-rule-item">
+          <h4 data-bm="Had Tetamu" data-en="Guest Limit">Had Tetamu</h4>
+          <p data-bm="Maklumkan awal jika melebihi 10 tetamu untuk atur caj tambahan." data-en="Inform us early if you exceed 10 guests to arrange extra charges.">
+            Maklumkan awal jika melebihi 10 tetamu untuk atur caj tambahan.
+          </p>
+        </div>
+        <div class="house-rule-item">
+          <h4 data-bm="Kebersihan & Bunyi" data-en="Cleanliness & Noise">Kebersihan & Bunyi</h4>
+          <p data-bm="Jaga kebersihan dan kurangkan bunyi selepas 11.00 malam." data-en="Keep the place clean and reduce noise after 11:00 PM.">
+            Jaga kebersihan dan kurangkan bunyi selepas 11.00 malam.
+          </p>
+        </div>
+        <div class="house-rule-item">
+          <h4 data-bm="Merokok" data-en="Smoking">Merokok</h4>
+          <p data-bm="Tidak dibenarkan merokok di dalam rumah." data-en="Smoking is not allowed inside the house.">
+            Tidak dibenarkan merokok di dalam rumah.
+          </p>
         </div>
       </div>
     </section>

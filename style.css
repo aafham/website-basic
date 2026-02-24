@@ -408,6 +408,12 @@ textarea:focus-visible {
   color: var(--note);
 }
 
+.video-fallback {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
 /* ================= BUTTONS ================= */
 .btn-primary {
   display: inline-block;
@@ -769,6 +775,19 @@ textarea:focus-visible {
   text-align: center;
 }
 
+.date-check-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.date-check-main {
+  display: grid;
+  gap: 18px;
+}
+
 .date-form {
   max-width: 850px;
   margin: 0 auto;
@@ -869,6 +888,193 @@ textarea:focus-visible {
   border-radius: 50%;
   background: #ef4444;
   flex-shrink: 0;
+}
+
+.availability-calendar-wrap {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(31, 79, 70, 0.12);
+}
+
+.availability-calendar-wrap h5 {
+  color: var(--primary);
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.availability-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.legend-item::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+
+.legend-open::before {
+  background: #ecfdf5;
+  border-color: #6ee7b7;
+}
+
+.legend-blocked::before {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.availability-calendar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.availability-month {
+  background: var(--surface-soft);
+  border: 1px solid rgba(31, 79, 70, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.availability-month-title {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+.availability-weekdays,
+.availability-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.availability-weekdays span {
+  text-align: center;
+  font-size: 10px;
+  color: var(--note);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.availability-day {
+  min-height: 26px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.availability-day.is-empty {
+  background: transparent;
+}
+
+.availability-day.is-open {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.availability-day.is-blocked {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.availability-day.is-past {
+  opacity: 0.4;
+}
+
+.availability-day.is-today {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.booking-summary {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid rgba(31, 79, 70, 0.12);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.07);
+  text-align: left;
+}
+
+.booking-summary h4 {
+  color: var(--primary);
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.booking-summary p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.booking-summary-list {
+  margin-top: 14px;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.booking-summary-list li {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.booking-summary-btn {
+  margin-top: 16px;
+}
+
+.house-rules {
+  padding: 70px 20px;
+  background: var(--surface);
+  text-align: center;
+}
+
+.house-rules h3 {
+  font-size: 30px;
+  color: var(--primary);
+}
+
+.house-rules-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.house-rule-item {
+  text-align: left;
+  background: var(--surface-soft);
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid rgba(31, 79, 70, 0.08);
+}
+
+.house-rule-item h4 {
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.house-rule-item p {
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .availability-owner {
@@ -1769,6 +1975,7 @@ textarea:focus-visible {
   .how-to-book,
   .date-check,
   .gallery,
+  .house-rules,
   .location-section,
   .nearby,
   .trust,
@@ -1880,7 +2087,8 @@ textarea:focus-visible {
   .trust-grid,
   .faq-list,
   .book-steps,
-  .gallery-grid {
+  .gallery-grid,
+  .house-rules-grid {
     gap: 16px;
   }
 
@@ -1938,6 +2146,14 @@ textarea:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .date-check-layout {
+    gap: 16px;
+  }
+
+  .booking-summary {
+    padding: 16px;
+  }
+
   .form-full,
   .date-form button,
   .form-feedback {
@@ -1956,5 +2172,210 @@ textarea:focus-visible {
 
   .availability-board {
     padding: 16px;
+  }
+}
+
+/* ================= DESKTOP REFINEMENT (NO MOBILE IMPACT) ================= */
+@media (min-width: 769px) {
+  body {
+    font-size: 16px;
+    line-height: 1.68;
+    background:
+      radial-gradient(circle at 15% -10%, rgba(63, 163, 123, 0.07), transparent 44%),
+      radial-gradient(circle at 100% 0%, rgba(31, 79, 70, 0.05), transparent 36%),
+      var(--bg);
+  }
+
+  .header-container {
+    max-width: 1180px;
+    padding: 14px 24px;
+  }
+
+  .main-nav {
+    gap: 10px;
+  }
+
+  .main-nav a {
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .main-nav a:hover,
+  .main-nav a:focus-visible {
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .hero {
+    padding: 128px 24px 112px;
+    text-align: left;
+    background-position: center 45%;
+  }
+
+  .hero-content {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .hero h2 {
+    font-size: clamp(38px, 4vw, 52px);
+    line-height: 1.12;
+    max-width: 760px;
+    margin-bottom: 14px;
+  }
+
+  .hero > .hero-content > p {
+    max-width: 650px;
+  }
+
+  .hero-rate {
+    margin: 18px 0 20px;
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    margin-top: 14px;
+  }
+
+  .hero-chips {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .video-tour,
+  .highlights,
+  .pricing,
+  .how-to-book,
+  .date-check,
+  .house-rules,
+  .gallery,
+  .about-split,
+  .who-for,
+  .why-us,
+  .facilities,
+  .location-section,
+  .nearby,
+  .trust,
+  .faq,
+  .final-cta {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .highlight-container,
+  .pricing-grid,
+  .book-steps,
+  .gallery-grid,
+  .who-grid,
+  .why-grid,
+  .facility-list,
+  .nearby-grid,
+  .trust-grid,
+  .faq-list {
+    max-width: 1120px;
+    gap: 18px;
+  }
+
+  .highlight-item,
+  .price-card,
+  .book-step,
+  .who-card,
+  .why-item,
+  .facility-item,
+  .nearby-item,
+  .trust-card,
+  .faq-item,
+  .availability-board,
+  .location-container,
+  .video-card {
+    border: 1px solid rgba(31, 79, 70, 0.09);
+    box-shadow: 0 10px 24px rgba(20, 35, 31, 0.06);
+  }
+
+  .highlight-item:hover,
+  .who-card:hover,
+  .why-item:hover,
+  .nearby-item:hover {
+    transform: translateY(-3px);
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .gallery-item {
+    border-radius: 14px;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.04);
+  }
+
+  .about-split-container,
+  .location-container {
+    max-width: 1120px;
+    gap: 34px;
+  }
+
+  .about-left h3,
+  .pricing h3,
+  .gallery h3,
+  .location-info h3,
+  .trust h3,
+  .faq h3,
+  .who-for h3,
+  .why-us h3,
+  .nearby h3,
+  .facilities h3,
+  .video-tour h3 {
+    letter-spacing: -0.01em;
+  }
+
+  .date-form {
+    max-width: 920px;
+    border: 1px solid rgba(31, 79, 70, 0.09);
+    box-shadow: 0 10px 24px rgba(20, 35, 31, 0.06);
+  }
+
+  .date-check-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .booking-summary {
+    position: sticky;
+    top: calc(var(--header-offset) + 8px);
+  }
+
+  .final-cta {
+    background: linear-gradient(135deg, #183f38, #24584f);
+    padding-top: 84px;
+    padding-bottom: 90px;
+  }
+
+  .final-cta-container {
+    max-width: 1120px;
+    gap: 28px;
+  }
+
+  .cta-side {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .site-footer {
+    padding: 30px 24px 20px;
+  }
+
+  .footer-grid {
+    max-width: 1120px;
+    grid-template-columns: 1.15fr 1fr 1fr;
+    gap: 12px;
   }
 }

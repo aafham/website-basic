@@ -10,9 +10,10 @@ window.APP_CONFIG = {
     gaMeasurementId: "",
     plausibleDomain: ""
   },
-  ownerPassword: "1234",
+  ownerPassword: "",
   ownerApiEndpoint: "",
   bookingCalendarIcsUrl: "",
+  walkthroughVideoUrl: "",
   enableThankYouRedirect: true,
   unavailableRanges: [
     {

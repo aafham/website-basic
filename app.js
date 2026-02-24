@@ -4,9 +4,10 @@
   const business = config.business || {};
   const analyticsConfig = config.analytics || {};
   const defaultUnavailableRanges = Array.isArray(config.unavailableRanges) ? config.unavailableRanges : [];
-  const ownerPassword = `${config.ownerPassword || "1234"}`;
+  const ownerPassword = `${config.ownerPassword || ""}`.trim();
   const ownerApiEndpoint = `${config.ownerApiEndpoint || ""}`.trim();
   const bookingCalendarIcsUrl = `${config.bookingCalendarIcsUrl || ""}`.trim();
+  const walkthroughVideoUrl = `${config.walkthroughVideoUrl || ""}`.trim();
   const ownerRangesStorageKey = "ownerUnavailableRanges";
   const ownerRangesUpdatedAtKey = "ownerUnavailableRangesUpdatedAt";
   const abVariantStorageKey = "abCtaVariant";
@@ -25,6 +26,7 @@
   const dateForm = document.getElementById("dateForm");
   const formFeedback = document.getElementById("formFeedback");
   const availabilityList = document.getElementById("availabilityList");
+  const availabilityCalendar = document.getElementById("availabilityCalendar");
   const availabilityUpdated = document.getElementById("availabilityUpdated");
   const ownerEditBtn = document.getElementById("ownerEditBtn");
   const ownerEditor = document.getElementById("ownerEditor");
@@ -38,6 +40,9 @@
   const loadMapBtn = document.getElementById("loadMapBtn");
   const locationMap = document.getElementById("locationMap");
   const locationMapFrame = document.getElementById("locationMapFrame");
+  const walkthroughVideo = document.getElementById("walkthroughVideo");
+  const walkthroughSource = document.getElementById("walkthroughSource");
+  const videoFallback = document.getElementById("videoFallback");
   const langButtons = Array.from(document.querySelectorAll(".lang-btn"));
   const translatable = document.querySelectorAll("[data-bm][data-en]");
   const ariaTranslatable = document.querySelectorAll("[data-bm-aria-label][data-en-aria-label]");
@@ -280,6 +285,119 @@
     return Number.isNaN(date.getTime()) ? null : date;
   };
 
+  const dateToIso = (date) => {
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, "0");
+    const day = `${date.getDate()}`.padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const isBlockedDay = (isoDate) => unavailableRanges.some((range) => {
+    if (!range.start || !range.end) {
+      return false;
+    }
+    return isoDate >= range.start && isoDate <= range.end;
+  });
+
+  const renderAvailabilityCalendar = (lang) => {
+    if (!availabilityCalendar) {
+      return;
+    }
+
+    availabilityCalendar.innerHTML = "";
+    const locale = lang === "en" ? "en-MY" : "ms-MY";
+    const weekdayNames = lang === "en"
+      ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+      : ["Isn", "Sel", "Rab", "Kha", "Jum", "Sab", "Aha"];
+    const today = new Date();
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    for (let offset = 0; offset < 2; offset += 1) {
+      const monthDate = new Date(todayStart.getFullYear(), todayStart.getMonth() + offset, 1);
+      const year = monthDate.getFullYear();
+      const month = monthDate.getMonth();
+      const monthLabel = monthDate.toLocaleString(locale, { month: "long", year: "numeric" });
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const startWeekday = (monthDate.getDay() + 6) % 7;
+
+      const monthCard = document.createElement("div");
+      monthCard.className = "availability-month";
+
+      const heading = document.createElement("p");
+      heading.className = "availability-month-title";
+      heading.textContent = monthLabel;
+      monthCard.appendChild(heading);
+
+      const weekdays = document.createElement("div");
+      weekdays.className = "availability-weekdays";
+      weekdayNames.forEach((dayName) => {
+        const cell = document.createElement("span");
+        cell.textContent = dayName;
+        weekdays.appendChild(cell);
+      });
+      monthCard.appendChild(weekdays);
+
+      const grid = document.createElement("div");
+      grid.className = "availability-days";
+
+      for (let i = 0; i < startWeekday; i += 1) {
+        const empty = document.createElement("span");
+        empty.className = "availability-day is-empty";
+        empty.textContent = "";
+        grid.appendChild(empty);
+      }
+
+      for (let day = 1; day <= daysInMonth; day += 1) {
+        const currentDate = new Date(year, month, day);
+        const isoDate = dateToIso(currentDate);
+        const cell = document.createElement("span");
+        const blocked = isBlockedDay(isoDate);
+        const isPast = currentDate < todayStart;
+        const isToday = isoDate === dateToIso(todayStart);
+
+        cell.className = `availability-day ${blocked ? "is-blocked" : "is-open"}`;
+        if (isPast) {
+          cell.classList.add("is-past");
+        }
+        if (isToday) {
+          cell.classList.add("is-today");
+        }
+        cell.textContent = `${day}`;
+        cell.title = blocked
+          ? (lang === "en" ? `${isoDate} booked` : `${isoDate} ditempah`)
+          : (lang === "en" ? `${isoDate} available` : `${isoDate} tersedia`);
+        grid.appendChild(cell);
+      }
+
+      monthCard.appendChild(grid);
+      availabilityCalendar.appendChild(monthCard);
+    }
+  };
+
+  const setupWalkthroughVideo = () => {
+    if (!walkthroughVideo || !walkthroughSource) {
+      return;
+    }
+    if (!walkthroughVideoUrl) {
+      walkthroughVideo.hidden = true;
+      if (videoFallback) {
+        videoFallback.hidden = false;
+      }
+      return;
+    }
+
+    walkthroughSource.src = walkthroughVideoUrl;
+    walkthroughVideo.hidden = false;
+    walkthroughVideo.load();
+
+    walkthroughVideo.addEventListener("error", () => {
+      walkthroughVideo.hidden = true;
+      if (videoFallback) {
+        videoFallback.hidden = false;
+      }
+    });
+  };
+
   const savedOwnerRanges = loadOwnerRanges();
   if (savedOwnerRanges && savedOwnerRanges.length >= 0) {
     unavailableRanges = savedOwnerRanges;
@@ -434,6 +552,7 @@
         ? "No blocked dates listed yet."
         : "Tiada tarikh blok ditetapkan lagi.";
       availabilityList.appendChild(item);
+      renderAvailabilityCalendar(lang);
       return;
     }
 
@@ -443,6 +562,8 @@
       item.textContent = `${range.start} - ${range.end}  ${label ? `(${label})` : ""}`.trim();
       availabilityList.appendChild(item);
     });
+
+    renderAvailabilityCalendar(lang);
   };
 
   const rangesToEditorText = (ranges) => ranges
@@ -855,7 +976,12 @@
     });
   }
 
-  if (ownerEditBtn && ownerEditor && ownerRangesInput) {
+  const isOwnerPasswordConfigured = ownerPassword.length >= 8 && ownerPassword !== "1234";
+  if (!isOwnerPasswordConfigured && ownerEditBtn) {
+    ownerEditBtn.hidden = true;
+  }
+
+  if (isOwnerPasswordConfigured && ownerEditBtn && ownerEditor && ownerRangesInput) {
     ownerEditBtn.addEventListener("click", () => {
       const input = window.prompt("Owner password:");
       if (input !== ownerPassword) {
@@ -1028,6 +1154,7 @@
   setupAnalytics();
   applyCanonical();
   renderSchema();
+  setupWalkthroughVideo();
   setTheme(getPreferredTheme(), false);
 
   if (themeToggle) {
