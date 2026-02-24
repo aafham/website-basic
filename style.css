@@ -3574,7 +3574,7 @@ textarea:focus-visible {
     margin-bottom: 16px;
   }
 
-  .price-card span {
+  .price-card > span:not(.badge) {
     margin-top: 0;
     font-size: 37px;
     line-height: 1.04;
@@ -3602,7 +3602,7 @@ textarea:focus-visible {
 
   .price-card.best h4,
   .price-card.best p,
-  .price-card.best span,
+  .price-card.best > span:not(.badge),
   .price-card.best .price-estimate {
     color: #f3fffb;
   }
@@ -3624,11 +3624,16 @@ textarea:focus-visible {
     background: linear-gradient(135deg, #7df1c0, #44c291);
     color: #083229;
     box-shadow: 0 10px 20px rgba(11, 54, 42, 0.3);
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
   }
 
   .deposit-box {
     margin-top: 22px;
     width: min(100%, 920px);
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     justify-content: center;
     align-items: center;
