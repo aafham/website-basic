@@ -1855,16 +1855,18 @@ textarea:focus-visible {
 /* ================= FLOATING CTA (DESKTOP) ================= */
 .floating-cta {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  right: 20px;
+  bottom: 16px;
   background: var(--surface);
-  border-radius: 16px;
-  padding: 14px 16px;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(31, 79, 70, 0.12);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.14);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  min-width: 230px;
+  gap: 8px;
+  min-width: 220px;
+  max-width: 250px;
   opacity: 0;
   transform: translateY(16px);
   pointer-events: none;
@@ -1879,7 +1881,7 @@ textarea:focus-visible {
 }
 
 .floating-cta-text {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--primary);
   font-weight: 600;
 }
@@ -1894,7 +1896,7 @@ textarea:focus-visible {
   color: white;
   text-decoration: none;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .floating-cta-btn:hover {
@@ -1904,8 +1906,8 @@ textarea:focus-visible {
 /* ================= BACK TO TOP ================= */
 .back-to-top {
   position: fixed;
-  right: 24px;
-  bottom: 170px;
+  right: 20px;
+  bottom: 136px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -2319,6 +2321,8 @@ textarea:focus-visible {
   .trust,
   .faq,
   .final-cta {
+    padding-top: 72px;
+    padding-bottom: 72px;
     padding-left: 24px;
     padding-right: 24px;
   }
@@ -2335,6 +2339,51 @@ textarea:focus-visible {
   .faq-list {
     max-width: 1120px;
     gap: 18px;
+  }
+
+  .section-desc,
+  .who-desc,
+  .why-desc,
+  .nearby-desc,
+  .pricing-desc {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .book-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .book-step {
+    padding: 28px 22px;
+  }
+
+  .book-step p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .facility-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .nearby-grid {
+    max-width: 980px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .nearby-item {
+    padding: 22px 18px;
+  }
+
+  .trust-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .trust-card {
+    text-align: left;
+    padding: 24px 22px;
   }
 
   .highlight-item,
@@ -2413,6 +2462,26 @@ textarea:focus-visible {
     top: calc(var(--header-offset) + 8px);
   }
 
+  .floating-cta {
+    right: 18px;
+    bottom: 14px;
+  }
+
+  .back-to-top {
+    right: 18px;
+    bottom: 128px;
+  }
+
+  @media (max-width: 1280px) {
+    .floating-cta {
+      display: none;
+    }
+
+    .back-to-top {
+      bottom: 20px;
+    }
+  }
+
   .final-cta {
     background: linear-gradient(135deg, #183f38, #24584f);
     padding-top: 84px;
@@ -2437,5 +2506,134 @@ textarea:focus-visible {
     max-width: 1120px;
     grid-template-columns: 1.15fr 1fr 1fr;
     gap: 12px;
+  }
+
+  /* Header/Nav refinement */
+  .site-header {
+    background: rgba(20, 58, 51, 0.72);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .site-header.shrink {
+    background: rgba(16, 44, 39, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .header-container {
+    max-width: 1200px;
+    padding: 12px 24px;
+  }
+
+  .logo h1 {
+    font-size: 30px;
+    letter-spacing: -0.02em;
+  }
+
+  .main-nav a {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    padding: 7px 11px;
+    border-radius: 999px;
+  }
+
+  .header-tools {
+    gap: 6px;
+  }
+
+  /* Hero refinement */
+  .hero {
+    padding: 138px 24px 118px;
+    background:
+      linear-gradient(108deg, rgba(16, 54, 47, 0.7), rgba(18, 60, 52, 0.56)),
+      url("images/ruang-tamu.jpg");
+    background-size: cover;
+    background-position: center 42%;
+  }
+
+  .hero-content {
+    max-width: 960px;
+  }
+
+  .hero h2 {
+    max-width: 700px;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.24);
+  }
+
+  .hero-badge,
+  .hero-rate,
+  .hero-chips span {
+    background: rgba(15, 36, 33, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(4px);
+  }
+
+  .hero-trust {
+    opacity: 0.95;
+  }
+
+  .hero-actions {
+    margin-top: 10px;
+  }
+
+  .btn-secondary {
+    padding: 11px 20px;
+    font-size: 14px;
+  }
+
+  /* Final CTA refinement */
+  .final-cta {
+    background: linear-gradient(132deg, #173d36, #214f47);
+    padding-top: 80px;
+    padding-bottom: 84px;
+  }
+
+  .final-cta-container {
+    max-width: 1120px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .cta-main {
+    gap: 10px;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(34px, 3.4vw, 46px);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .final-cta p {
+    margin-bottom: 18px;
+  }
+
+  .btn-cta {
+    padding: 14px 30px;
+    border-radius: 999px;
+    font-size: 15px;
+  }
+
+  .contact-fallback {
+    margin-top: 12px;
+    gap: 10px;
+  }
+
+  .policy-list {
+    margin-top: 14px;
+    gap: 10px 14px;
+    max-width: 620px;
+  }
+
+  .cta-trust {
+    margin-top: 14px;
+    gap: 14px;
+  }
+
+  .cta-side {
+    width: 100%;
   }
 }
