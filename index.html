@@ -372,6 +372,16 @@
             </label>
 
             <label class="form-field form-full">
+              <span data-bm="Tujuan Penginapan" data-en="Stay Purpose">Tujuan Penginapan</span>
+              <select name="intent">
+                <option value="family" data-bm="Keluarga" data-en="Family">Keluarga</option>
+                <option value="event" data-bm="Kenduri / Majlis" data-en="Event / Gathering">Kenduri / Majlis</option>
+                <option value="convocation" data-bm="Konvokesyen" data-en="Convocation">Konvokesyen</option>
+                <option value="work" data-bm="Kerja / Urusan" data-en="Work / Business">Kerja / Urusan</option>
+              </select>
+            </label>
+
+            <label class="form-field form-full">
               <span data-bm="Nota (optional)" data-en="Notes (optional)">Nota (optional)</span>
               <textarea name="notes" rows="3" placeholder="Contoh: datang konvokesyen..."></textarea>
             </label>
@@ -380,6 +390,7 @@
               Hantar ke WhatsApp
             </button>
             <p class="form-feedback" id="formFeedback" aria-live="polite"></p>
+            <p class="form-availability-status" id="formAvailabilityStatus" aria-live="polite"></p>
           </form>
 
           <div class="availability-board" id="availabilityBoard">
@@ -818,36 +829,42 @@
           &#128722;
           <span data-bm="Lotus&#8217;s Jitra" data-en="Lotus&#8217;s Jitra">Lotus&#8217;s Jitra</span>
           <small data-bm="&plusmn; 5 min" data-en="&plusmn; 5 min">&plusmn; 5 min</small>
+          <em data-bm="Kereta: 1.8 km" data-en="Drive: 1.8 km">Kereta: 1.8 km</em>
         </div>
 
         <div class="nearby-item">
           &#127979;
           <span data-bm="MRSM Kubang Pasu" data-en="MRSM Kubang Pasu">MRSM Kubang Pasu</span>
           <small data-bm="&plusmn; 10 min" data-en="&plusmn; 10 min">&plusmn; 10 min</small>
+          <em data-bm="Kereta: 4.2 km" data-en="Drive: 4.2 km">Kereta: 4.2 km</em>
         </div>
 
         <div class="nearby-item">
           &#127891;
           <span data-bm="POLIMAS" data-en="POLIMAS">POLIMAS</span>
           <small data-bm="&plusmn; 15 min" data-en="&plusmn; 15 min">&plusmn; 15 min</small>
+          <em data-bm="Kereta: 7.1 km" data-en="Drive: 7.1 km">Kereta: 7.1 km</em>
         </div>
 
         <div class="nearby-item">
           &#128348;
           <span data-bm="Masjid Sharifah Fatimah" data-en="Masjid Sharifah Fatimah">Masjid Sharifah Fatimah</span>
           <small data-bm="&plusmn; 10 min" data-en="&plusmn; 10 min">&plusmn; 10 min</small>
+          <em data-bm="Kereta: 4.9 km" data-en="Drive: 4.9 km">Kereta: 4.9 km</em>
         </div>
 
         <div class="nearby-item">
           &#127914;
           <span data-bm="Darulaman Aquapark" data-en="Darulaman Aquapark">Darulaman Aquapark</span>
           <small data-bm="&plusmn; 20 min" data-en="&plusmn; 20 min">&plusmn; 20 min</small>
+          <em data-bm="Kereta: 10.8 km" data-en="Drive: 10.8 km">Kereta: 10.8 km</em>
         </div>
 
         <div class="nearby-item">
           &#127973;
           <span data-bm="Hospital Jitra" data-en="Jitra Hospital">Hospital Jitra</span>
           <small data-bm="Berhampiran" data-en="Nearby">Berhampiran</small>
+          <em data-bm="Jalan kaki: 3-5 min" data-en="Walk: 3-5 min">Jalan kaki: 3-5 min</em>
         </div>
       </div>
     </section>
@@ -869,6 +886,7 @@
             sangat responsif.&rdquo;
           </p>
           <span data-bm="&mdash; Keluarga dari Perlis" data-en="&mdash; Family from Perlis">&mdash; Keluarga dari Perlis</span>
+          <small class="review-date" data-bm="Menginap: Januari 2026" data-en="Stayed: January 2026">Menginap: Januari 2026</small>
         </div>
 
         <div class="trust-card">
@@ -881,6 +899,7 @@
             repeat.&rdquo;
           </p>
           <span data-bm="&mdash; Tetamu Konvokesyen UUM" data-en="&mdash; UUM Convocation Guest">&mdash; Tetamu Konvokesyen UUM</span>
+          <small class="review-date" data-bm="Menginap: November 2025" data-en="Stayed: November 2025">Menginap: November 2025</small>
         </div>
 
         <div class="trust-card">
@@ -893,6 +912,7 @@
             selesa.&rdquo;
           </p>
           <span data-bm="&mdash; Rombongan Sukan Kedah" data-en="&mdash; Kedah Sports Group">&mdash; Rombongan Sukan Kedah</span>
+          <small class="review-date" data-bm="Menginap: Disember 2025" data-en="Stayed: December 2025">Menginap: Disember 2025</small>
         </div>
       </div>
 

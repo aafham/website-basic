@@ -15,6 +15,8 @@
   const funnelMetricsStorageKey = "funnelMetrics";
   let unavailableRanges = defaultUnavailableRanges.slice();
   let abVariantTracked = false;
+  let hasTrackedFormStart = false;
+  let lastAvailabilityState = "";
 
   const header = document.getElementById("siteHeader");
   const nav = document.getElementById("mainNav");
@@ -25,6 +27,7 @@
   const backToTop = document.getElementById("backToTop");
   const dateForm = document.getElementById("dateForm");
   const formFeedback = document.getElementById("formFeedback");
+  const formAvailabilityStatus = document.getElementById("formAvailabilityStatus");
   const availabilityList = document.getElementById("availabilityList");
   const availabilityCalendar = document.getElementById("availabilityCalendar");
   const availabilityUpdated = document.getElementById("availabilityUpdated");
@@ -505,6 +508,11 @@
       "telephone": business.phone || "",
       "description": business.description || "Homestay Semi-D 2 tingkat di Jitra.",
       "image": business.image || `${siteUrl}/images/halaman.jpg`,
+      "checkinTime": "15:00",
+      "checkoutTime": "12:00",
+      "hasMap": "https://goo.gl/maps/pjnMbwm5Pk2QqPeP8",
+      "petsAllowed": false,
+      "smokingAllowed": false,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "49, Taman Jitra Indah, Jalan Hospital Daerah",
@@ -513,7 +521,21 @@
         "addressRegion": "Kedah",
         "addressCountry": "MY"
       },
-      "priceRange": "RM170-RM330 per night"
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 6.2805462,
+        "longitude": 100.4151952
+      },
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "WiFi", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Air Conditioning", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Parking", "value": true },
+        { "@type": "LocationFeatureSpecification", "name": "Kitchen", "value": true }
+      ],
+      "priceRange": "RM170-RM330 per night",
+      "sameAs": [
+        "https://www.facebook.com/media/set/?set=a.2393864657563587&type=3"
+      ]
     };
     schemaNode.textContent = JSON.stringify(schema);
   };
@@ -630,6 +652,90 @@
         authorEl.textContent = name ? `- ${name}` : authorEl.textContent;
       }
     });
+  };
+
+  const getIntentText = (intentValue, lang) => {
+    const value = `${intentValue || ""}`.toLowerCase();
+    if (lang === "en") {
+      if (value === "event") {
+        return "Event / Gathering";
+      }
+      if (value === "convocation") {
+        return "Convocation";
+      }
+      if (value === "work") {
+        return "Work / Business";
+      }
+      return "Family";
+    }
+    if (value === "event") {
+      return "Kenduri / Majlis";
+    }
+    if (value === "convocation") {
+      return "Konvokesyen";
+    }
+    if (value === "work") {
+      return "Kerja / Urusan";
+    }
+    return "Keluarga";
+  };
+
+  const updateLiveAvailabilityStatus = () => {
+    if (!dateForm || !formAvailabilityStatus) {
+      return;
+    }
+    const checkinInput = dateForm.querySelector('input[name="checkin"]');
+    const checkoutInput = dateForm.querySelector('input[name="checkout"]');
+    if (!checkinInput || !checkoutInput) {
+      return;
+    }
+
+    const checkin = `${checkinInput.value || ""}`.trim();
+    const checkout = `${checkoutInput.value || ""}`.trim();
+    const lang = root.dataset.lang || "ms";
+
+    formAvailabilityStatus.classList.remove("is-open", "is-blocked", "is-warn");
+    if (!checkin || !checkout) {
+      formAvailabilityStatus.textContent = lang === "en"
+        ? "Choose check-in and check-out dates to see quick availability status."
+        : "Pilih tarikh check-in dan check-out untuk lihat status ketersediaan segera.";
+      return;
+    }
+
+    if (checkout <= checkin) {
+      formAvailabilityStatus.classList.add("is-warn");
+      formAvailabilityStatus.textContent = lang === "en"
+        ? "Check-out must be after check-in."
+        : "Tarikh check-out mesti selepas check-in.";
+      return;
+    }
+
+    const conflict = overlapsWithUnavailable(checkin, checkout);
+    const nextState = conflict ? "blocked" : "open";
+    if (nextState !== lastAvailabilityState) {
+      lastAvailabilityState = nextState;
+      trackEvent("date_availability_check", {
+        status: nextState,
+        checkin,
+        checkout
+      });
+    }
+
+    if (conflict) {
+      formAvailabilityStatus.classList.add("is-blocked");
+      const label = lang === "en"
+        ? (conflict.labelEn || conflict.labelBm || "")
+        : (conflict.labelBm || conflict.labelEn || "");
+      formAvailabilityStatus.textContent = lang === "en"
+        ? `These dates overlap with booked range ${conflict.start} - ${conflict.end}${label ? ` (${label})` : ""}.`
+        : `Tarikh ini bertindih dengan slot ditempah ${conflict.start} - ${conflict.end}${label ? ` (${label})` : ""}.`;
+      return;
+    }
+
+    formAvailabilityStatus.classList.add("is-open");
+    formAvailabilityStatus.textContent = lang === "en"
+      ? "Great, these dates look available. Send now for final confirmation."
+      : "Bagus, tarikh ini nampak tersedia. Hantar sekarang untuk pengesahan akhir.";
   };
 
   const getOrCreateAbVariant = () => {
@@ -839,6 +945,7 @@
     });
 
     renderAvailability(lang);
+    updateLiveAvailabilityStatus();
     applyOwnerTestimonials(lang);
     applyAbCta();
     updateThemeToggleUI();
@@ -976,7 +1083,7 @@
     });
   }
 
-  const isOwnerPasswordConfigured = ownerPassword.length >= 8 && ownerPassword !== "1234";
+  const isOwnerPasswordConfigured = ownerPassword.length >= 8 && ownerPassword !== "1234" && !!ownerApiEndpoint;
   if (!isOwnerPasswordConfigured && ownerEditBtn) {
     ownerEditBtn.hidden = true;
   }
@@ -1052,6 +1159,8 @@
   if (dateForm) {
     const checkinInput = dateForm.querySelector('input[name="checkin"]');
     const checkoutInput = dateForm.querySelector('input[name="checkout"]');
+    const guestsInput = dateForm.querySelector('input[name="guests"]');
+    const intentSelect = dateForm.querySelector('select[name="intent"]');
 
     if (checkinInput && checkoutInput) {
       const today = new Date().toISOString().split("T")[0];
@@ -1068,12 +1177,20 @@
             checkoutInput.value = "";
           }
         }
+        updateLiveAvailabilityStatus();
       });
+
+      checkoutInput.addEventListener("change", updateLiveAvailabilityStatus);
     }
 
     dateForm.addEventListener("input", () => {
       if (formFeedback) {
         formFeedback.textContent = "";
+      }
+      updateLiveAvailabilityStatus();
+      if (!hasTrackedFormStart) {
+        hasTrackedFormStart = true;
+        trackEvent("date_form_start");
       }
     });
 
@@ -1084,6 +1201,7 @@
       const checkout = `${data.get("checkout") || ""}`.trim();
       const guests = `${data.get("guests") || ""}`.trim();
       const rooms = `${data.get("rooms") || ""}`.trim();
+      const intent = `${data.get("intent") || "family"}`.trim();
       const notes = `${data.get("notes") || ""}`.trim();
       const lang = root.dataset.lang || "ms";
 
@@ -1126,6 +1244,7 @@
         lines.push(`Check-out: ${checkout}`);
         lines.push(`Guests: ${guests}`);
         lines.push(`Rooms: ${rooms}`);
+        lines.push(`Purpose: ${getIntentText(intent, lang)}`);
         if (notes) {
           lines.push(`Notes: ${notes}`);
         }
@@ -1135,10 +1254,19 @@
         lines.push(`Check-out: ${checkout}`);
         lines.push(`Tetamu: ${guests}`);
         lines.push(`Bilik: ${rooms}`);
+        lines.push(`Tujuan: ${getIntentText(intent, lang)}`);
         if (notes) {
           lines.push(`Nota: ${notes}`);
         }
       }
+
+      trackEvent("date_form_submit", {
+        checkin,
+        checkout,
+        guests,
+        rooms,
+        intent
+      });
 
       const phone = (business.phone || "+60194410666").replace(/\D/g, "");
       const message = encodeURIComponent(lines.join("\n"));
@@ -1149,6 +1277,23 @@
       }
       openWhatsApp(`https://wa.me/${phone}?text=${message}`, "date_form_submit");
     });
+
+    if (guestsInput) {
+      guestsInput.addEventListener("change", () => {
+        const value = Number(guestsInput.value);
+        if (Number.isFinite(value) && value > 10) {
+          trackEvent("guest_count_over_limit", { guests: value });
+        }
+      });
+    }
+
+    if (intentSelect) {
+      intentSelect.addEventListener("change", () => {
+        trackEvent("booking_intent_change", { intent: intentSelect.value || "family" });
+      });
+    }
+
+    updateLiveAvailabilityStatus();
   }
 
   setupAnalytics();
