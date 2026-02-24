@@ -2953,6 +2953,120 @@ textarea:focus-visible {
   }
 }
 
+/* ================= FINAL CTA FOOTER BOLD MODERN V2 ================= */
+@media (min-width: 769px) {
+  .final-cta {
+    background:
+      radial-gradient(circle at 88% 14%, rgba(84, 221, 170, 0.25), transparent 38%),
+      linear-gradient(132deg, #0a2f29, #11463c) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+    padding-top: 78px !important;
+    padding-bottom: 78px !important;
+  }
+
+  .final-cta-container {
+    max-width: 1200px !important;
+    grid-template-columns: 1.35fr 0.65fr !important;
+    gap: 24px !important;
+  }
+
+  .cta-main {
+    background: rgba(8, 33, 29, 0.44) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 18px !important;
+    padding: 22px 22px 18px !important;
+  }
+
+  .availability-badge {
+    background: rgba(255, 255, 255, 0.16) !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(34px, 3.4vw, 48px) !important;
+    line-height: 1.08 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .final-cta p {
+    font-size: 17px !important;
+    max-width: 650px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .btn-cta {
+    background: linear-gradient(135deg, #55cda0, #2ea078) !important;
+    box-shadow: 0 12px 26px rgba(7, 24, 21, 0.34) !important;
+  }
+
+  .btn-cta:hover {
+    background: linear-gradient(135deg, #66d9af, #39ad84) !important;
+  }
+
+  .policy-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px 10px !important;
+    margin-top: 12px !important;
+  }
+
+  .policy-list > div {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 10px !important;
+    padding: 8px 10px !important;
+  }
+
+  .cta-trust {
+    gap: 8px !important;
+    margin-top: 12px !important;
+  }
+
+  .cta-trust span {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.17) !important;
+    border-radius: 999px !important;
+    padding: 5px 10px !important;
+  }
+
+  .cta-side {
+    background: rgba(255, 255, 255, 0.14) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    border-radius: 18px !important;
+    padding: 12px !important;
+    box-shadow: 0 16px 34px rgba(8, 24, 22, 0.32) !important;
+  }
+
+  .site-footer {
+    background: #123c34 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+    padding: 20px 24px 14px !important;
+  }
+
+  .footer-grid {
+    max-width: 1200px !important;
+    grid-template-columns: 1.2fr 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  .footer-card {
+    background: rgba(6, 28, 24, 0.28) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 12px !important;
+    padding: 14px 14px 12px !important;
+  }
+
+  .footer-grid p,
+  .footer-links a {
+    font-size: 13px !important;
+  }
+
+  .footer-copy {
+    margin-top: 10px !important;
+    padding-top: 10px !important;
+    font-size: 13px !important;
+  }
+}
+
 /* ================= FINAL CTA + FOOTER POLISH (DESKTOP) ================= */
 @media (min-width: 769px) {
   .final-cta {
