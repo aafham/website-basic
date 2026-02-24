@@ -2763,6 +2763,37 @@ textarea:focus-visible {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(248, 243, 234, 0.78));
   }
 
+  .video-tour,
+  .highlights,
+  .pricing,
+  .how-to-book,
+  .date-check,
+  .house-rules,
+  .gallery,
+  .about-split,
+  .who-for,
+  .facilities,
+  .location-section,
+  .nearby,
+  .trust,
+  .faq,
+  .final-cta {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .section-desc,
+  .who-desc,
+  .nearby-desc,
+  .pricing-desc {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .highlights,
   .pricing,
   .date-check,
@@ -2806,7 +2837,6 @@ textarea:focus-visible {
 
   .book-steps,
   .who-grid,
-  .why-grid,
   .facility-list,
   .nearby-grid,
   .trust-grid {
@@ -2834,6 +2864,51 @@ textarea:focus-visible {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .who-card,
+  .book-step,
+  .faq-item {
+    padding: 24px 20px;
+  }
+
+  .who-card p,
+  .book-step p,
+  .faq-item p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .date-check h3 {
+    font-size: clamp(34px, 3.4vw, 46px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .date-check-layout {
+    max-width: 1160px;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 24px;
+  }
+
+  .date-form {
+    max-width: 100%;
+    padding: 30px;
+  }
+
+  .date-form button {
+    padding: 14px 28px;
+  }
+
+  .booking-summary {
+    padding: 24px 22px;
+  }
+
+  .faq-list {
+    max-width: 1120px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
   .trust-card {
     text-align: left;
   }
@@ -2841,11 +2916,6 @@ textarea:focus-visible {
   .location-container {
     grid-template-columns: 0.95fr 1.05fr;
     padding: 34px;
-  }
-
-  .date-check-layout {
-    grid-template-columns: minmax(0, 1fr) 330px;
-    gap: 22px;
   }
 
   .booking-summary {
