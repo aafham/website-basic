@@ -2953,6 +2953,183 @@ textarea:focus-visible {
   }
 }
 
+/* ================= FINAL CTA + FOOTER POLISH (DESKTOP) ================= */
+@media (min-width: 769px) {
+  .final-cta {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(132deg, #0f3a33, #1c5a4d);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .final-cta::before {
+    content: "";
+    position: absolute;
+    right: -180px;
+    top: -140px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(85, 221, 172, 0.22), rgba(85, 221, 172, 0));
+    pointer-events: none;
+  }
+
+  .final-cta-container {
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: 1.32fr 0.68fr;
+    gap: 30px;
+    align-items: stretch;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-main {
+    padding: 24px 24px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(9, 35, 31, 0.24);
+    backdrop-filter: blur(4px);
+  }
+
+  .availability-badge {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    margin-bottom: 12px;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(36px, 3.5vw, 50px);
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .final-cta p {
+    margin-bottom: 18px;
+    max-width: 620px;
+  }
+
+  .btn-cta {
+    background: linear-gradient(135deg, #42b98d, #2f9b73);
+    box-shadow: 0 10px 24px rgba(8, 24, 22, 0.28);
+  }
+
+  .btn-cta:hover {
+    background: linear-gradient(135deg, #53c89d, #39a97f);
+    transform: translateY(-2px);
+  }
+
+  .contact-fallback {
+    margin-top: 12px;
+    gap: 10px;
+  }
+
+  .contact-chip {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .policy-list {
+    margin-top: 14px;
+    gap: 10px 12px;
+    max-width: 640px;
+  }
+
+  .policy-list > div {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    padding: 9px 10px;
+  }
+
+  .cta-trust {
+    margin-top: 14px;
+    gap: 10px;
+  }
+
+  .cta-trust span {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .cta-side {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.12);
+    padding: 14px;
+    box-shadow: 0 16px 30px rgba(8, 24, 22, 0.26);
+    align-content: start;
+  }
+
+  .cta-photo {
+    aspect-ratio: 4 / 4.6;
+    border-radius: 14px;
+  }
+
+  .cta-photo img {
+    border-radius: 14px;
+  }
+
+  .cta-quote {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(247, 255, 252, 0.96);
+  }
+
+  .cta-quote span {
+    color: #dcfff2;
+  }
+
+  .site-footer {
+    background: #17483f;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 24px 24px 18px;
+  }
+
+  .footer-grid {
+    max-width: 1180px;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  .footer-card {
+    background: rgba(7, 31, 27, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+    min-height: 0;
+  }
+
+  .footer-title {
+    margin-bottom: 8px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-grid p {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .footer-links {
+    gap: 6px;
+  }
+
+  .footer-links a {
+    min-height: 30px;
+    padding: 3px 9px;
+    font-size: 14px;
+  }
+
+  .footer-copy {
+    margin-top: 12px;
+    padding-top: 12px;
+    font-size: 14px;
+  }
+}
+
 /* ================= PREMIUM RELAUNCH DESKTOP ================= */
 @media (min-width: 769px) {
   :root {
